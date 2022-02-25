@@ -1,0 +1,74 @@
+.contenido{
+    padding: 30px 0;
+}
+
+.titulo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.titulo-secundario {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.2rem;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.main {
+    display: grid;
+    grid-template-columns: 75% 25%;
+}
+
+.main-principal {
+    margin-right: 50px;
+}
+
+.main-relacionados {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.col-izquierda, .col-derecha {
+    display: flex;
+    flex-direction: column;
+}
+
+.producto {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.producto-categoria, .producto-precio {
+    font-size: 16px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-weight: 400;
+}
+
+.listado-relacionados {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.relacionado {
+    height: 170px;
+    width: 170px;
+    cursor: pointer;
+}
+
+.relacionado-imagen {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+figcaption {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+

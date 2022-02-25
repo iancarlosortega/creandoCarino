@@ -1,0 +1,20 @@
+.example-card {
+    max-width: 400px;
+}
+
+.contenido{
+    padding: 30px 0;
+    background-color: #ededed6e;
+}
+
+.titulo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.productos {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+

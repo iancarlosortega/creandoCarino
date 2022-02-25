@@ -1,0 +1,38 @@
+<app-navbar></app-navbar>
+<div class="contenido">
+    <div class="container">
+        <div class="main">
+            <div class="main-principal">
+                <h1 class="titulo">{{producto.nombre}}</h1>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 col-izquierda">
+                        <img class="producto-imagen" [src]="producto.imagen" [alt]="producto.nombre">
+                    </div>
+                    <div class="col-md-6 col-derecha">
+                        <p>{{producto.descripcion}}</p>
+                        <p class="producto">Categoría: <span class="producto-categoria">{{producto.categoria | titlecase}}</span></p>
+                        <p class="producto">Precio: <span class="producto-precio">${{producto.precio}}</span></p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="main-relacionados">
+                <h2 class="titulo-secundario">Más regalos</h2>
+                <ul class="listado-relacionados">
+                    <li class="relacionado" *ngFor="let pr of productosRelacionados | slice:0:6">
+                        <div class="view overlay zoom" [routerLink]="['/ver/regalo', pr.id]">
+                            <img [src]="pr.imagen" [alt]="pr.nombre" class="img-fluid" >
+                            <div class="mask flex-center rgba-brown-light relacionado-imagen">
+                                <p class="white-text">{{pr.nombre}}</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>
+<app-contactanos id="contactanos"></app-contactanos>
+<app-footer></app-footer>

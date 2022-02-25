@@ -1,0 +1,54 @@
+  
+.avatar {
+    /* background-image: url('/assets/favicon.png'); */
+    background-size: 70% 70%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 60px;
+    height: 60px;
+    -webkit-box-shadow: 0px 0px 11px 8px rgba(158,158,158,0.4); 
+    box-shadow: 0px 0px 11px 8px rgba(158,158,158,0.4);
+}
+
+.desayunos {
+    background-image: url('/assets/headers-icons/desayunos.png');
+}
+
+.cajas { 
+    background-image: url('/assets/headers-icons/cajas.png');
+}
+
+.tipis { 
+    background-image: url('/assets/headers-icons/tipis.png');
+}
+
+.globos { 
+    background-image: url('/assets/headers-icons/globos.png');
+}
+
+mat-card {
+    margin: 10px 20px;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.boton-precio {
+    background-color: #ffcdc2;
+}
+
+.precio {
+    margin: 0;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    background-color: #FAECE9;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    letter-spacing: 2.2px;
+}

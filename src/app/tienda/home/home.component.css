@@ -1,0 +1,125 @@
+.avatar2 {
+    width: 60px;
+    height: 60px;
+}
+
+.desayunos {
+    background-image: url('/assets/headers-icons/desayunos2.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.cajas { 
+    background-image: url('/assets/headers-icons/cajas2.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.tipis { 
+    background-image: url('/assets/headers-icons/tipis2.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.globos { 
+    background-image: url('/assets/headers-icons/globos2.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+mat-card {
+    margin: 10px 20px;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.precio {
+    margin: 0;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    background-color: #906F22;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.ver-mas {
+    margin-left: 10px;
+    background-color: #a78943;
+}
+
+.productos {
+    background-color: #FAECE9;
+}
+
+mat-card-title {
+    font-size: 10px;
+}
+
+.catalogo{
+    padding: 35px 0;
+    text-align: center;
+}
+
+.catalogo-titulo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 65px;
+    font-weight: 300;
+    letter-spacing:10px;
+    text-transform: uppercase;
+}
+
+.container{
+    padding: 20px 0;
+}
+
+.flechas {
+    background-color: #303030a1 ;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.flecha-izquierda {
+    left: 2.5%;
+}
+
+.flecha-derecha {
+    right: 2.5%;
+}
+
+.icono {
+    color: rgb(230, 230, 230);
+}
+
+.example-card {
+    height: 500px;
+}
+
+.select {
+    font-family: 'Montserrat', sans-serif;
+    border: 1px solid #ededed;
+    border-radius: 3px;
+    margin-left: 10px;
+}
+
+.select-label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+}
+
+.container form{
+    margin-bottom: 10px;
+}

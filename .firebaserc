@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "creando-carino": {
+      "hosting": {
+        "creadoCarino": [
+          "creando-carino"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "creando-carino"
+  }
+}
