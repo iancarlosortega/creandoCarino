@@ -1,43 +1,48 @@
 <main class="login">
   <div class="formulario">
-    <h1>Iniciar Sesión</h1>
+      
+    <div class="logo">
+        <img
+          class="logo-imagen"
+          src="/assets/logo.png"
+          alt="Logo Creando Carino"
+        />
+        <p class="logo-nombre">Creando Cariño</p>
+    </div>
+
     <form [formGroup]="loginForm" autocomplete="off" (submit)="login()">
 
         <!-- Campo de email -->
 
-        <mat-form-field appearance="fill">
-            <mat-label>Correo eletrónico</mat-label>
+        <div class="campo">
+            <label>Correo eletrónico</label>
             <input
                 type="email"
-                matInput
                 formControlName="email"
                 placeholder="Ex. pat@example.com"
             />
-            <mat-error *ngIf="campoNoValido('email')">
-                El campo es <strong>obligatorio</strong>.
-            </mat-error>
-        </mat-form-field>
+            <span 
+                class="text-error alert alert-danger" 
+                *ngIf="campoNoValido('email')"
+                >El correo electrónico es  <b>obligatorio</b>
+            </span>
+        </div>
 
         <!-- Campo de contraseña -->
 
-        <mat-form-field appearance="fill">
-            <mat-label>Contraseña</mat-label>
+        <div class="campo">
+            <label>Contraseña</label>
             <input
                 type="password"
-                matInput
                 formControlName="password"
                 placeholder="chofi2020"
             />
-            <mat-error *ngIf="campoNoValido('email')">
-                El campo es <strong>obligatorio</strong>.
-            </mat-error>
-        </mat-form-field>
-
-        <span 
-            class="text-error alert alert-danger" 
-            *ngIf="error"
-            >El correo electrónico o la contraseña son <b>incorrectos</b>
-        </span>
+            <span 
+                class="text-error alert alert-danger" 
+                *ngIf="campoNoValido('password')"
+                >La contraseña es  <b>obligatoria</b>
+            </span>
+        </div>
 
         <button
             type="submit"

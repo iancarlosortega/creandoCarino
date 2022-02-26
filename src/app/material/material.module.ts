@@ -10,7 +10,7 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonModule,
     MatCardModule,
     MatIconModule,
-    MatInputModule,
+    MatInputModule
   ]
 })
 export class MaterialModule { }
