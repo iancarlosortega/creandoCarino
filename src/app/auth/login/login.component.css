@@ -1,0 +1,41 @@
+.login {
+    background-color: var(--primario);
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.formulario {
+    background-color: var(--blanco);
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    width: 90%;
+    max-width: 500px;
+}
+
+.formulario h1 {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.formulario form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+mat-form-field:first-child {
+    margin-bottom: 0.5rem;
+}
+
+.boton {
+    margin-top: 2rem;
+    background-color: var(--secundario);
+    color: var(--negro);
+}

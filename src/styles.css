@@ -3,6 +3,19 @@
     display: none;
 }
 
+:root {
+    /* Fuentes */
+    --fuente-principal: Roboto, "Helvetica Neue", sans-serif;
+    --fuente-secundaria: 'Dancing Script', cursive;
+    /* Colores */
+    --blanco: #FFFFFF;
+    --negro: #000000;
+    --primario: #FAECE9;
+    --secundario: #F0D8C0;
+    --gold: #906F22;
+    --gold-light: #a78943;
+}
+
 /* Hover effects */
 .hvr-glow {
     display: inline-block;
@@ -20,7 +33,7 @@
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: var(--fuente-principal); }
 html {
     scroll-behavior: smooth;
 }

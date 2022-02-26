@@ -1,1 +1,50 @@
-<p>login works!</p>
+<main class="login">
+  <div class="formulario">
+    <h1>Iniciar Sesión</h1>
+    <form [formGroup]="loginForm" autocomplete="off" (submit)="login()">
+
+        <!-- Campo de email -->
+
+        <mat-form-field appearance="fill">
+            <mat-label>Correo eletrónico</mat-label>
+            <input
+                type="email"
+                matInput
+                formControlName="email"
+                placeholder="Ex. pat@example.com"
+            />
+            <mat-error *ngIf="campoNoValido('email')">
+                El campo es <strong>obligatorio</strong>.
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Campo de contraseña -->
+
+        <mat-form-field appearance="fill">
+            <mat-label>Contraseña</mat-label>
+            <input
+                type="password"
+                matInput
+                formControlName="password"
+                placeholder="chofi2020"
+            />
+            <mat-error *ngIf="campoNoValido('email')">
+                El campo es <strong>obligatorio</strong>.
+            </mat-error>
+        </mat-form-field>
+
+        <span 
+            class="text-error alert alert-danger" 
+            *ngIf="error"
+            >El correo electrónico o la contraseña son <b>incorrectos</b>
+        </span>
+
+        <button
+            type="submit"
+            class="boton"
+            mat-button>
+            Continuar
+        </button>
+    </form>
+  </div>
+</main>

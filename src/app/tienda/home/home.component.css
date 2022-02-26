@@ -73,7 +73,7 @@ mat-card-title {
 }
 
 .catalogo-titulo {
-    font-family: 'Dancing Script', cursive;
+    font-family: var(--fuente-secundaria);
     font-size: 65px;
     font-weight: 300;
     letter-spacing:10px;
