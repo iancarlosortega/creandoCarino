@@ -14,7 +14,7 @@ export class DesayunosComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.productos = this.productos.filter(producto => producto.categoria === "desayunos");
+    this.productos = this.productos.filter(producto => producto.name === "desayunos");
   }
 
 }

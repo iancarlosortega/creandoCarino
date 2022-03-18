@@ -107,7 +107,7 @@ export class HomeComponent implements OnInit {
   cambiarTipo(event: any) {
     this.productos = productosTotales;
     if(event.target.value !== "todos"){
-      this.productos = this.productos.filter(producto => producto.categoria === event.target.value);
+      this.productos = this.productos.filter(producto => producto.name === event.target.value);
     }
     this.ngxGlide.recreate();
     console.log(this.productos);

@@ -34,15 +34,14 @@
               <div
                 mat-card-avatar
                 class="avatar2"
-                [class]="producto.categoria"
               ></div>
-              <mat-card-title>{{ producto.nombre }}</mat-card-title>
-              <mat-card-subtitle>{{ producto.subtitulo }}</mat-card-subtitle>
+              <mat-card-title>{{ producto.name }}</mat-card-title>
+              <mat-card-subtitle>{{ producto.subtitle }}</mat-card-subtitle>
             </mat-card-header>
-            <img mat-card-image [src]="producto.imagen" alt="Producto" />
+            <img mat-card-image [src]="producto.photo_url" alt="Producto" />
             <mat-card-content>
               <div class="footer">
-                <p class="precio">{{ producto.precio | currency }}</p>
+                <p class="precio">{{ producto.price | currency }}</p>
                 <p
                   [routerLink]="['/ver/regalo', producto.id]"
                   class="precio ver-mas"

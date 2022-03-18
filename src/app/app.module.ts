@@ -11,6 +11,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from '../environments/environment';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { environment } from '../environments/environment';
       maxOpened: 1,
       preventDuplicates: true
     }),
+    ModalModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,15 +1,15 @@
 <mat-card  class="example-card">
     <mat-card-header>
-      <div mat-card-avatar class="avatar" [class]="producto.categoria"></div>
-      <mat-card-title>{{producto.nombre}}</mat-card-title>
-      <mat-card-subtitle>{{producto.subtitulo}}</mat-card-subtitle>
+      <div mat-card-avatar class="avatar"></div>
+      <mat-card-title>{{producto.name}}</mat-card-title>
+      <mat-card-subtitle>{{producto.subtitle}}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image [src]="producto.imagen" alt="Producto">
+    <img mat-card-image [src]="producto.photo_url" alt="Producto">
     <mat-card-content>
-        <p>{{producto.descripcion}}</p>
+        <p>{{producto.description}}</p>
         <hr>
         <div class="footer">
-            <p class="precio">{{producto.precio | currency}}</p>
+            <p class="precio">{{producto.price | currency}}</p>
         </div>
     </mat-card-content>
 </mat-card>

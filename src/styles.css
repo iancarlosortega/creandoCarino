@@ -33,7 +33,14 @@
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: var(--fuente-principal); }
+body { 
+    margin: 0; 
+    font-family: var(--fuente-principal); 
+    background-color: #F8F9FA;
+}
 html {
     scroll-behavior: smooth;
 }
+
+/* Fix mat-select and modal */
+.cdk-global-overlay-wrapper, .cdk-overlay-container { z-index: 9999!important; }

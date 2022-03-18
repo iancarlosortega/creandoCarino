@@ -23,11 +23,6 @@ export class VerMasComponent implements OnInit {
     this.activatedRoute.params.subscribe( ({id}) => {
       this.productos = this.productos.filter(producto => producto.id == id);
       this.producto = this.productos[0];
-      this.productosRelacionados = this.productosRelacionados.filter(producto => (producto.categoria == this.producto.categoria && producto.id != this.producto.id));
-      this.productosRelacionados = this.productosRelacionados
-        .map((value) => ({ value, sort: Math.random() }))
-        .sort((a, b) => a.sort - b.sort)
-        .map(({ value }) => value)
       })
   }
 
