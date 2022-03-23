@@ -7,16 +7,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
-
 @NgModule({
-  exports: [
-    MatButtonModule,
-    MatCardModule,
-    MatDialogModule,
-    MatExpansionModule,
-    MatIconModule,
-    MatInputModule,
-    MatSelectModule
-  ]
+	exports: [
+		MatButtonModule,
+		MatCardModule,
+		MatDialogModule,
+		MatExpansionModule,
+		MatIconModule,
+		MatInputModule,
+		MatSelectModule,
+	],
 })
-export class MaterialModule { }
+export class MaterialModule {}

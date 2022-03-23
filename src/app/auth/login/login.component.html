@@ -1,55 +1,45 @@
 <main class="login">
-  <div class="formulario">
-      
-    <div class="logo">
-        <img
-          class="logo-imagen"
-          src="/assets/logo.png"
-          alt="Logo Creando Carino"
-        />
-        <p class="logo-nombre">Creando Cariño</p>
-    </div>
+	<div class="formulario">
+		<div class="logo">
+			<img
+				class="logo-imagen"
+				src="/assets/logo.png"
+				alt="Logo Creando Carino" />
+			<p class="logo-nombre">Creando Cariño</p>
+		</div>
 
-    <form [formGroup]="loginForm" autocomplete="off" (submit)="login()">
+		<form [formGroup]="loginForm" autocomplete="off" (submit)="login()">
+			<!-- Campo de email -->
 
-        <!-- Campo de email -->
+			<div class="campo">
+				<label>Correo eletrónico</label>
+				<input
+					type="email"
+					formControlName="email"
+					placeholder="Ex. pat@example.com" />
+				<span
+					class="text-error alert alert-danger"
+					*ngIf="campoNoValido('email')"
+					>El correo electrónico es <b>obligatorio</b>
+				</span>
+			</div>
 
-        <div class="campo">
-            <label>Correo eletrónico</label>
-            <input
-                type="email"
-                formControlName="email"
-                placeholder="Ex. pat@example.com"
-            />
-            <span 
-                class="text-error alert alert-danger" 
-                *ngIf="campoNoValido('email')"
-                >El correo electrónico es  <b>obligatorio</b>
-            </span>
-        </div>
+			<!-- Campo de contraseña -->
 
-        <!-- Campo de contraseña -->
+			<div class="campo">
+				<label>Contraseña</label>
+				<input
+					type="password"
+					formControlName="password"
+					placeholder="chofi2020" />
+				<span
+					class="text-error alert alert-danger"
+					*ngIf="campoNoValido('password')"
+					>La contraseña es <b>obligatoria</b>
+				</span>
+			</div>
 
-        <div class="campo">
-            <label>Contraseña</label>
-            <input
-                type="password"
-                formControlName="password"
-                placeholder="chofi2020"
-            />
-            <span 
-                class="text-error alert alert-danger" 
-                *ngIf="campoNoValido('password')"
-                >La contraseña es  <b>obligatoria</b>
-            </span>
-        </div>
-
-        <button
-            type="submit"
-            class="boton"
-            mat-button>
-            Continuar
-        </button>
-    </form>
-  </div>
+			<button type="submit" class="boton" mat-button>Continuar</button>
+		</form>
+	</div>
 </main>

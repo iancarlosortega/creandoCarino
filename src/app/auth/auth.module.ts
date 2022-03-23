@@ -7,16 +7,13 @@ import { MaterialModule } from './../material/material.module';
 
 import { LoginComponent } from './login/login.component';
 
-
 @NgModule({
-  declarations: [
-    LoginComponent
-  ],
-  imports: [
-    CommonModule,
-    AuthRoutingModule,
-    ReactiveFormsModule,
-    MaterialModule,
-  ]
+	declarations: [LoginComponent],
+	imports: [
+		CommonModule,
+		AuthRoutingModule,
+		ReactiveFormsModule,
+		MaterialModule,
+	],
 })
-export class AuthModule { }
+export class AuthModule {}

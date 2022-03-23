@@ -1,68 +1,83 @@
-<div id="catalogo" class="catalogo">
-  <h2 class="catalogo-titulo">Catálogo</h2>
+<div *ngIf="!loading" id="catalogo" class="catalogo">
+	<header class="header">
+		<p>Catálogo</p>
+		<div class="linea"></div>
+	</header>
+
+	<main class="productos">
+		<div class="container">
+			<!-- Select -->
+
+			<form [formGroup]="miFormulario">
+				<label class="select-label"
+					>Selecciona el tipo de regalo:</label
+				>
+				<select
+					formControlName="tipo"
+					(change)="cambiarTipo($event)"
+					class="select">
+					<option value="todos">Todos</option>
+					<option
+						*ngFor="let categoria of categorias"
+						[value]="categoria.id">
+						{{ categoria.name }}
+					</option>
+				</select>
+			</form>
+			<!-- Slider -->
+			<div class="slider">
+				<swiper
+					[config]="config"
+					[spaceBetween]="10"
+					[slidesPerView]="1.2"
+					[pagination]="true"
+					[navigation]="true"
+					class="mySwiper">
+					<ng-template swiperSlide *ngFor="let producto of productos">
+						<div
+							class="card"
+							[routerLink]="[
+								'/producto',
+								producto.category,
+								producto.id
+							]">
+							<img
+								[src]="producto.photo_url"
+								class="card-img-top"
+								[alt]="producto.name" />
+							<div class="card-body">
+								<h5 class="card-title">{{ producto.name }}</h5>
+								<div class="footer">
+									<p class="precio">
+										{{ producto.price | currency }}
+									</p>
+									<p
+										[routerLink]="[
+											'/ver/regalo',
+											producto.id
+										]"
+										class="precio ver-mas">
+										Ver Más
+									</p>
+								</div>
+							</div>
+						</div>
+					</ng-template>
+				</swiper>
+			</div>
+		</div>
+	</main>
 </div>
 
-<main class="productos">
-  <div class="container">
-    <form [formGroup]="miFormulario">
-      <label class="select-label">Selecciona el tipo de regalo:</label>
-      <select
-        formControlName="tipo"
-        (change)="cambiarTipo($event)"
-        class="select"
-      >
-        <option value="todos">Todos</option>
-        <option value="desayunos">Desayunos</option>
-        <option value="cajas">Cajas</option>
-        <option value="globos">Regalos con Globos</option>
-        <option value="fresas">Regalos con fresas</option>
-        <option value="otros">Otros</option>
-      </select>
-    </form>
-    <ng-container *ngIf="productos && productos.length > 0">
-      <ngx-glide
-        #ngxGlide
-        [perView]="perView"
-        [gap]="gap"
-        [showBullets]="showBullets"
-        [arrowLeftTemplate]="(showCustomArrows && arrowLeftTemplate) || null"
-        [arrowRightTemplate]="(showCustomArrows && arrowRightTemplate) || null"
-      >
-        <ng-container *ngFor="let producto of productos">
-          <mat-card class="example-card">
-            <mat-card-header>
-              <div
-                mat-card-avatar
-                class="avatar2"
-              ></div>
-              <mat-card-title>{{ producto.name }}</mat-card-title>
-              <mat-card-subtitle>{{ producto.subtitle }}</mat-card-subtitle>
-            </mat-card-header>
-            <img mat-card-image [src]="producto.photo_url" alt="Producto" />
-            <mat-card-content>
-              <div class="footer">
-                <p class="precio">{{ producto.price | currency }}</p>
-                <p
-                  [routerLink]="['/ver/regalo', producto.id]"
-                  class="precio ver-mas"
-                >
-                  Ver Más
-                </p>
-              </div>
-            </mat-card-content>
-          </mat-card>
-        </ng-container>
-      </ngx-glide>
-    </ng-container>
-  </div>
-</main>
+<app-loading *ngIf="loading"></app-loading>
+
 <ng-template #arrowLeftTemplate>
-  <button mat-mini-fab class="flechas flecha-izquierda">
-    <mat-icon class="icono">keyboard_arrow_left</mat-icon>
-  </button>
+	<button mat-mini-fab class="flechas flecha-izquierda">
+		<mat-icon class="icono">keyboard_arrow_left</mat-icon>
+	</button>
 </ng-template>
 <ng-template #arrowRightTemplate>
-  <button mat-mini-fab class="flechas flecha-derecha">
-    <mat-icon class="icono">keyboard_arrow_right</mat-icon>
-  </button>
+	<button mat-mini-fab class="flechas flecha-derecha">
+		<mat-icon class="icono">keyboard_arrow_right</mat-icon>
+	</button>
 </ng-template>

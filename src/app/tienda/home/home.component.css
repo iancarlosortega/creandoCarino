@@ -1,44 +1,57 @@
-.avatar2 {
-    width: 60px;
-    height: 60px;
+.catalogo{
+    text-align: center;
 }
 
-.desayunos {
-    background-image: url('/assets/headers-icons/desayunos2.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.cajas { 
-    background-image: url('/assets/headers-icons/cajas2.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.tipis { 
-    background-image: url('/assets/headers-icons/tipis2.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.globos { 
-    background-image: url('/assets/headers-icons/globos2.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-mat-card {
-    margin: 10px 20px;
-}
-
-.footer {
+.header {
+    margin: 3.5rem 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+}
+
+.header p {
+    font-size: 4rem;
+    text-align: center;
+    margin: 0;
+    font-family: var(--fuente-primaria);
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+.header .linea {
+    height: 5px;
+    width: 70px;
+    background-color: var(--gold);
+}
+
+.productos {
+    background-color: #FAECE9;
+}
+
+.container{
+    padding: 20px 0;
+}
+
+.container form{
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.select {
+    font-family: 'Montserrat', sans-serif;
+    border: 1px solid #ededed;
+    border-radius: 3px;
+    margin-left: 10px;
+}
+
+.select:focus {
+    outline: none;
+}
+
+.select-label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 17px;
 }
 
 .precio {
@@ -59,29 +72,11 @@ mat-card {
     background-color: #a78943;
 }
 
-.productos {
-    background-color: #FAECE9;
-}
 
-mat-card-title {
-    font-size: 10px;
-}
-
-.catalogo{
-    padding: 35px 0;
-    text-align: center;
-}
-
-.catalogo-titulo {
-    font-family: var(--fuente-secundaria);
-    font-size: 65px;
-    font-weight: 300;
-    letter-spacing:10px;
-    text-transform: uppercase;
-}
-
-.container{
-    padding: 20px 0;
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .flechas {
@@ -101,25 +96,4 @@ mat-card-title {
 
 .icono {
     color: rgb(230, 230, 230);
-}
-
-.example-card {
-    height: 500px;
-}
-
-.select {
-    font-family: 'Montserrat', sans-serif;
-    border: 1px solid #ededed;
-    border-radius: 3px;
-    margin-left: 10px;
-}
-
-.select-label {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
-    font-size: 17px;
-}
-
-.container form{
-    margin-bottom: 10px;
 }

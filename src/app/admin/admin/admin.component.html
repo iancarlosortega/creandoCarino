@@ -1,728 +1,709 @@
 <div class="container">
-    
-    <nav class="nav-bar">
-        <article>
-            <h1 class="titulo">Panel administrativo</h1>
-        </article>
-        
-        <div class="acciones">
-            <button
-                routerLink="/"
-                class="boton">
-                <mat-icon>home</mat-icon>
-            </button>
-            <button
-                routerLink="/"
-                (click)="logout()"
-                class="boton">
-                <mat-icon>logout</mat-icon>
-            </button>
-        </div>
-    </nav>
+	<nav class="nav-bar">
+		<article>
+			<h1 class="titulo">Panel administrativo</h1>
+		</article>
 
-    <mat-accordion multi>
+		<div class="acciones">
+			<button routerLink="/" class="boton">
+				<mat-icon>home</mat-icon>
+			</button>
+			<button routerLink="/" (click)="logout()" class="boton">
+				<mat-icon>logout</mat-icon>
+			</button>
+		</div>
+	</nav>
 
-        <mat-expansion-panel [expanded]="true" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-            <mat-expansion-panel-header>
-                <mat-panel-title> Listado de Categorías </mat-panel-title>
-            </mat-expansion-panel-header>
-            
-            <!-- Tabla -->
-            <p-table 
-                #dtCategorias
-                [value]="categorias" 
-                dataKey="name" 
-                selectionMode="single"
-                [rows]="15" 
-                [showCurrentPageReport]="true" 
-                [rowsPerPageOptions]="[15,25,50]" 
-                [loading]="loading" 
-                styleClass="p-datatable-usuarios p-datatable-gridlines"
-                [paginator]="true" 
-                [scrollable]="scrollableCategories" scrollDirection="both"
-                currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} categorías"
-                [globalFilterFields]="['name']">
+	<mat-accordion multi>
+		<mat-expansion-panel
+			[expanded]="true"
+			(opened)="panelOpenState = true"
+			(closed)="panelOpenState = false">
+			<mat-expansion-panel-header>
+				<mat-panel-title> Listado de Categorías </mat-panel-title>
+			</mat-expansion-panel-header>
 
-                <!-- Tabla header -->
-                <ng-template pTemplate="caption">
-                    <div class="tabla-header">
-                        <!-- Agregar Categoria -->
-                        <button 
-                            pButton
-                            icon="pi pi-plus-circle" 
-                            iconPos="right"
-                            type="button" 
-                            class="p-button-raised" 
-                            label="Agregar Categoría"
-                            (click)="openModalCategoria()">
-                        </button>
+			<!-- Tabla -->
+			<p-table
+				#dtCategorias
+				[value]="categorias"
+				dataKey="name"
+				selectionMode="single"
+				[rows]="15"
+				[showCurrentPageReport]="true"
+				[rowsPerPageOptions]="[15, 25, 50]"
+				[loading]="loading"
+				styleClass="p-datatable-usuarios p-datatable-gridlines"
+				[paginator]="true"
+				[scrollable]="scrollableCategories"
+				scrollDirection="both"
+				currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} categorías"
+				[globalFilterFields]="['name']">
+				<!-- Tabla header -->
+				<ng-template pTemplate="caption">
+					<div class="tabla-header">
+						<!-- Agregar Categoria -->
+						<button
+							pButton
+							icon="pi pi-plus-circle"
+							iconPos="right"
+							type="button"
+							class="p-button-raised"
+							label="Agregar Categoría"
+							(click)="openModalCategoria()"></button>
 
-                        <!-- Buscador -->
-                        <span class="p-input-icon-left p-ml-auto">
-                            <i class="pi pi-search"></i>
-                            <input 
-                                class="p-inputtext p-component" 
-                                pInputText 
-                                type="text"
-                                (input)="filtrarCategorias($event, 'contains')" 
-                                placeholder="Buscar categoría" />
-                        </span>
-                    </div>
-                </ng-template>
+						<!-- Buscador -->
+						<span class="p-input-icon-left p-ml-auto">
+							<i class="pi pi-search"></i>
+							<input
+								class="p-inputtext p-component"
+								pInputText
+								type="text"
+								(input)="filtrarCategorias($event, 'contains')"
+								placeholder="Buscar categoría" />
+						</span>
+					</div>
+				</ng-template>
 
+				<ng-template pTemplate="header">
+					<tr>
+						<th pSortableColumn="nombre" style="width: 200px">
+							<div class="p-d-flex p-jc-between p-ai-center">
+								Nombre
+								<p-sortIcon field="nombre"></p-sortIcon>
+							</div>
+						</th>
+						<th style="width: 200px">Acciones</th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-categoria>
+					<tr>
+						<td style="width: 200px">
+							{{ categoria.name }}
+						</td>
 
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th pSortableColumn="nombre" style="width: 200px">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                Nombre
-                                <p-sortIcon field="nombre"></p-sortIcon>
-                            </div>
-                        </th>
-                        <th style="width: 200px">Acciones</th>
-                        
-                    </tr>
-                    
-                </ng-template>
-                <ng-template pTemplate="body" let-categoria>
-                    <tr>
-                        <td style="width: 200px">
-                            {{categoria.name}}
-                        </td>
-                        
-                        <td style="width: 200px">
+						<td style="width: 200px">
+							<div class="acciones">
+								<!-- Botón de editar -->
+								<button
+									pButton
+									icon="pi pi-pencil"
+									iconPos="right"
+									type="button"
+									(click)="obtenerCategoria(categoria.id)"
+									class="p-button-raised p-button-rounded"></button>
 
-                            <div class="acciones">
-                                <!-- Botón de editar -->
-                                <button 
-                                    pButton 
-                                    icon="pi pi-pencil" 
-                                    iconPos="right"
-                                    type="button" 
-                                    (click)="obtenerCategoria(categoria.id)"
-                                    class="p-button-raised p-button-rounded">
-                                </button>
+								<!-- Botón de eliminar -->
+								<button
+									pButton
+									icon="pi pi-trash"
+									iconPos="right"
+									type="button"
+									(click)="eliminarCategoria(categoria.id)"
+									class="p-button-raised p-button-rounded p-button-danger"></button>
+							</div>
+						</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="emptymessage">
+					<tr>
+						<td class="sin-resultados" colspan="2">
+							Ninguna categoría encontrada.
+						</td>
+					</tr>
+				</ng-template>
+			</p-table>
+		</mat-expansion-panel>
 
-                                <!-- Botón de eliminar -->
-                                <button 
-                                    pButton 
-                                    icon="pi pi-trash" 
-                                    iconPos="right"
-                                    type="button" 
-                                    (click)="eliminarCategoria(categoria.id)"
-                                    class="p-button-raised p-button-rounded p-button-danger">
-                                </button>
-                            </div>
-                            
-                        </td>
-                        
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="emptymessage">
-                    <tr>
-                        <td class="sin-resultados" colspan="2">Ninguna categoría encontrada.</td>
-                    </tr>
-                </ng-template>
-            </p-table>
+		<mat-expansion-panel
+			[expanded]="true"
+			(opened)="panelOpenState = true"
+			(closed)="panelOpenState = false">
+			<mat-expansion-panel-header>
+				<mat-panel-title> Listado de Productos </mat-panel-title>
+			</mat-expansion-panel-header>
 
-        </mat-expansion-panel>
+			<!-- Tabla -->
+			<p-table
+				#dtProductos
+				[value]="productos"
+				dataKey="name"
+				selectionMode="single"
+				[rows]="15"
+				[showCurrentPageReport]="true"
+				[rowsPerPageOptions]="[15, 25, 50]"
+				[loading]="loading"
+				styleClass="p-datatable-usuarios p-datatable-gridlines"
+				[paginator]="true"
+				[scrollable]="scrollableProducts"
+				scrollDirection="both"
+				currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} productos"
+				[globalFilterFields]="[
+					'name',
+					'price',
+					'description',
+					'category'
+				]">
+				<!-- Tabla header -->
+				<ng-template pTemplate="caption">
+					<div class="tabla-header">
+						<!-- Agregar Producto -->
+						<button
+							pButton
+							icon="pi pi-plus-circle"
+							iconPos="right"
+							type="button"
+							class="p-button-raised"
+							label="Agregar Producto"
+							(click)="openModalProducto()"></button>
 
-        <mat-expansion-panel [expanded]="true" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-            <mat-expansion-panel-header>
-                <mat-panel-title> Listado de Productos </mat-panel-title>
-            </mat-expansion-panel-header>
-            
-            <!-- Tabla -->
-            <p-table 
-                #dtProductos
-                [value]="productos" 
-                dataKey="name" 
-                selectionMode="single"
-                [rows]="15" 
-                [showCurrentPageReport]="true" 
-                [rowsPerPageOptions]="[15,25,50]" 
-                [loading]="loading" 
-                styleClass="p-datatable-usuarios p-datatable-gridlines"
-                [paginator]="true" 
-                [scrollable]="scrollableProducts" scrollDirection="both"
-                currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} productos"
-                [globalFilterFields]="['name','price','description', 'category']">
+						<!-- Buscador -->
+						<span class="p-input-icon-left p-ml-auto">
+							<i class="pi pi-search"></i>
+							<input
+								class="p-inputtext p-component"
+								pInputText
+								type="text"
+								(input)="filtrarProductos($event, 'contains')"
+								placeholder="Buscar producto" />
+						</span>
+					</div>
+				</ng-template>
 
-                <!-- Tabla header -->
-                <ng-template pTemplate="caption">
-                    <div class="tabla-header">
-                        <!-- Agregar Producto -->
-                        <button 
-                            pButton
-                            icon="pi pi-plus-circle" 
-                            iconPos="right"
-                            type="button" 
-                            class="p-button-raised" 
-                            label="Agregar Producto"
-                            (click)="openModalProducto()">
-                        </button>
+				<ng-template pTemplate="header">
+					<tr>
+						<th pSortableColumn="name" style="width: 200px">
+							<div class="p-d-flex p-jc-between p-ai-center">
+								Nombre
+								<p-sortIcon field="name"></p-sortIcon>
+							</div>
+						</th>
+						<th pSortableColumn="price" style="width: 150px">
+							<div class="p-d-flex p-jc-between p-ai-center">
+								Precio
+								<p-sortIcon field="price"></p-sortIcon>
+							</div>
+						</th>
+						<th pSortableColumn="description" style="width: 300px">
+							<div class="p-d-flex p-jc-between p-ai-center">
+								Descripción
+								<p-sortIcon field="description"></p-sortIcon>
+							</div>
+						</th>
+						<th pSortableColumn="photo_url" style="width: 200px">
+							<div class="p-d-flex p-jc-between p-ai-center">
+								Imagen
+								<p-sortIcon field="photo_url"></p-sortIcon>
+							</div>
+						</th>
+						<th pSortableColumn="subtitle" style="width: 200px">
+							<div class="p-d-flex p-jc-between p-ai-center">
+								Subtítulo
+								<p-sortIcon field="subtitle"></p-sortIcon>
+							</div>
+						</th>
+						<th style="width: 200px">Acciones</th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-producto>
+					<tr>
+						<td style="width: 200px">
+							{{ producto.name }}
+						</td>
+						<td style="width: 150px">
+							{{ producto.price | currency }}
+						</td>
+						<td style="width: 300px">
+							{{ producto.description }}
+						</td>
+						<td class="tabla-imagen" style="width: 200px">
+							<img
+								[src]="producto.photo_url"
+								[alt]="producto.name" />
+						</td>
+						<td style="width: 200px">
+							{{ producto.subtitle }}
+						</td>
 
-                        <!-- Buscador -->
-                        <span class="p-input-icon-left p-ml-auto">
-                            <i class="pi pi-search"></i>
-                            <input 
-                                class="p-inputtext p-component" 
-                                pInputText 
-                                type="text"
-                                (input)="filtrarProductos($event, 'contains')" 
-                                placeholder="Buscar producto" />
-                        </span>
-                    </div>
-                </ng-template>
+						<td style="width: 200px">
+							<div class="acciones">
+								<!-- Botón de editar -->
+								<button
+									pButton
+									icon="pi pi-pencil"
+									iconPos="right"
+									type="button"
+									(click)="
+										obtenerProducto(
+											producto.id,
+											producto.category
+										)
+									"
+									class="p-button-raised p-button-rounded"></button>
 
+								<!-- Botón de eliminar -->
+								<button
+									pButton
+									icon="pi pi-trash"
+									iconPos="right"
+									type="button"
+									(click)="eliminarProducto(producto)"
+									class="p-button-raised p-button-rounded p-button-danger"></button>
+							</div>
+						</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="emptymessage">
+					<tr>
+						<td class="sin-resultados" colspan="6">
+							Ningún producto encontrado.
+						</td>
+					</tr>
+				</ng-template>
+			</p-table>
+		</mat-expansion-panel>
+	</mat-accordion>
 
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th pSortableColumn="name" style="width: 200px">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                Nombre
-                                <p-sortIcon field="name"></p-sortIcon>
-                            </div>
-                        </th>
-                        <th pSortableColumn="price" style="width: 150px">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                Precio
-                                <p-sortIcon field="price"></p-sortIcon>
-                            </div>
-                        </th>
-                        <th pSortableColumn="description" style="width: 300px">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                Descripción
-                                <p-sortIcon field="description"></p-sortIcon>
-                            </div>
-                        </th>
-                        <th pSortableColumn="photo_url" style="width: 200px">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                Imagen
-                                <p-sortIcon field="photo_url"></p-sortIcon>
-                            </div>
-                        </th>
-                        <th pSortableColumn="subtitle" style="width: 200px">
-                            <div class="p-d-flex p-jc-between p-ai-center">
-                                Subtítulo
-                                <p-sortIcon field="subtitle"></p-sortIcon>
-                            </div>
-                        </th>
-                        <th style="width: 200px">Acciones</th>
-                        
-                    </tr>
-                    
-                </ng-template>
-                <ng-template pTemplate="body" let-producto>
-                    <tr>
-                        <td style="width: 200px">
-                            {{producto.name}}
-                        </td>
-                        <td style="width: 150px">
-                            {{producto.price | currency}}
-                        </td>
-                        <td style="width: 300px">
-                            {{producto.description}}
-                        </td>
-                        <td class="tabla-imagen" style="width: 200px">
-                            <img [src]="producto.photo_url" [alt]="producto.name">
-                        </td>
-                        <td style="width: 200px">
-                            {{producto.subtitle}}
-                        </td>
-                        
-                        <td style="width: 200px">
-
-                            <div class="acciones">
-                                <!-- Botón de editar -->
-                                <button 
-                                    pButton 
-                                    icon="pi pi-pencil" 
-                                    iconPos="right"
-                                    type="button" 
-                                    (click)="obtenerProducto(producto.id, producto.category)"
-                                    class="p-button-raised p-button-rounded">
-                                </button>
-
-                                <!-- Botón de eliminar -->
-                                <button 
-                                    pButton 
-                                    icon="pi pi-trash" 
-                                    iconPos="right"
-                                    type="button" 
-                                    (click)="eliminarProducto(producto)"
-                                    class="p-button-raised p-button-rounded p-button-danger">
-                                </button>
-                            </div>
-                            
-                        </td>
-                        
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="emptymessage">
-                    <tr>
-                        <td class="sin-resultados" colspan="6">Ningún producto encontrado.</td>
-                    </tr>
-                </ng-template>
-            </p-table>
-        </mat-expansion-panel>
-
-    </mat-accordion>
-
-    <br>
+	<br />
 </div>
 
 <!-- Modal para crear categoría -->
 
 <ng-template #modalCrearCategoria>
-    <div class="modal-header">
-        <h4 class="modal-title pull-left">Agregar Categoría</h4>
-        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
-            <span aria-hidden="true" class="visually-hidden">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <form 
-            [formGroup]="formularioCategoria" 
-            autocomplete="off">
+	<div class="modal-header">
+		<h4 class="modal-title pull-left">Agregar Categoría</h4>
+		<button
+			type="button"
+			class="btn-close close pull-right"
+			aria-label="Close"
+			(click)="modalRef?.hide()">
+			<span aria-hidden="true" class="visually-hidden">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<form [formGroup]="formularioCategoria" autocomplete="off">
+			<!-- Input Nombre -->
 
-            <!-- Input Nombre -->
-        
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Nombre de la categoría</mat-label>
-                <input 
-                    type="text" 
-                    matInput 
-                    formControlName="name"
-                    placeholder="Ex. Cuadros">
-                <mat-error *ngIf="campoNoValidoCategoria('name')">
-                    El campo de nombre es <strong>obligatorio</strong>
-                </mat-error>
-            </mat-form-field>
-                    
-        </form>
+			<mat-form-field class="example-full-width" appearance="fill">
+				<mat-label>Nombre de la categoría</mat-label>
+				<input
+					type="text"
+					matInput
+					formControlName="name"
+					placeholder="Ex. Cuadros" />
+				<mat-error *ngIf="campoNoValidoCategoria('name')">
+					El campo de nombre es <strong>obligatorio</strong>
+				</mat-error>
+			</mat-form-field>
+		</form>
+	</div>
 
-    </div>
+	<div class="modal-footer">
+		<button
+			pButton
+			(click)="closeModalCategoria()"
+			label="Cancelar"
+			icon="pi pi-times"
+			iconPos="left"
+			class="p-button-raised boton-cancelar"></button>
 
-    <div class="modal-footer">
-        <button 
-            pButton 
-            (click)="closeModalCategoria()" 
-            label="Cancelar" 
-            icon="pi pi-times" 
-            iconPos="left" 
-            class="p-button-raised boton-cancelar">
-        </button>
-
-        <button 
-            pButton 
-            (click)="agregarCategoria()" 
-            label="Guardar" 
-            [disabled]="disabled"
-            icon="pi pi-check" 
-            iconPos="right" 
-            class="p-button-raised">
-        </button>
-        
-    </div>
+		<button
+			pButton
+			(click)="agregarCategoria()"
+			label="Guardar"
+			[disabled]="disabled"
+			icon="pi pi-check"
+			iconPos="right"
+			class="p-button-raised"></button>
+	</div>
 </ng-template>
 
 <!-- Modal para editar categoría -->
 
 <ng-template #modalEditarCategoria>
-    <div class="modal-header">
-    <h4 class="modal-title pull-left">Editar Categoría</h4>
-    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
-        <span aria-hidden="true" class="visually-hidden">&times;</span>
-    </button>
-    </div>
-    <div class="modal-body">
-        <form 
-            [formGroup]="formularioCategoria" 
-            autocomplete="off">
+	<div class="modal-header">
+		<h4 class="modal-title pull-left">Editar Categoría</h4>
+		<button
+			type="button"
+			class="btn-close close pull-right"
+			aria-label="Close"
+			(click)="modalRef?.hide()">
+			<span aria-hidden="true" class="visually-hidden">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<form [formGroup]="formularioCategoria" autocomplete="off">
+			<!-- Input Nombre -->
 
-            <!-- Input Nombre -->
-        
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Nombre de la categoría</mat-label>
-                <input 
-                    type="text" 
-                    matInput 
-                    formControlName="name"
-                    placeholder="Ex. Cuadros">
-                <mat-error *ngIf="campoNoValidoCategoria('name')">
-                  El campo de nombre es <strong>obligatorio</strong>
-                </mat-error>
-            </mat-form-field>      
-                    
-        </form>
+			<mat-form-field class="example-full-width" appearance="fill">
+				<mat-label>Nombre de la categoría</mat-label>
+				<input
+					type="text"
+					matInput
+					formControlName="name"
+					placeholder="Ex. Cuadros" />
+				<mat-error *ngIf="campoNoValidoCategoria('name')">
+					El campo de nombre es <strong>obligatorio</strong>
+				</mat-error>
+			</mat-form-field>
+		</form>
+	</div>
 
-    </div>
+	<div class="modal-footer">
+		<button
+			pButton
+			(click)="closeModalCategoria()"
+			label="Cancelar"
+			icon="pi pi-times"
+			iconPos="left"
+			class="p-button-raised boton-cancelar"></button>
 
-    <div class="modal-footer">
-        <button 
-            pButton 
-            (click)="closeModalCategoria()" 
-            label="Cancelar" 
-            icon="pi pi-times" 
-            iconPos="left" 
-            class="p-button-raised boton-cancelar">
-        </button>
-
-        <button 
-            pButton 
-            (click)="actualizarCategoria()" 
-            [disabled]="disabled"
-            label="Actualizar" 
-            icon="pi pi-check" 
-            iconPos="right" 
-            class="p-button-raised">
-        </button>
-        
-    </div>
+		<button
+			pButton
+			(click)="actualizarCategoria()"
+			[disabled]="disabled"
+			label="Actualizar"
+			icon="pi pi-check"
+			iconPos="right"
+			class="p-button-raised"></button>
+	</div>
 </ng-template>
 
 <!-- Modal para crear producto -->
- 
+
 <ng-template #modalCrearProducto>
-    <div class="modal-header">
-    <h4 class="modal-title pull-left">Agregar Producto</h4>
-    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
-        <span aria-hidden="true" class="visually-hidden">&times;</span>
-    </button>
-    </div>
-    <div class="modal-body">
-        <form 
-        [formGroup]="formularioProducto"
-        #form="ngForm"
-        autocomplete="off" >
+	<div class="modal-header">
+		<h4 class="modal-title pull-left">Agregar Producto</h4>
+		<button
+			type="button"
+			class="btn-close close pull-right"
+			aria-label="Close"
+			(click)="modalRef?.hide()">
+			<span aria-hidden="true" class="visually-hidden">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<form
+			[formGroup]="formularioProducto"
+			#form="ngForm"
+			autocomplete="off">
+			<div>
+				<!-- Previsualizacion de la foto del producto -->
+				<div class="previsualizacion">
+					<img
+						[src]="url"
+						alt="Foto de producto"
+						*ngIf="format === 'image' && url" />
+				</div>
 
-        <div>
-            <!-- Previsualizacion de la foto del producto -->
-            <div class="previsualizacion">
+				<!-- Input File -->
 
-                <img [src]="url" alt="Foto de producto" *ngIf="format==='image' && url" >
+				<div class="custom-file">
+					<input
+						#inputFile
+						type="file"
+						class="form-control"
+						formControlName="photo_url"
+						accept="image/png, image/jpg, image/*"
+						(change)="selectFile($event)" />
+				</div>
 
-            </div>
+				<!-- Barra de porcentaje -->
+				<div class="porcentaje" *ngIf="currentFileUpload && visible">
+					<div class="alert alert-info loading">
+						<p>Cargando imagen...</p>
+						<p-progressSpinner
+							[style]="{ width: '20px', height: '20px' }"
+							styleClass="custom-spinner"
+							strokeWidth="8"
+							animationDuration=".5s">
+						</p-progressSpinner>
+					</div>
 
-            <!-- Input File -->
+					<div class="progress mt-2">
+						<div
+							class="progress-bar progress-bar-striped"
+							role="progressbar"
+							attr.aria-valuenow="{{ percentage }}"
+							aria-valuemin="0"
+							aria-valuemax="100"
+							[ngStyle]="{ width: percentage + '%' }"
+							[ngClass]="{
+								'bg-success': percentage > 70,
+								'bg-info': percentage > 40 && percentage < 70,
+								'bg-warning':
+									percentage > 20 && percentage < 40,
+								'bg-danger': percentage > 0 && percentage < 20
+							}">
+							{{ percentage }}%
+						</div>
+					</div>
+				</div>
+			</div>
 
-            <div class="custom-file">
-                <input 
-                    #inputFile
-                    type="file" 
-                    class="form-control"
-                    formControlName="photo_url"
-                    accept="image/png, image/jpg, image/*"
-                    (change)="selectFile($event)">
-            </div>
+			<!-- Input Nombre -->
 
-            
+			<mat-form-field appearance="fill">
+				<mat-label>Nombre del producto</mat-label>
+				<input
+					type="text"
+					matInput
+					formControlName="name"
+					placeholder="Ex. Regalo Sorpresa" />
+				<mat-error *ngIf="campoNoValidoProducto('name')">
+					El campo de nombre es <strong>obligatorio</strong>
+				</mat-error>
+			</mat-form-field>
 
-            <!-- Barra de porcentaje -->
-            <div class="porcentaje" *ngIf="currentFileUpload && visible">
-                
-                <div class="alert alert-info loading">
-                    <p>Cargando imagen...</p>
-                    <p-progressSpinner 
-                        [style]="{width: '20px', height: '20px'}" 
-                        styleClass="custom-spinner" 
-                        strokeWidth="8"
-                        animationDuration=".5s">
-                    </p-progressSpinner>
-                </div>
+			<!-- Input Subtitulo -->
 
-                <div class="progress mt-2">
-                    <div
-                        class="progress-bar progress-bar-striped"
-                        role="progressbar"
-                        attr.aria-valuenow="{{ percentage }}"
-                        aria-valuemin="0"
-                        aria-valuemax="100"
-                        [ngStyle]="{ width: percentage + '%' }"
-                        [ngClass]="{
-                            'bg-success': percentage > 70,
-                            'bg-info': percentage > 40 && percentage < 70,
-                            'bg-warning': percentage > 20 && percentage < 40,
-                            'bg-danger': percentage > 0 && percentage < 20
-                        }"
-                        >
-                        {{ percentage }}%
-                    </div>
-                </div>
+			<mat-form-field appearance="fill">
+				<mat-label>Subtítulo del producto</mat-label>
+				<input
+					type="text"
+					matInput
+					formControlName="subtitle"
+					placeholder="Ex. Regalo Sorpresa" />
+			</mat-form-field>
 
-            </div>
-        </div>
+			<!-- Input precio del producto -->
 
-            <!-- Input Nombre -->
-        
-            <mat-form-field  appearance="fill">
-                <mat-label>Nombre del producto</mat-label>
-                <input 
-                    type="text" 
-                    matInput 
-                    formControlName="name"
-                    placeholder="Ex. Regalo Sorpresa">
-                <mat-error *ngIf="campoNoValidoProducto('name')">
-                  El campo de nombre es <strong>obligatorio</strong>
-                </mat-error>
-            </mat-form-field>
+			<mat-form-field appearance="fill">
+				<mat-label>Precio del producto</mat-label>
+				<input
+					type="number"
+					matInput
+					formControlName="price"
+					placeholder="Ex. $25.50"
+					min="1" />
+				<mat-error *ngIf="campoNoValidoProducto('price')">
+					El precio debe ser mínimo <strong>1</strong>
+				</mat-error>
+			</mat-form-field>
 
-            <!-- Input Subtitulo -->
-        
-            <mat-form-field  appearance="fill">
-                <mat-label>Subtítulo del producto</mat-label>
-                <input 
-                    type="text" 
-                    matInput 
-                    formControlName="subtitle"
-                    placeholder="Ex. Regalo Sorpresa">
-            </mat-form-field>
-        
-            <!-- Input precio del producto -->
-            
-            <mat-form-field  appearance="fill">
-                <mat-label>Precio del producto</mat-label>
-                <input 
-                    type="number" 
-                    matInput 
-                    formControlName="price"
-                    placeholder="Ex. $25.50"
-                    min="1">
-                <mat-error *ngIf="campoNoValidoProducto('price')">
-                  El precio debe ser mínimo <strong>1</strong>
-                </mat-error>
-            </mat-form-field>
+			<!-- Input de categoría  -->
 
-            <!-- Input de categoría  -->
-            
-            <mat-form-field>
-                <mat-label>Categoría</mat-label>
-                <mat-select 
-                    formControlName="category">
-                    
-                    <mat-option *ngFor="let categoria of categorias" [value]="categoria.id">
-                        {{ categoria.name }}
-                    </mat-option>
-    
-                </mat-select>
-                <mat-error *ngIf="campoNoValidoProducto('category')">
-                    El campo de categoría es <strong>obligatorio</strong>
-                </mat-error>
-            </mat-form-field>
+			<mat-form-field>
+				<mat-label>Categoría</mat-label>
+				<mat-select formControlName="category">
+					<mat-option
+						*ngFor="let categoria of categorias"
+						[value]="categoria.id">
+						{{ categoria.name }}
+					</mat-option>
+				</mat-select>
+				<mat-error *ngIf="campoNoValidoProducto('category')">
+					El campo de categoría es <strong>obligatorio</strong>
+				</mat-error>
+			</mat-form-field>
 
-            <!-- Input Descripción -->
-            <div class="descripcion">
-                <label class="label" for="descripcion">Descripción del producto</label>
-                <textarea 
-                    class="form-control textarea"
-                    formControlName="description"
-                    id="descripcion"
-                    rows="10"
-                    [ngClass]="{'is-invalid': campoNoValidoProducto('description')}">
-                </textarea>
-                <small 
-                    *ngIf="campoNoValidoProducto('description')" 
-                    class="text text-danger">
-                    La descripción de la materia es <strong>obligatoria</strong>
-                </small>
-            </div>
-                    
-        </form>
+			<!-- Input Descripción -->
+			<div class="descripcion">
+				<label class="label" for="descripcion"
+					>Descripción del producto</label
+				>
+				<textarea
+					class="form-control textarea"
+					formControlName="description"
+					id="descripcion"
+					rows="10"
+					[ngClass]="{
+						'is-invalid': campoNoValidoProducto('description')
+					}">
+				</textarea>
+				<small
+					*ngIf="campoNoValidoProducto('description')"
+					class="text text-danger">
+					La descripción de la materia es <strong>obligatoria</strong>
+				</small>
+			</div>
+		</form>
+	</div>
 
-    </div>
+	<div class="modal-footer">
+		<button
+			pButton
+			(click)="closeModalProducto()"
+			label="Cancelar"
+			icon="pi pi-times"
+			iconPos="left"
+			class="p-button-raised boton-cancelar"></button>
 
-    <div class="modal-footer">
-        <button 
-            pButton 
-            (click)="closeModalProducto()" 
-            label="Cancelar" 
-            icon="pi pi-times" 
-            iconPos="left" 
-            class="p-button-raised boton-cancelar">
-        </button>
-
-        <button 
-            pButton 
-            (click)="agregarProducto()" 
-            label="Guardar"
-            [disabled]="disabled"
-            icon="pi pi-check" 
-            iconPos="right" 
-            class="p-button-raised">
-        </button>
-        
-    </div>
+		<button
+			pButton
+			(click)="agregarProducto()"
+			label="Guardar"
+			[disabled]="disabled"
+			icon="pi pi-check"
+			iconPos="right"
+			class="p-button-raised"></button>
+	</div>
 </ng-template>
 
 <!-- Modal para editar producto -->
 
 <ng-template #modalEditarProducto>
-    <div class="modal-header">
-    <h4 class="modal-title pull-left">Editar Producto</h4>
-    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
-        <span aria-hidden="true" class="visually-hidden">&times;</span>
-    </button>
-    </div>
-    <div class="modal-body">
-        <form 
-        [formGroup]="formularioProducto"
-        autocomplete="off" >
+	<div class="modal-header">
+		<h4 class="modal-title pull-left">Editar Producto</h4>
+		<button
+			type="button"
+			class="btn-close close pull-right"
+			aria-label="Close"
+			(click)="modalRef?.hide()">
+			<span aria-hidden="true" class="visually-hidden">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<form [formGroup]="formularioProducto" autocomplete="off">
+			<div class="foto-perfil">
+				<!-- Previsualizacion de la foto de carrera -->
+				<div class="previsualizacion">
+					<img
+						[src]="url"
+						alt="Foto de carrera"
+						*ngIf="format === 'image' && url" />
+				</div>
 
-        <div class="foto-perfil">
-            <!-- Previsualizacion de la foto de carrera -->
-            <div class="previsualizacion">
+				<!-- Input File -->
 
-                <img [src]="url" alt="Foto de carrera" *ngIf="format==='image' && url" >
+				<div class="custom-file">
+					<input
+						#inputFile
+						type="file"
+						class="form-control"
+						formControlName="photo_url"
+						accept="image/png, image/jpg, image/*"
+						(change)="selectFile($event)" />
+				</div>
 
-            </div>
+				<!-- Barra de porcentaje -->
+				<div class="porcentaje" *ngIf="currentFileUpload && visible">
+					<div class="alert alert-info loading">
+						<p>Cargando imagen...</p>
+						<p-progressSpinner
+							[style]="{ width: '20px', height: '20px' }"
+							styleClass="custom-spinner"
+							strokeWidth="8"
+							animationDuration=".5s">
+						</p-progressSpinner>
+					</div>
 
-            <!-- Input File -->
+					<div class="progress mt-2">
+						<div
+							class="progress-bar progress-bar-striped"
+							role="progressbar"
+							attr.aria-valuenow="{{ percentage }}"
+							aria-valuemin="0"
+							aria-valuemax="100"
+							[ngStyle]="{ width: percentage + '%' }"
+							[ngClass]="{
+								'bg-success': percentage > 70,
+								'bg-info': percentage > 40 && percentage < 70,
+								'bg-warning':
+									percentage > 20 && percentage < 40,
+								'bg-danger': percentage > 0 && percentage < 20
+							}">
+							{{ percentage }}%
+						</div>
+					</div>
+				</div>
+			</div>
 
-            <div class="custom-file">
-                <input 
-                    #inputFile
-                    type="file" 
-                    class="form-control"
-                    formControlName="photo_url"
-                    accept="image/png, image/jpg, image/*"
-                    (change)="selectFile($event)">
-            </div>
+			<!-- Input Nombre -->
 
-            
+			<mat-form-field appearance="fill">
+				<mat-label>Nombre del producto</mat-label>
+				<input
+					type="text"
+					matInput
+					formControlName="name"
+					placeholder="Ex. Regalo Sorpresa" />
+				<mat-error *ngIf="campoNoValidoProducto('name')">
+					El campo de nombre es <strong>obligatorio</strong>
+				</mat-error>
+			</mat-form-field>
 
-            <!-- Barra de porcentaje -->
-            <div class="porcentaje" *ngIf="currentFileUpload && visible">
-                
-                <div class="alert alert-info loading">
-                    <p>Cargando imagen...</p>
-                    <p-progressSpinner 
-                        [style]="{width: '20px', height: '20px'}" 
-                        styleClass="custom-spinner" 
-                        strokeWidth="8"
-                        animationDuration=".5s">
-                    </p-progressSpinner>
-                </div>
+			<!-- Input Subtitulo -->
 
-                <div class="progress mt-2">
-                    <div
-                        class="progress-bar progress-bar-striped"
-                        role="progressbar"
-                        attr.aria-valuenow="{{ percentage }}"
-                        aria-valuemin="0"
-                        aria-valuemax="100"
-                        [ngStyle]="{ width: percentage + '%' }"
-                        [ngClass]="{
-                            'bg-success': percentage > 70,
-                            'bg-info': percentage > 40 && percentage < 70,
-                            'bg-warning': percentage > 20 && percentage < 40,
-                            'bg-danger': percentage > 0 && percentage < 20
-                        }"
-                        >
-                        {{ percentage }}%
-                    </div>
-                </div>
+			<mat-form-field appearance="fill">
+				<mat-label>Subtítulo del producto</mat-label>
+				<input
+					type="text"
+					matInput
+					formControlName="subtitle"
+					placeholder="Ex. Regalo Sorpresa" />
+			</mat-form-field>
 
-            </div>
-        </div>
+			<!-- Input precio del producto -->
 
-            <!-- Input Nombre -->
-        
-            <mat-form-field  appearance="fill">
-                <mat-label>Nombre del producto</mat-label>
-                <input 
-                    type="text" 
-                    matInput 
-                    formControlName="name"
-                    placeholder="Ex. Regalo Sorpresa">
-                <mat-error *ngIf="campoNoValidoProducto('name')">
-                  El campo de nombre es <strong>obligatorio</strong>
-                </mat-error>
-            </mat-form-field>
+			<mat-form-field appearance="fill">
+				<mat-label>Precio del producto</mat-label>
+				<input
+					type="number"
+					matInput
+					formControlName="price"
+					placeholder="Ex. $25.50"
+					min="1" />
+				<mat-error *ngIf="campoNoValidoProducto('price')">
+					El precio debe ser mínimo <strong>1</strong>
+				</mat-error>
+			</mat-form-field>
 
-            <!-- Input Subtitulo -->
-        
-            <mat-form-field  appearance="fill">
-                <mat-label>Subtítulo del producto</mat-label>
-                <input 
-                    type="text" 
-                    matInput 
-                    formControlName="subtitle"
-                    placeholder="Ex. Regalo Sorpresa">
-            </mat-form-field>
-        
-            <!-- Input precio del producto -->
-            
-            <mat-form-field  appearance="fill">
-                <mat-label>Precio del producto</mat-label>
-                <input 
-                    type="number" 
-                    matInput 
-                    formControlName="price"
-                    placeholder="Ex. $25.50"
-                    min="1">
-                <mat-error *ngIf="campoNoValidoProducto('price')">
-                  El precio debe ser mínimo <strong>1</strong>
-                </mat-error>
-            </mat-form-field>
+			<!-- Input de categoría  -->
 
-            <!-- Input de categoría  -->
-            
-            <mat-form-field>
-                <mat-label>Categoría</mat-label>
-                <mat-select 
-                    formControlName="category">
-                    
-                    <mat-option *ngFor="let categoria of categorias" [value]="categoria.id">
-                        {{ categoria.name }}
-                    </mat-option>
-    
-                </mat-select>
-                <mat-error *ngIf="campoNoValidoProducto('category')">
-                    El campo de categoría es <strong>obligatorio</strong>
-                </mat-error>
-            </mat-form-field>
+			<mat-form-field>
+				<mat-label>Categoría</mat-label>
+				<mat-select formControlName="category">
+					<mat-option
+						*ngFor="let categoria of categorias"
+						[value]="categoria.id">
+						{{ categoria.name }}
+					</mat-option>
+				</mat-select>
+				<mat-error *ngIf="campoNoValidoProducto('category')">
+					El campo de categoría es <strong>obligatorio</strong>
+				</mat-error>
+			</mat-form-field>
 
-            <!-- Input Descripción -->
-            <div class="descripcion">
-                <label class="label" for="descripcion">Descripción del producto</label>
-                <textarea 
-                    class="form-control textarea"
-                    formControlName="description"
-                    id="descripcion"
-                    rows="10"
-                    [ngClass]="{'is-invalid': campoNoValidoProducto('description')}">
-                </textarea>
-                <small 
-                    *ngIf="campoNoValidoProducto('description')" 
-                    class="text text-danger">
-                    La descripción de la materia es <strong>obligatoria</strong>
-                </small>
-            </div>
-                    
-        </form>
+			<!-- Input Descripción -->
+			<div class="descripcion">
+				<label class="label" for="descripcion"
+					>Descripción del producto</label
+				>
+				<textarea
+					class="form-control textarea"
+					formControlName="description"
+					id="descripcion"
+					rows="10"
+					[ngClass]="{
+						'is-invalid': campoNoValidoProducto('description')
+					}">
+				</textarea>
+				<small
+					*ngIf="campoNoValidoProducto('description')"
+					class="text text-danger">
+					La descripción de la materia es <strong>obligatoria</strong>
+				</small>
+			</div>
+		</form>
+	</div>
 
-    </div>
+	<div class="modal-footer">
+		<button
+			pButton
+			(click)="closeModalProducto()"
+			label="Cancelar"
+			icon="pi pi-times"
+			iconPos="left"
+			class="p-button-raised boton-cancelar"></button>
 
-    <div class="modal-footer">
-        <button 
-            pButton 
-            (click)="closeModalProducto()" 
-            label="Cancelar" 
-            icon="pi pi-times" 
-            iconPos="left" 
-            class="p-button-raised boton-cancelar">
-        </button>
-
-        <button 
-            pButton 
-            (click)="actualizarProducto()" 
-            [disabled]="disabled"
-            label="Actualizar" 
-            icon="pi pi-check" 
-            iconPos="right" 
-            class="p-button-raised">
-        </button>
-        
-    </div>
+		<button
+			pButton
+			(click)="actualizarProducto()"
+			[disabled]="disabled"
+			label="Actualizar"
+			icon="pi pi-check"
+			iconPos="right"
+			class="p-button-raised"></button>
+	</div>
 </ng-template>

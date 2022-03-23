@@ -10,19 +10,15 @@ import { AdminComponent } from './admin/admin.component';
 import { PrimengModule } from '../primeng/primeng.module';
 import { EliminarComponent } from './eliminar/eliminar.component';
 
-
 @NgModule({
-  declarations: [
-    AdminComponent,
-    EliminarComponent
-  ],
-  imports: [
-    CommonModule,
-    AdminRoutingModule,
-    ReactiveFormsModule,
-    MaterialModule,
-    PrimengModule,
-    SharedModule
-  ]
+	declarations: [AdminComponent, EliminarComponent],
+	imports: [
+		CommonModule,
+		AdminRoutingModule,
+		ReactiveFormsModule,
+		MaterialModule,
+		PrimengModule,
+		SharedModule,
+	],
 })
-export class AdminModule { }
+export class AdminModule {}

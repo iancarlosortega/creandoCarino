@@ -1,79 +1,89 @@
 <app-navbar *ngIf="!home"></app-navbar>
 
 <div *ngIf="home" class="body">
-  <header class="header" [ngClass]="{ fondo: !home }">
-    <div class="logo" [ngClass]="{ 'fondo-blanco': !home }">
-      <img
-        class="logo-imagen"
-        src="/assets/logo.png"
-        alt="Logo Creando Carino"
-      />
-      <p class="logo-nombre">Creando Cariño</p>
-    </div>
-    <nav class="navbar container">
-      <a
-        class="navbar-item hvr-glow"
-        routerLink="/"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-        >Home</a
-      >
-      <a
-        class="navbar-item hvr-glow"
-        routerLink="/desayunos"
-        routerLinkActive="active"
-        >Desayunos</a
-      >
-      <a
-        class="navbar-item hvr-glow"
-        routerLink="/cajas"
-        routerLinkActive="active"
-        >Cajas</a
-      >
-      <a
-        class="navbar-item hvr-glow"
-        routerLink="/fresas"
-        routerLinkActive="active"
-        >Fresas</a
-      >
-      <a
-        class="navbar-item hvr-glow"
-        routerLink="/regalos/globos"
-        routerLinkActive="active"
-        >Regalos con Globos</a
-      >
-      <a
-        class="navbar-item hvr-glow"
-        routerLink="/otros"
-        routerLinkActive="active"
-        >Otros</a
-      >
-      <a
-        class="navbar-item hvr-glow"
-        (click)="scroll('contactanos')"
-        routerLinkActive="active"
-        >Contáctanos</a
-      >
-    </nav>
-    <hr *ngIf="home" class="container" />
-  </header>
-  <div class="principal">
-    <div class="contenido">
-      <p class="bienvenido">Bienvenido a</p>
-      <h1 class="titulo">Creando Cariño</h1>
-      <p class="descripcion">
-        En Creando Cariño, no se trata solo de hacer regalos, sino de hacer
-        negocios con nuestros corazones. No importa quien sea el destinatario de
-        tu regalo, estamos seguros de que tenemos algo para todos, ajustandonos
-        a tu presupuesto.
-      </p>
-      <button (click)="scroll('catalogo')" class="boton">CATÁLOGO</button>
-    </div>
-  </div>
+	<header class="header" [ngClass]="{ fondo: !home }">
+		<div class="logo" [ngClass]="{ 'fondo-blanco': !home }">
+			<img
+				class="logo-imagen"
+				src="/assets/logo.png"
+				alt="Logo Creando Carino" />
+			<p class="logo-nombre">Creando Cariño</p>
+		</div>
+		<nav class="container">
+			<ul class="navbar">
+				<li>
+					<a
+						class="navbar-item hvr-glow"
+						[routerLinkActiveOptions]="{ exact: true }"
+						routerLink="/"
+						routerLinkActive="active"
+						>Home</a
+					>
+				</li>
+				<li
+					(mouseover)="isOpened = true"
+					(mouseleave)="isOpened = false">
+					<a class="navbar-item hvr-glow menu"> Categorías </a>
+					<ul *ngIf="isOpened" class="dropdown" aria-label="submenu">
+						<li *ngFor="let categoria of categorias">
+							<a
+								[routerLink]="[
+									'/',
+									categoria.name,
+									categoria.id
+								]"
+								>{{ categoria.name }}</a
+							>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a
+						class="navbar-item hvr-glow"
+						routerLink="/pago"
+						routerLinkActive="active"
+						>Método de Pago</a
+					>
+				</li>
+				<li>
+					<a
+						class="navbar-item hvr-glow"
+						routerLink="/guia"
+						routerLinkActive="active"
+						>¿Cómo comprar?</a
+					>
+				</li>
+				<li>
+					<a
+						class="navbar-item hvr-glow"
+						(click)="scrollToSection('contactanos')"
+						routerLinkActive="active"
+						>Contactos</a
+					>
+				</li>
+			</ul>
+		</nav>
+		<hr *ngIf="home" class="container" />
+	</header>
+	<div class="principal">
+		<div class="contenido">
+			<p class="bienvenido">Bienvenido a</p>
+			<h1 class="titulo">Creando Cariño</h1>
+			<p class="descripcion">
+				En Creando Cariño, no se trata solo de hacer regalos, sino de
+				hacer negocios con nuestros corazones. No importa quien sea el
+				destinatario de tu regalo, estamos seguros de que tenemos algo
+				para todos, ajustandonos a tu presupuesto.
+			</p>
+			<button (click)="scrollToSection('catalogo')" class="boton">
+				CATÁLOGO
+			</button>
+		</div>
+	</div>
 </div>
 
-<main [@routeAnimations]="prepareRoute(outlet)">
-  <router-outlet #outlet="outlet"></router-outlet>
+<main class="loading" [@routeAnimations]="prepareRoute(outlet)">
+	<router-outlet #outlet="outlet"></router-outlet>
 </main>
 <app-contactanos id="contactanos"></app-contactanos>
 <app-footer></app-footer>

@@ -8,31 +8,29 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 
 //Firebase
-import { AngularFireModule } from "@angular/fire/compat";
+import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from '../environments/environment';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
-    ToastrModule.forRoot({
-      positionClass: 'toast-top-right',
-      timeOut: 3000,
-      maxOpened: 1,
-      preventDuplicates: true
-    }),
-    ModalModule.forRoot(),
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	declarations: [AppComponent],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		HttpClientModule,
+		BrowserAnimationsModule,
+		AngularFireModule.initializeApp(environment.firebase),
+		AngularFireAuthModule,
+		ToastrModule.forRoot({
+			positionClass: 'toast-top-right',
+			timeOut: 3000,
+			maxOpened: 1,
+			preventDuplicates: true,
+		}),
+		ModalModule.forRoot(),
+	],
+	providers: [],
+	bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
