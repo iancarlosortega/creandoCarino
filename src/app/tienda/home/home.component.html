@@ -1,75 +1,105 @@
-<div *ngIf="!loading" id="catalogo" class="catalogo">
-	<header class="header">
-		<p>Catálogo</p>
-		<div class="linea"></div>
-	</header>
-
-	<main class="productos">
-		<div class="container">
-			<!-- Select -->
-
-			<form [formGroup]="miFormulario">
-				<label class="select-label"
-					>Selecciona el tipo de regalo:</label
-				>
-				<select
-					formControlName="tipo"
-					(change)="cambiarTipo($event)"
-					class="select">
-					<option value="todos">Todos</option>
-					<option
-						*ngFor="let categoria of categorias"
-						[value]="categoria.id">
-						{{ categoria.name }}
-					</option>
-				</select>
-			</form>
-			<!-- Slider -->
-			<div class="slider">
-				<swiper
-					[config]="config"
-					[spaceBetween]="10"
-					[slidesPerView]="1.2"
-					[pagination]="true"
-					[navigation]="true"
-					class="mySwiper">
-					<ng-template swiperSlide *ngFor="let producto of productos">
-						<div
-							class="card"
-							[routerLink]="[
-								'/producto',
-								producto.category,
-								producto.id
-							]">
-							<img
-								[src]="producto.photo_url"
-								class="card-img-top"
-								[alt]="producto.name" />
-							<div class="card-body">
-								<h5 class="card-title">{{ producto.name }}</h5>
-								<div class="footer">
-									<p class="precio">
-										{{ producto.price | currency }}
-									</p>
-									<p
-										[routerLink]="[
-											'/ver/regalo',
-											producto.id
-										]"
-										class="precio ver-mas">
-										Ver Más
-									</p>
-								</div>
-							</div>
-						</div>
-					</ng-template>
-				</swiper>
+<div class="fadeIn" *ngIf="!loading">
+	<div class="body">
+		<app-navbar></app-navbar>
+		<div class="principal">
+			<div class="contenido">
+				<p class="bienvenido">Bienvenido a</p>
+				<h1 class="titulo">Creando Cariño</h1>
+				<p class="descripcion">
+					En Creando Cariño, no se trata solo de hacer regalos, sino
+					de hacer negocios con nuestros corazones. No importa quien
+					sea el destinatario de tu regalo, estamos seguros de que
+					tenemos algo para todos, ajustandonos a tu presupuesto.
+				</p>
+				<button (click)="scrollToSection('catalogo')" class="boton">
+					CATÁLOGO
+				</button>
 			</div>
 		</div>
-	</main>
+	</div>
+	<div id="catalogo" class="catalogo">
+		<header class="header">
+			<p>Catálogo</p>
+			<div class="linea"></div>
+		</header>
+
+		<main class="productos">
+			<div class="container">
+				<!-- Select -->
+
+				<form class="formulario" [formGroup]="miFormulario">
+					<label class="select-label"
+						>Selecciona el tipo de regalo:</label
+					>
+					<select
+						formControlName="tipo"
+						(change)="cambiarTipo($event)"
+						class="select">
+						<option value="todos">Todos</option>
+						<option
+							*ngFor="let categoria of categorias"
+							[value]="categoria.id">
+							{{ categoria.name }}
+						</option>
+					</select>
+				</form>
+				<!-- Slider -->
+				<div class="slider">
+					<swiper
+						[config]="config"
+						[spaceBetween]="10"
+						[grabCursor]="true"
+						[slidesPerView]="1.2"
+						[pagination]="pagination"
+						[navigation]="true"
+						class="mySwiper">
+						<ng-template
+							swiperSlide
+							*ngFor="let producto of productos">
+							<div
+								class="card"
+								[routerLink]="[
+									'/producto',
+									producto.category,
+									producto.id
+								]">
+								<img
+									[src]="producto.photo_url"
+									class="card-img-top"
+									[alt]="producto.name" />
+								<div class="card-body">
+									<h5 class="card-title">
+										{{ producto.name }}
+									</h5>
+									<div class="footer">
+										<p class="precio">
+											{{ producto.price | currency }}
+										</p>
+										<p
+											[routerLink]="[
+												'/ver/regalo',
+												producto.id
+											]"
+											class="precio ver-mas">
+											Ver Más
+										</p>
+									</div>
+								</div>
+							</div>
+						</ng-template>
+					</swiper>
+				</div>
+			</div>
+		</main>
+	</div>
+	<app-contactanos id="contactanos"></app-contactanos>
+	<app-footer></app-footer>
 </div>
 
-<app-loading *ngIf="loading"></app-loading>
+<!-- Loading -->
+<div [ngClass]="{ fadeOut: !loading }" class="loading" *ngIf="loading">
+	<img src="/assets/loading.gif" alt="Loading.." />
+</div>
 
 <ng-template #arrowLeftTemplate>
 	<button mat-mini-fab class="flechas flecha-izquierda">

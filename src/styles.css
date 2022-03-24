@@ -1,8 +1,3 @@
-/* Eliminar scrollbar */
-::-webkit-scrollbar {
-    display: none;
-}
-
 :root {
     /* Fuentes */
     --fuente-principal: Roboto, "Helvetica Neue", sans-serif;

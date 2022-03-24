@@ -10,7 +10,7 @@ import { scroll } from 'src/app/helpers/scroll';
 	styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-	navbar: boolean = false;
+	home: boolean = false;
 	isOpened: boolean = false;
 	categorias: Categoria[] = [];
 
@@ -19,8 +19,8 @@ export class NavbarComponent implements OnInit {
 	ngOnInit(): void {
 		const url = this.router.url;
 
-		if (url !== '/home') {
-			this.navbar = true;
+		if (url === '/' || url === '') {
+			this.home = true;
 		}
 
 		this.adminService.obtenerCategorias().subscribe(categorias => {

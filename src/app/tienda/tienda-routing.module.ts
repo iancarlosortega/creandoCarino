@@ -1,4 +1,3 @@
-import { TiendaComponent } from './tienda/tienda.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -11,7 +10,6 @@ import { VerMasComponent } from './ver-mas/ver-mas.component';
 const routes: Routes = [
 	{
 		path: '',
-		component: TiendaComponent,
 		children: [
 			{ path: '', component: HomeComponent },
 			{ path: ':name/:id', component: CategoriasComponent },

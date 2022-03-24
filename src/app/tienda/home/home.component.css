@@ -1,3 +1,79 @@
+.body {
+    background-image: url(/assets/fondo.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+.principal{
+    width: 70%;
+    margin: auto;
+}
+
+.contenido {
+    padding: 50px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+}
+
+.bienvenido {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+}
+
+.titulo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem;
+}
+
+.descripcion {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+}
+
+.boton {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    background-color: #FAECE9;
+    color: #838383;
+    border: 1px solid #FAECE9;
+    border-radius: 10px;
+    padding: 1rem 2rem;
+}
+
+@media (min-width : 768px) {
+    .contenido {
+        padding: 100px 0;
+        height: calc(100vh - 183px);
+    }
+    
+    .bienvenido {
+        font-size: 40px;
+    }
+    
+    .titulo {
+        font-size: 6rem;
+    }
+    
+    .descripcion {
+        font-size: 20px;
+    }
+    
+    .boton {
+        font-size: 25px;
+        font-weight: 700;
+        border-radius: 20px;
+        padding: 1rem 3rem;
+    }
+}
+
 .catalogo{
     text-align: center;
 }
@@ -26,22 +102,27 @@
 
 .productos {
     background-color: #FAECE9;
+    padding-bottom: 2rem;
 }
 
-.container{
-    padding: 20px 0;
+.formulario{
+    display: grid;
+    place-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
 }
 
-.container form{
-    text-align: left;
-    margin-bottom: 10px;
+@media (min-width:768px){
+    .formulario{
+        display: flex;
+        justify-content: center;
+    }
 }
 
 .select {
     font-family: 'Montserrat', sans-serif;
     border: 1px solid #ededed;
     border-radius: 3px;
-    margin-left: 10px;
 }
 
 .select:focus {
@@ -67,6 +148,12 @@
     color: #fff;
 }
 
+.card-img-top {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+}
+
 .ver-mas {
     margin-left: 10px;
     background-color: #a78943;
@@ -77,23 +164,85 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 1.5rem;
 }
 
-.flechas {
-    background-color: #303030a1 ;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+/* Animations */
+.fadeIn {
+    visibility: visible;
+    animation: 1.3s ease fadeIn;
 }
 
-.flecha-izquierda {
-    left: 2.5%;
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
-.flecha-derecha {
-    right: 2.5%;
+.loading {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    width: 100vw;
 }
 
-.icono {
-    color: rgb(230, 230, 230);
+.fadeOut {
+    animation: 0.2s ease fadeOut;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        background-color: #906F22;
+    }
+    100% {
+        opacity: 0;
+        background-color: blue;
+        display: none;
+        visibility: hidden;
+    }
+}
+
+::ng-deep .swiper-pagination-bullet {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 12px;
+    color: #000;
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.2);
+    transform: translateY(10px);
+}
+  
+::ng-deep .swiper-pagination-bullet-active {
+    background: #cd6133;
+}
+
+::ng-deep .swiper-button-prev {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23cd6133'%2F%3E%3C%2Fsvg%3E") !important;
+}
+
+::ng-deep .swiper-button-prev::after {
+    content: "";
+}
+
+::ng-deep .swiper-button-next {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23cd6133'%2F%3E%3C%2Fsvg%3E") !important;
+}
+
+::ng-deep .swiper-button-next::after {
+    content: "";
 }
