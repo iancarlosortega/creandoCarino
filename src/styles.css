@@ -12,6 +12,16 @@
     --gold-light: #a78943;
 }
 
+html, body { height: 100%; }
+body { 
+    margin: 0; 
+    font-family: var(--fuente-principal); 
+    background-color: #F8F9FA;
+}
+html {
+    scroll-behavior: smooth;
+}
+
 /* Hover effects */
 .hvr-glow {
     display: inline-block;
@@ -26,16 +36,6 @@
 }
 .hvr-glow:hover, .hvr-glow:focus, .hvr-glow:active {
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
-}
-
-html, body { height: 100%; }
-body { 
-    margin: 0; 
-    font-family: var(--fuente-principal); 
-    background-color: #F8F9FA;
-}
-html {
-    scroll-behavior: smooth;
 }
 
 /* Fix mat-select and modal */

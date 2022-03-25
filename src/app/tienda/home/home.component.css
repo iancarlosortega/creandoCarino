@@ -6,53 +6,45 @@
     width: 100%;
     height: 100vh;
     position: relative;
-}
-
-.principal{
-    width: 70%;
-    margin: auto;
+    display: grid;
+    grid-template-rows: 20% 80%;
 }
 
 .contenido {
-    padding: 50px 0;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    gap: 3rem;
+    justify-content: center;
     align-items: center;
     text-align: center;
+    font-family: var(--fuente-terciaria);
 }
 
 .bienvenido {
-    font-family: 'Montserrat', sans-serif;
     font-size: 25px;
 }
 
 .titulo {
-    font-family: 'Dancing Script', cursive;
+    font-family: var(--fuente-secundaria);
     font-size: 3rem;
 }
 
 .descripcion {
-    font-family: 'Montserrat', sans-serif;
     font-size: 16px;
 }
 
 .boton {
-    font-family: 'Montserrat', sans-serif;
     font-size: 18px;
     font-weight: 600;
     background-color: #FAECE9;
     color: #838383;
     border: 1px solid #FAECE9;
-    border-radius: 10px;
-    padding: 1rem 2rem;
+    border-radius: 20px;
+    padding: 1rem 3rem;
 }
 
 @media (min-width : 768px) {
-    .contenido {
-        padding: 100px 0;
-        height: calc(100vh - 183px);
-    }
     
     .bienvenido {
         font-size: 40px;
@@ -68,9 +60,6 @@
     
     .boton {
         font-size: 25px;
-        font-weight: 700;
-        border-radius: 20px;
-        padding: 1rem 3rem;
     }
 }
 
@@ -120,7 +109,7 @@
 }
 
 .select {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--fuente-terciaria);
     border: 1px solid #ededed;
     border-radius: 3px;
 }
@@ -130,7 +119,7 @@
 }
 
 .select-label {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--fuente-terciaria);
     font-weight: 500;
     font-size: 17px;
 }
@@ -139,7 +128,7 @@
     margin: 0;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
     background-color: #906F22;
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--fuente-terciaria);
     font-size: 15px;
     font-weight: 600;
     padding: 10px 20px;
