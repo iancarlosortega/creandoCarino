@@ -1,15 +1,59 @@
+.fondo {
+    background: linear-gradient(to bottom, #faece9 0%,#f0d8c0 100%);
+    padding: 3rem 0;
+}
+
 .footer {
-    background-color: #F0D8C0;
-    /* color: #575757; */
     display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    padding: 15px 0;
+}
+
+@media (min-width:992px){
+    .footer {
+        display: grid;
+        grid-template-columns: 20% 50% 30%;
+    }
 }
 
 .logo {
     display: flex;
-    align-items: center;
+    justify-content: center;
+}
+
+.imagen {
+    width: 70%;
+}
+
+.tipos {
+    width: 100%;
+}
+
+.tipos-listado {
+    width: 80%;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    place-content: center;
+}
+
+@media (min-width:768px){
+    .tipos-listado {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+}
+
+.tipos-listado li {
+    font-family: var(--fuente-terciaria);
+    font-weight: 500;
+    padding: 0.75rem 0;
+    cursor: pointer;
+}
+
+.tipos-listado li:hover {
+    color: rgba(0, 0, 0, 0.76);
 }
 
 .redes-sociales, .tipos{
@@ -18,38 +62,83 @@
     align-items: center;
 }
 
-
-.imagen {
-    width: 40%;
+.input-group.with-icon {
+    width: 80%;
+    margin: 1rem auto;
 }
 
-.redes-sociales p{
+.input-group.with-icon>input::-ms-clear{display:none}
+
+.input-group.with-icon>img {
+    width: 2rem;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    pointer-events: none;
+    position: absolute;
+    z-index: 3;
+    top: 50%;
+}
+
+.input-group.with-icon>img,
+.input-group.with-icon.icon-right>img{
+    right: .7rem;
+}
+.input-group.with-icon>input,
+.input-group.with-icon.icon-right>input {
+    padding-right: 1.7rem;
+}
+
+.input-group.with-icon>input {
+    border-radius: 30px !important;
+}
+
+.input-group {
+    margin: 1rem 0;
+}
+
+.icono {
+    position: relative;
+}
+
+.redes-sociales-listado{
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    padding: 0;
+}
+
+/* .redes-sociales p{
     margin: 0;
     margin-left: 5px;
-}
+} */
 
 .titulo {
-    font-size: 2.5rem;
-    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    font-family: var(--fuente-terciaria);
+    font-weight: 600;
     margin: 0;
+    text-align: center;
+}
+
+@media (min-width:768px){
+    .titulo {
+        margin: 1rem 0;
+    }
 }
 
 .item {
-    margin: 10px 0;
     display: flex;
-    flex-wrap: nowrap;
+    gap: 1rem;
+    align-items: center;
 }
 
-.tipos {
-    padding: 0 50px;
-    border-left: 1px solid #a0a0a0b4;
-    border-right: 1px solid #a0a0a0b4;
+.item img {
+    width: 2rem;
+    height: 2rem;
 }
 
-.tipos li {
-    cursor: pointer;
-}
-
-.tipos li:hover {
-    color: rgba(0, 0, 0, 0.76);
+.item p {
+    margin: 0;
+    text-align: left;
 }
