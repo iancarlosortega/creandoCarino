@@ -74,13 +74,6 @@ export class HomeComponent implements OnInit {
 		},
 	};
 
-	pagination = {
-		clickable: true,
-		renderBullet: function (index: number, className: string) {
-			return '<span class="' + className + '"></span>';
-		},
-	};
-
 	constructor(private fb: FormBuilder, private adminService: AdminService) {}
 
 	ngOnInit(): void {

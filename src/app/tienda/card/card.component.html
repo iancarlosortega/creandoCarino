@@ -1,12 +1,10 @@
 <mat-card class="example-card">
 	<mat-card-header>
-		<div mat-card-avatar class="avatar"></div>
 		<mat-card-title>{{ producto.name }}</mat-card-title>
-		<mat-card-subtitle>{{ producto.subtitle }}</mat-card-subtitle>
 	</mat-card-header>
-	<img mat-card-image [src]="producto.photo_url" alt="Producto" />
+	<img [src]="producto.photo_url" alt="Producto" class="card-img" />
 	<mat-card-content>
-		<p>{{ producto.description }}</p>
+		<p class="description">{{ producto.description }}</p>
 		<hr />
 		<div class="footer">
 			<p class="precio">{{ producto.price | currency }}</p>

@@ -3,17 +3,19 @@
 }
 
 .contenido{
-    padding: 30px 0;
+    padding: 2rem 0;
     background-color: #ededed6e;
 }
 
 .titulo {
-    font-family: 'Dancing Script', cursive;
-    font-size: 4rem;
+    font-family: var(--fuente-terciaria);
+    font-size: 3rem;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
+    font-weight: 400;
 }
 .productos {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: grid; 
+    gap: 1rem; 
+    grid-template-columns: repeat( auto-fill, minmax(20rem, 1fr) ); 
 }
