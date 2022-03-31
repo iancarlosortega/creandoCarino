@@ -1,4 +1,4 @@
-<header class="header" [ngClass]="{ fondo: !home }">
+<header *ngIf="!toolBar" class="header" [ngClass]="{ fondo: !home }">
 	<div class="logo" [ngClass]="{ 'fondo-blanco': !home }">
 		<img
 			class="logo-imagen"
@@ -55,3 +55,115 @@
 	</nav>
 	<hr *ngIf="home" class="container" />
 </header>
+
+<mat-toolbar *ngIf="toolBar">
+	<div class="navbar-button">
+		<button mat-icon-button (click)="visibleSidebar = true">
+			<mat-icon> menu </mat-icon>
+		</button>
+	</div>
+	<div class="logo2">
+		<img
+			class="logo-imagen"
+			src="/assets/logo.png"
+			alt="Logo Creando Carino" />
+		<p class="logo-nombre">Creando Cariño</p>
+	</div>
+</mat-toolbar>
+
+<!-- Sidebar -->
+<p-sidebar [(visible)]="visibleSidebar" [baseZIndex]="10000">
+	<mat-accordion class="example-headers-align" multi>
+		<ul class="listado">
+			<li>
+				<a class="nav-item" routerLink="/">
+					<div class="listado-item">
+						<mat-icon
+							routerLinkActive="activo"
+							[routerLinkActiveOptions]="{ exact: true }"
+							>home</mat-icon
+						>
+						<div
+							class="item-nombre"
+							routerLinkActive="activo"
+							[routerLinkActiveOptions]="{ exact: true }">
+							<p>Home</p>
+						</div>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a class="nav-item" routerLink="/pago">
+					<div class="listado-item">
+						<mat-icon
+							routerLinkActive="activo"
+							[routerLinkActiveOptions]="{ exact: true }"
+							>monetization_on
+						</mat-icon>
+						<div
+							class="item-nombre"
+							routerLinkActive="activo"
+							[routerLinkActiveOptions]="{ exact: true }">
+							<p>Método de pago</p>
+						</div>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a class="nav-item" routerLink="/guia">
+					<div class="listado-item">
+						<mat-icon
+							routerLinkActive="activo"
+							[routerLinkActiveOptions]="{ exact: true }"
+							>question_answer</mat-icon
+						>
+						<div
+							class="item-nombre"
+							routerLinkActive="activo"
+							[routerLinkActiveOptions]="{ exact: true }">
+							<p>¿Cómo comprar?</p>
+						</div>
+					</div>
+				</a>
+			</li>
+		</ul>
+		<mat-expansion-panel [expanded]="true">
+			<mat-expansion-panel-header>
+				<mat-panel-title>
+					<div class="listado-item">
+						<mat-icon>clear_all</mat-icon>
+						<div class="item-nombre">
+							<p>Categorías</p>
+						</div>
+					</div>
+				</mat-panel-title>
+			</mat-expansion-panel-header>
+			<ul class="listado">
+				<li *ngFor="let categoria of categorias">
+					<a
+						(click)="visibleSidebar = false"
+						class="nav-item"
+						[routerLink]="['/', categoria.name, categoria.id]">
+						<div class="listado-item">
+							<mat-icon
+								routerLinkActive="activo"
+								[routerLinkActiveOptions]="{
+									exact: true
+								}"
+								>keyboard_double_arrow_right</mat-icon
+							>
+							<div
+								class="item-nombre"
+								routerLinkActive="activo"
+								[routerLinkActiveOptions]="{
+									exact: true
+								}">
+								<p>{{ categoria.name }}</p>
+							</div>
+						</div>
+					</a>
+				</li>
+			</ul>
+		</mat-expansion-panel>
+	</mat-accordion>
+</p-sidebar>

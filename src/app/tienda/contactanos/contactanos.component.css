@@ -11,6 +11,10 @@
     }
 }
 
+.background {
+    padding: 2rem 0;
+}
+
 .titulo {
     text-align: center;
     margin: 1.5rem 0;
