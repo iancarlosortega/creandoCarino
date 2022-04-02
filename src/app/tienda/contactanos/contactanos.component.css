@@ -32,16 +32,6 @@
     }
 }
 
-.redes-sociales {
-    margin: 25px 0;
-    display: flex;
-    justify-content: center;
-}
-
-.redes-sociales a{
-    margin: 0 10px;
-}
-
 .contenido-texto {
     text-align: center;
     font-family: 'Montserrat', cursive;
@@ -53,4 +43,27 @@
     .contenido-texto {
         font-size: 1.3rem;
     }
+}
+
+.redes-sociales {
+    width: 100%;
+    margin: 25px 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.redes-sociales-links{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: #000;
+    text-decoration: none;
+    font-weight: 300;
+    font-size: 1rem;
+}
+
+.redes-sociales-links img{
+    height: 5rem;
+    width: 5rem;
 }
