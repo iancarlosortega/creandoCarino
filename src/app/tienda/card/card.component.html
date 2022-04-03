@@ -7,7 +7,14 @@
 		<p class="description">{{ producto.description }}</p>
 		<hr />
 		<div class="footer">
-			<p class="precio">{{ producto.price | currency }}</p>
+			<p class="precio">
+				{{ producto.price | currency }}
+			</p>
+			<p
+				[routerLink]="['/producto', producto.category, producto.id]"
+				class="precio ver-mas">
+				Ver Más
+			</p>
 		</div>
 	</mat-card-content>
 </mat-card>

@@ -1,4 +1,42 @@
 <app-navbar></app-navbar>
-<p>guia works!</p>
+<div class="container">
+	<mat-stepper orientation="vertical" [linear]="true" #stepper>
+		<mat-step label="Encontrar y seleccionar un regalo">
+			<p>
+				Puede encontrar una gran variedad de regalos revisando las
+				distintas categorías dentro de la plataforma y encontrar el
+				regalo que más le llame la atención, donde podrá ver información
+				mas a detalle del mismo presionando el botón de
+				<strong>Ver Más</strong>.
+			</p>
+			<div>
+				<button mat-button matStepperNext>Siguiente</button>
+			</div>
+		</mat-step>
+		<mat-step label="Presionar el botón de WhatsApp">
+			<p>
+				Una vez seleccionado su regalo ideal, debe presionar el botón de
+				<strong>WhatsApp</strong> el cual lo llevará directamente a la
+				conversación con el chat de Creando Cariño.
+			</p>
+			<div>
+				<button mat-button matStepperPrevious>Anterior</button>
+				<button mat-button matStepperNext>Siguiente</button>
+			</div>
+		</mat-step>
+		<mat-step label="Coordinar los detalles del regalo">
+			<p>
+				En el chat de WhatsApp usted podrá sugerir que es lo que
+				realmente necesita en el regalo para que este sea completamente
+				personalizado a su gusto y se le cotizará el mismo en un tiempo
+				aproximado de 1 o 2 horas.
+			</p>
+			<div>
+				<button mat-button matStepperPrevious>Anterior</button>
+				<button mat-button (click)="stepper.reset()">Inicio</button>
+			</div>
+		</mat-step>
+	</mat-stepper>
+</div>
 <app-contactanos id="contactanos"></app-contactanos>
 <app-footer></app-footer>

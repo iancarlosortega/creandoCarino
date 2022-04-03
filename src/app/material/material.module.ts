@@ -6,6 +6,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
@@ -17,6 +18,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 		MatIconModule,
 		MatInputModule,
 		MatSelectModule,
+		MatStepperModule,
 		MatToolbarModule,
 	],
 })

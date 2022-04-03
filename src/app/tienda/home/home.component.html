@@ -55,13 +55,7 @@
 						<ng-template
 							swiperSlide
 							*ngFor="let producto of productos">
-							<div
-								class="card"
-								[routerLink]="[
-									'/producto',
-									producto.category,
-									producto.id
-								]">
+							<div class="card">
 								<img
 									[src]="producto.photo_url"
 									class="card-img-top"
@@ -76,7 +70,8 @@
 										</p>
 										<p
 											[routerLink]="[
-												'/ver/regalo',
+												'/producto',
+												producto.category,
 												producto.id
 											]"
 											class="precio ver-mas">

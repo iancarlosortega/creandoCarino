@@ -4,8 +4,6 @@ mat-card {
 
 .card-img {
     width: 100%;
-    aspect-ratio: 3/4;
-    object-fit: cover;
 }
 
 .description {
@@ -21,12 +19,17 @@ mat-card {
 .precio {
     margin: 0;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-    background-color: #FAECE9;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 20px;
-    font-weight: 400;
+    background-color: #906F22;
+    font-family: var(--fuente-terciaria);
+    font-size: 15px;
+    font-weight: 600;
     padding: 10px 20px;
-    border-radius: 10px;
+    border-radius: 3px;
     cursor: pointer;
-    letter-spacing: 2.2px;
+    color: #fff;
+}
+
+.ver-mas {
+    margin-left: 10px;
+    background-color: #a78943;
 }
