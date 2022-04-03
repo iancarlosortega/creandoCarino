@@ -1,55 +1,41 @@
+<app-navbar></app-navbar>
 <div class="contenido">
 	<div class="container">
-		<div class="main">
-			<div class="main-principal">
-				<h1 class="titulo">{{ producto?.name }}</h1>
-				<hr />
-				<div class="row">
-					<div class="col-md-6 col-izquierda">
-						<img
-							class="producto-imagen"
-							[src]="producto?.photo_url"
-							[alt]="producto?.name" />
-					</div>
-					<div class="col-md-6 col-derecha">
-						<p>{{ producto?.description }}</p>
-						<p class="producto">
-							Categoría:
-							<span class="producto-categoria"
-								>Regalos con globos</span
-							>
-						</p>
-						<p class="producto">
-							Precio:
-							<span class="producto-precio"
-								>${{ producto?.price }}</span
-							>
-						</p>
-					</div>
+		<main class="main">
+			<h1 class="titulo">{{ producto?.name }}</h1>
+			<hr />
+			<div class="row">
+				<div class="col-md-6 col-izquierda">
+					<img
+						class="producto-imagen"
+						[src]="producto?.photo_url"
+						[alt]="producto?.name" />
+				</div>
+				<div class="col-md-6 col-derecha">
+					<p class="description">{{ producto?.description }}</p>
+					<p class="producto">
+						Categoría:
+						<span class="producto-categoria">{{
+							categoria.name
+						}}</span>
+					</p>
+					<p class="producto">
+						Precio:
+						<span class="producto-precio"
+							>${{ producto?.price }}</span
+						>
+					</p>
+					<a
+						*ngIf="producto"
+						[href]="urlPersonalizado"
+						target="_blank"
+						class="boton-whatsapp">
+						<p>Pedir por WhatsApp</p>
+						<mat-icon>whatsapp</mat-icon>
+					</a>
 				</div>
 			</div>
-			<div class="main-relacionados">
-				<h2 class="titulo-secundario">Más regalos</h2>
-				<ul class="listado-relacionados">
-					<li
-						class="relacionado"
-						*ngFor="let pr of productosRelacionados | slice: 0:6">
-						<div
-							class="view overlay zoom"
-							[routerLink]="['/ver/regalo', pr.id]">
-							<img
-								[src]="pr.photo_url"
-								[alt]="pr.name"
-								class="img-fluid" />
-							<div
-								class="mask flex-center rgba-brown-light relacionado-imagen">
-								<p class="white-text">{{ pr.name }}</p>
-							</div>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
+		</main>
 		<hr />
 	</div>
 </div>

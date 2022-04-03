@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Producto } from '../../interfaces/productos.interface';
-import { switchMap, tap } from 'rxjs/operators';
 import { AdminService } from '../../services/admin.service';
+import { switchMap, tap } from 'rxjs/operators';
+import { Producto } from '../../interfaces/productos.interface';
+import { Categoria } from '../../interfaces/categorias.interface';
 
 @Component({
 	selector: 'app-ver-mas',
@@ -11,8 +12,9 @@ import { AdminService } from '../../services/admin.service';
 })
 export class VerMasComponent implements OnInit {
 	producto!: Producto;
-	productosRelacionados: Producto[] = [];
+	categoria!: Categoria;
 	id!: number;
+	urlPersonalizado: string = '';
 
 	constructor(
 		private activatedRoute: ActivatedRoute,
@@ -22,19 +24,21 @@ export class VerMasComponent implements OnInit {
 	ngOnInit(): void {
 		this.activatedRoute.params
 			.pipe(
-				tap(({ category }) =>
+				tap(({ category }) => {
 					this.adminService
-						.obtenerProductosPorCategoria(category)
-						.subscribe(productos => {
-							this.productosRelacionados = productos;
-						})
-				),
+						.obtenerCategoriaPorId(category)
+						.subscribe(categoria => {
+							this.categoria = categoria;
+						});
+				}),
 				switchMap(({ category, id }) =>
 					this.adminService.obtenerProductoPorId(id, category)
 				)
 			)
 			.subscribe((producto: Producto) => {
 				this.producto = producto;
+				const msg = `Hola, por favor podría ayudarme con el regalo: ${this.producto.name}`;
+				this.urlPersonalizado = `https://wa.me/593986526621?text=${msg}`;
 			});
 	}
 }
