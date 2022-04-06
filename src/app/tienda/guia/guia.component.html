@@ -1,42 +1,82 @@
 <app-navbar></app-navbar>
 <div class="container">
-	<mat-stepper orientation="vertical" [linear]="true" #stepper>
-		<mat-step label="Encontrar y seleccionar un regalo">
+	<h1 class="titulo">Guía para realizar tus pedidos</h1>
+	<mat-stepper orientation="vertical" [linear]="false" #stepper>
+		<mat-step label="Elije tu modelo favorito desde nuestra página web">
 			<p>
 				Puede encontrar una gran variedad de regalos revisando las
 				distintas categorías dentro de la plataforma y encontrar el
 				regalo que más le llame la atención, donde podrá ver información
-				mas a detalle del mismo presionando el botón de
+				más a detalle del mismo presionando el botón de
 				<strong>Ver Más</strong>.
 			</p>
 			<div>
-				<button mat-button matStepperNext>Siguiente</button>
+				<button class="boton" mat-button matStepperNext>
+					Siguiente
+				</button>
 			</div>
 		</mat-step>
-		<mat-step label="Presionar el botón de WhatsApp">
+		<mat-step label="Dale click en el botón de Pedir por WhatsApp">
 			<p>
 				Una vez seleccionado su regalo ideal, debe presionar el botón de
 				<strong>WhatsApp</strong> el cual lo llevará directamente a la
 				conversación con el chat de Creando Cariño.
 			</p>
 			<div>
-				<button mat-button matStepperPrevious>Anterior</button>
-				<button mat-button matStepperNext>Siguiente</button>
+				<button class="boton" mat-button matStepperPrevious>
+					Anterior
+				</button>
+				<button class="boton" mat-button matStepperNext>
+					Siguiente
+				</button>
 			</div>
 		</mat-step>
-		<mat-step label="Coordinar los detalles del regalo">
+		<mat-step label="Personaliza el regalo a tu elección">
 			<p>
-				En el chat de WhatsApp usted podrá sugerir que es lo que
-				realmente necesita en el regalo para que este sea completamente
-				personalizado a su gusto y se le cotizará el mismo en un tiempo
-				aproximado de 1 o 2 horas.
+				Envíanos las frases que desees que vayan en el detalle, así
+				también como los colores, fotos, etc.
 			</p>
 			<div>
-				<button mat-button matStepperPrevious>Anterior</button>
-				<button mat-button (click)="stepper.reset()">Inicio</button>
+				<button class="boton" mat-button matStepperPrevious>
+					Anterior
+				</button>
+				<button class="boton" mat-button matStepperNext>
+					Siguiente
+				</button>
+			</div>
+		</mat-step>
+		<mat-step
+			label="Realiza el pago mediante depósito o transferencia bancaria">
+			<p>
+				Una vez realizado el pago, envia foto de tu comprobante mediante
+				whastapp para proceder a realizar tu regalo.
+			</p>
+			<div>
+				<button class="boton" mat-button matStepperPrevious>
+					Anterior
+				</button>
+				<button class="boton" mat-button matStepperNext>
+					Siguiente
+				</button>
+			</div>
+		</mat-step>
+		<mat-step label="Coordina la entrega">
+			<p>
+				Mediante whastapp envia la ubicación del lugar a entregar, entre
+				esas: barrio, calles, color, número de casa y alguna referencia
+				para llegar facilmente.
+			</p>
+			<div>
+				<button class="boton" mat-button matStepperPrevious>
+					Anterior
+				</button>
+				<button class="boton" mat-button (click)="stepper.reset()">
+					Inicio
+				</button>
 			</div>
 		</mat-step>
 	</mat-stepper>
 </div>
+
 <app-contactanos id="contactanos"></app-contactanos>
 <app-footer></app-footer>

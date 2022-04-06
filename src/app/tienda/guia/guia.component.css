@@ -1,0 +1,31 @@
+.titulo {
+    font-family: var(--fuente-terciaria);
+    font-size: 2.2rem;
+    text-align: center;
+    margin: 2.5rem 0;
+    font-weight: 400;
+}
+
+@media (min-width:768px){
+    .titulo {
+        font-size: 3rem;
+    }
+}
+
+.boton {
+    margin-right: 1rem;
+    background-color: var(--gold);
+    color: #fff;
+}
+
+mat-stepper {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    /* background-color: var(--primario); */
+    background: linear-gradient(to bottom, #faece9 0%,#f0d8c0 100%);
+}
+
+::ng-deep .mat-step-header .mat-step-icon-selected, 
+::ng-deep .mat-step-header .mat-step-icon-state-done, 
+::ng-deep.mat-step-header .mat-step-icon-state-edit {
+    background-color: var(--gold) !important;
+}
