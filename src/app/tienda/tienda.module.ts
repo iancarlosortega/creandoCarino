@@ -1,9 +1,8 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { TiendaRoutingModule } from './tienda-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
-// import { SwiperModule } from 'swiper/angular';
 import { MaterialModule } from './../material/material.module';
 
 import { SharedModule } from './../shared/shared.module';
@@ -16,6 +15,11 @@ import { HomeComponent } from './home/home.component';
 import { PagoComponent } from './pago/pago.component';
 import { VerMasComponent } from './ver-mas/ver-mas.component';
 
+// Swiper Config
+import { register } from 'swiper/element/bundle';
+import { SwiperDirective } from './directives/swiper.directive';
+register();
+
 @NgModule({
 	declarations: [
 		CardComponent,
@@ -25,6 +29,7 @@ import { VerMasComponent } from './ver-mas/ver-mas.component';
 		HomeComponent,
 		PagoComponent,
 		VerMasComponent,
+		SwiperDirective,
 	],
 	imports: [
 		CommonModule,
@@ -32,7 +37,7 @@ import { VerMasComponent } from './ver-mas/ver-mas.component';
 		TiendaRoutingModule,
 		SharedModule,
 		ReactiveFormsModule,
-		// SwiperModule,
 	],
+	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class TiendaModule {}

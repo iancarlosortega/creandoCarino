@@ -1,17 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { ViewportScroller } from '@angular/common';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AdminService } from '../../services/admin.service';
 import { Categoria } from '../../interfaces/categorias.interface';
 import { Producto } from '../../interfaces/productos.interface';
 
-// import Swiper core and required modules
-import SwiperCore from 'swiper';
-import { Navigation, Pagination } from 'swiper/modules';
-import { type SwiperOptions } from 'swiper/types/swiper-options';
-import { ViewportScroller } from '@angular/common';
+import { SwiperOptions } from 'swiper/types';
 
-// install Swiper modules
-SwiperCore.use([Navigation, Pagination]);
 @Component({
 	selector: 'app-home',
 	templateUrl: './home.component.html',
@@ -26,29 +21,30 @@ export class HomeComponent implements OnInit {
 		tipo: ['todos'],
 	});
 
+	config: SwiperOptions = {
+		spaceBetween: 10,
+		grabCursor: true,
+		slidesPerView: 1.2,
+		navigation: true,
+		breakpoints: {
+			'499': {
+				slidesPerView: 2.2,
+			},
+			'768': {
+				slidesPerView: 2.8,
+			},
+			'992': {
+				slidesPerView: 4.2,
+			},
+		},
+	};
+
 	home: boolean = false;
 	isOpened: boolean = false;
 	loading: boolean = true;
 	categorias: Categoria[] = [];
 	productos: Producto[] = [];
 	productosTotales: Producto[] = [];
-
-	config: SwiperOptions = {
-		breakpoints: {
-			// when window width is <= 499px
-			499: {
-				slidesPerView: 2.2,
-			},
-			// when window width is <= 999px
-			768: {
-				slidesPerView: 2.8,
-			},
-			// when window width is <= 999px
-			992: {
-				slidesPerView: 4.2,
-			},
-		},
-	};
 
 	ngOnInit(): void {
 		this.adminService.obtenerCategorias().subscribe(categorias => {

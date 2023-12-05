@@ -41,21 +41,14 @@
 				</form>
 				<!-- Slider -->
 				<div class="slider">
-					<!-- TODO: Fix this -->
-					<!-- <swiper
-						[config]="config"
-						[spaceBetween]="10"
-						[grabCursor]="true"
-						[slidesPerView]="1.2"
-						[navigation]="true"
-						class="mySwiper">
-						<ng-template
-							swiperSlide
-							*ngFor="let producto of productos">
+					<swiper-container appSwiper [config]="config" lazy="true">
+						@for (producto of productos; track $index) {
+						<swiper-slide>
 							<div class="card">
 								<img
 									[src]="producto.photo_url"
 									class="card-img-top"
+									loading="lazy"
 									[alt]="producto.name" />
 								<div class="card-body">
 									<h5 class="card-title">
@@ -77,8 +70,9 @@
 									</div>
 								</div>
 							</div>
-						</ng-template>
-					</swiper> -->
+						</swiper-slide>
+						}
+					</swiper-container>
 				</div>
 			</div>
 		</main>
@@ -86,14 +80,3 @@
 	<app-contactanos></app-contactanos>
 	<app-footer></app-footer>
 </div>
-
-<ng-template #arrowLeftTemplate>
-	<button mat-mini-fab class="flechas flecha-izquierda">
-		<mat-icon class="icono">keyboard_arrow_left</mat-icon>
-	</button>
-</ng-template>
-<ng-template #arrowRightTemplate>
-	<button mat-mini-fab class="flechas flecha-derecha">
-		<mat-icon class="icono">keyboard_arrow_right</mat-icon>
-	</button>
-</ng-template>
