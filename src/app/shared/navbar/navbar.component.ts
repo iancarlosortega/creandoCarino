@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AdminService } from '../../services/admin.service';
 import { Categoria } from '../../interfaces/categorias.interface';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
 	selector: 'app-navbar',
@@ -15,6 +16,8 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 	home: boolean = false;
 	isOpened: boolean = false;
 	categorias: Categoria[] = [];
+
+	public viewportScroller = inject(ViewportScroller);
 
 	menuItems = [
 		{
@@ -79,8 +82,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 		}, 0);
 	}
 
-	scrollToSection(anchor: any) {
-		// TODO - Fix this
-		// scroll(anchor);
+	scrollToSection(elementId: string): void {
+		this.viewportScroller.scrollToAnchor(elementId);
 	}
 }

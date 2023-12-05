@@ -1,9 +1,6 @@
 <header *ngIf="!toolBar" class="header" [ngClass]="{ fondo: !home }">
 	<div class="logo" [ngClass]="{ 'fondo-blanco': !home }">
-		<img
-			class="logo-imagen"
-			src="/assets/logo.png"
-			alt="Logo Creando Carino" />
+		<img class="logo-imagen" src="/assets/logo.png" alt="Logo Creando Carino" />
 		<p class="logo-nombre">Creando Cariño</p>
 	</div>
 	<nav class="container">
@@ -46,10 +43,9 @@
 			<li>
 				<a
 					class="navbar-item hvr-glow"
-					(click)="scrollToSection('contactanos')"
-					routerLinkActive="active"
-					>Contactos</a
-				>
+					(click)="scrollToSection('contactanos')">
+					Contactos
+				</a>
 			</li>
 		</ul>
 	</nav>
@@ -63,10 +59,7 @@
 		</button>
 	</div>
 	<div class="logo2">
-		<img
-			class="logo-imagen"
-			src="/assets/logo.png"
-			alt="Logo Creando Carino" />
+		<img class="logo-imagen" src="/assets/logo.png" alt="Logo Creando Carino" />
 		<p class="logo-nombre">Creando Cariño</p>
 	</div>
 </mat-toolbar>

@@ -1,12 +1,5 @@
-import {
-	animate,
-	state,
-	style,
-	transition,
-	trigger,
-} from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { Component, OnInit, inject } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { AdminService } from '../../services/admin.service';
 import { Categoria } from '../../interfaces/categorias.interface';
 import { Producto } from '../../interfaces/productos.interface';
@@ -15,6 +8,7 @@ import { Producto } from '../../interfaces/productos.interface';
 import SwiperCore from 'swiper';
 import { Navigation, Pagination } from 'swiper/modules';
 import { type SwiperOptions } from 'swiper/types/swiper-options';
+import { ViewportScroller } from '@angular/common';
 
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination]);
@@ -22,32 +16,13 @@ SwiperCore.use([Navigation, Pagination]);
 	selector: 'app-home',
 	templateUrl: './home.component.html',
 	styleUrls: ['./home.component.css'],
-	animations: [
-		trigger('openClose', [
-			// ...
-			state(
-				'open',
-				style({
-					height: '200px',
-					opacity: 1,
-					backgroundColor: 'yellow',
-				})
-			),
-			state(
-				'closed',
-				style({
-					height: '100px',
-					opacity: 0.8,
-					backgroundColor: 'blue',
-				})
-			),
-			transition('open => closed', [animate('1s')]),
-			transition('closed => open', [animate('0.5s')]),
-		]),
-	],
 })
 export class HomeComponent implements OnInit {
-	miFormulario: UntypedFormGroup = this.fb.group({
+	public viewportScroller = inject(ViewportScroller);
+	public fb = inject(FormBuilder);
+	public adminService = inject(AdminService);
+
+	miFormulario: FormGroup = this.fb.group({
 		tipo: ['todos'],
 	});
 
@@ -75,11 +50,6 @@ export class HomeComponent implements OnInit {
 		},
 	};
 
-	constructor(
-		private fb: UntypedFormBuilder,
-		private adminService: AdminService
-	) {}
-
 	ngOnInit(): void {
 		this.adminService.obtenerCategorias().subscribe(categorias => {
 			this.categorias = categorias;
@@ -101,8 +71,7 @@ export class HomeComponent implements OnInit {
 		}
 	}
 
-	scrollToSection(anchor: any) {
-		// TODO: Implementar el scroll
-		// scroll(anchor);
+	scrollToSection(elementId: string): void {
+		this.viewportScroller.scrollToAnchor(elementId);
 	}
 }
