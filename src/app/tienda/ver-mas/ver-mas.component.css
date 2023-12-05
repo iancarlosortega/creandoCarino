@@ -3,7 +3,6 @@
 }
 
 .titulo {
-    font-family: var(--fuente-terciaria);
     font-size: 2rem;
     font-weight: 400;
     text-align: center;
@@ -26,7 +25,6 @@
 }
 
 .producto {
-    font-family: 'Montserrat', sans-serif;
     font-size: 18px;
     font-weight: 600;
 }
@@ -48,7 +46,6 @@
     justify-content: center;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
     background-color: #3CB851;
-    font-family: var(--fuente-terciaria);
     font-size: 1.3rem;
     padding: 0.5rem 1rem;
     text-decoration: none;

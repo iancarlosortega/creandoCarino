@@ -70,7 +70,7 @@ mat-toolbar {
 
 .logo-nombre {
     font-size: 2.5rem;
-    font-family: 'Dancing Script', cursive;
+    font-family: var(--fuente-secundaria);
     margin: 0;
 }
 
@@ -98,7 +98,6 @@ mat-toolbar {
 .navbar-item {
     text-decoration: none;
     color: #000000;
-    font-family: 'Montserrat', sans-serif;
     font-size: 17px;
     font-weight: 600;
     padding: 10px 20px;
@@ -124,7 +123,6 @@ mat-toolbar {
 .dropdown li a {
     text-decoration: none;
     color: #000000;
-    font-family: 'Montserrat', sans-serif;
     font-size: 15px;
     font-weight: 600;
     transition: all .1s ease;

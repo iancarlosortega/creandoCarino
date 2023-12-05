@@ -18,7 +18,6 @@
 .titulo {
     text-align: center;
     margin: 1.5rem 0;
-    font-family: 'Montserrat', cursive;
     font-size: 2rem;
     font-weight: 500;
     letter-spacing:5px;
@@ -34,7 +33,6 @@
 
 .contenido-texto {
     text-align: center;
-    font-family: 'Montserrat', cursive;
     font-size: 1rem;
     font-weight: 300;
 }

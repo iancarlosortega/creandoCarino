@@ -46,7 +46,7 @@
 .logo-nombre {
     text-align: center;
     font-size: 2.5rem;
-    font-family: 'Dancing Script', cursive;
+    font-family: var(--fuente-secundaria);
     margin: 0;
 }
 
