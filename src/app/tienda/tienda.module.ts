@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { TiendaRoutingModule } from './tienda-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SwiperModule } from 'swiper/angular';
+// import { SwiperModule } from 'swiper/angular';
 import { MaterialModule } from './../material/material.module';
 
 import { SharedModule } from './../shared/shared.module';
@@ -32,7 +32,7 @@ import { VerMasComponent } from './ver-mas/ver-mas.component';
 		TiendaRoutingModule,
 		SharedModule,
 		ReactiveFormsModule,
-		SwiperModule,
+		// SwiperModule,
 	],
 })
 export class TiendaModule {}

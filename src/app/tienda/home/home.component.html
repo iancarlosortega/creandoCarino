@@ -6,10 +6,10 @@
 				<p class="bienvenido">Bienvenido a</p>
 				<h1 class="titulo">Creando Cariño</h1>
 				<p class="descripcion">
-					En Creando Cariño, no se trata solo de hacer regalos, sino
-					de hacer negocios con nuestros corazones. No importa quien
-					sea el destinatario de tu regalo, estamos seguros de que
-					tenemos algo para todos, ajustándonos a tu presupuesto.
+					En Creando Cariño, no se trata solo de hacer regalos, sino de hacer
+					negocios con nuestros corazones. No importa quien sea el destinatario
+					de tu regalo, estamos seguros de que tenemos algo para todos,
+					ajustándonos a tu presupuesto.
 				</p>
 				<button (click)="scrollToSection('catalogo')" class="boton">
 					CATÁLOGO
@@ -28,24 +28,21 @@
 				<!-- Select -->
 
 				<form class="formulario" [formGroup]="miFormulario">
-					<label class="select-label"
-						>Selecciona el tipo de regalo:</label
-					>
+					<label class="select-label">Selecciona el tipo de regalo:</label>
 					<select
 						formControlName="tipo"
 						(change)="cambiarTipo($event)"
 						class="select">
 						<option value="todos">Todos</option>
-						<option
-							*ngFor="let categoria of categorias"
-							[value]="categoria.id">
+						<option *ngFor="let categoria of categorias" [value]="categoria.id">
 							{{ categoria.name }}
 						</option>
 					</select>
 				</form>
 				<!-- Slider -->
 				<div class="slider">
-					<swiper
+					<!-- TODO: Fix this -->
+					<!-- <swiper
 						[config]="config"
 						[spaceBetween]="10"
 						[grabCursor]="true"
@@ -81,7 +78,7 @@
 								</div>
 							</div>
 						</ng-template>
-					</swiper>
+					</swiper> -->
 				</div>
 			</div>
 		</main>

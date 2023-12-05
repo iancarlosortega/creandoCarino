@@ -5,7 +5,11 @@ import {
 	OnInit,
 	AfterViewInit,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+	UntypedFormBuilder,
+	UntypedFormGroup,
+	Validators,
+} from '@angular/forms';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
@@ -57,11 +61,11 @@ export class AdminComponent implements OnInit, AfterViewInit {
 	percentage: number = 0;
 
 	//Formularios
-	formularioCategoria: FormGroup = this.fb.group({
+	formularioCategoria: UntypedFormGroup = this.fb.group({
 		name: ['', [Validators.required, Validators.minLength(3)]],
 	});
 
-	formularioProducto: FormGroup = this.fb.group({
+	formularioProducto: UntypedFormGroup = this.fb.group({
 		name: ['', [Validators.required, Validators.minLength(3)]],
 		price: ['', [Validators.required, Validators.min(1)]],
 		description: ['', [Validators.required, Validators.minLength(10)]],
@@ -71,7 +75,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
 	});
 
 	constructor(
-		private fb: FormBuilder,
+		private fb: UntypedFormBuilder,
 		private modalService: BsModalService,
 		private adminService: AdminService,
 		private authService: AuthService,
@@ -259,10 +263,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
 						);
 					})
 					.catch(err => {
-						this.toastr.error(
-							`${err}`,
-							'Error al eliminar la categoría'
-						);
+						this.toastr.error(`${err}`, 'Error al eliminar la categoría');
 						console.log('Error al eliminar la categoría', err);
 					});
 			}
@@ -338,9 +339,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
 				this.adminService
 					.agregarProducto(this.currentFileUpload, this.producto)
 					.subscribe(percentage => {
-						this.percentage = Math.round(
-							percentage ? percentage : 0
-						);
+						this.percentage = Math.round(percentage ? percentage : 0);
 						if (this.percentage == 100) {
 							setTimeout(() => {
 								this.toastr.success(
@@ -360,10 +359,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
 				this.toastr.error('Error', 'Error');
 			}
 		} else {
-			this.toastr.error(
-				'Por favor, seleccione una imagen para subir',
-				'Error'
-			);
+			this.toastr.error('Por favor, seleccione una imagen para subir', 'Error');
 		}
 	}
 
@@ -377,9 +373,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
 		this.producto = { ...this.producto, ...this.formularioProducto.value };
 
 		if (this.selectedFiles) {
-			this.adminService.eliminarProductoStorage(
-				this.producto.photo_filename!
-			);
+			this.adminService.eliminarProductoStorage(this.producto.photo_filename!);
 
 			let filename: string =
 				this.formularioProducto.controls['photo_url'].value;
@@ -401,14 +395,9 @@ export class AdminComponent implements OnInit, AfterViewInit {
 					this.formularioProducto.get('category')?.value
 				) {
 					this.adminService
-						.actualizarProductoCompleto(
-							this.currentFileUpload,
-							this.producto
-						)
+						.actualizarProductoCompleto(this.currentFileUpload, this.producto)
 						.subscribe(percentage => {
-							this.percentage = Math.round(
-								percentage ? percentage : 0
-							);
+							this.percentage = Math.round(percentage ? percentage : 0);
 							if (this.percentage == 100) {
 								setTimeout(() => {
 									this.toastr.info(
@@ -426,15 +415,11 @@ export class AdminComponent implements OnInit, AfterViewInit {
 						});
 				} else {
 					this.obs.unsubscribe();
-					this.adminService.eliminarProductoFirestore(
-						this.productoEditar
-					);
+					this.adminService.eliminarProductoFirestore(this.productoEditar);
 					this.adminService
 						.agregarProducto(this.currentFileUpload, this.producto)
 						.subscribe(percentage => {
-							this.percentage = Math.round(
-								percentage ? percentage : 0
-							);
+							this.percentage = Math.round(percentage ? percentage : 0);
 							if (this.percentage == 100) {
 								setTimeout(() => {
 									this.toastr.info(
@@ -474,9 +459,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
 					});
 			} else {
 				this.obs.unsubscribe();
-				this.adminService.eliminarProductoFirestore(
-					this.productoEditar
-				);
+				this.adminService.eliminarProductoFirestore(this.productoEditar);
 				this.adminService
 					._agregarProducto(this.producto)
 					.then(_ => {
@@ -531,10 +514,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
 						);
 					})
 					.catch(err => {
-						this.toastr.error(
-							`${err}`,
-							'Error al eliminar la carrerar'
-						);
+						this.toastr.error(`${err}`, 'Error al eliminar la carrerar');
 						console.log('Error al eliminar la carrera', err);
 					});
 			}

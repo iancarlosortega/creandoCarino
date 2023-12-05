@@ -2,7 +2,6 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AdminService } from '../../services/admin.service';
 import { Categoria } from '../../interfaces/categorias.interface';
-import { scroll } from 'src/app/helpers/scroll';
 import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
@@ -81,6 +80,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 	}
 
 	scrollToSection(anchor: any) {
-		scroll(anchor);
+		// TODO - Fix this
+		// scroll(anchor);
 	}
 }

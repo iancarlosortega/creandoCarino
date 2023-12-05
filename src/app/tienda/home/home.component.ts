@@ -6,14 +6,15 @@ import {
 	trigger,
 } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { AdminService } from '../../services/admin.service';
 import { Categoria } from '../../interfaces/categorias.interface';
 import { Producto } from '../../interfaces/productos.interface';
-import { scroll } from 'src/app/helpers/scroll';
 
 // import Swiper core and required modules
-import SwiperCore, { Navigation, Pagination, SwiperOptions } from 'swiper';
+import SwiperCore from 'swiper';
+import { Navigation, Pagination } from 'swiper/modules';
+import { type SwiperOptions } from 'swiper/types/swiper-options';
 
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination]);
@@ -46,7 +47,7 @@ SwiperCore.use([Navigation, Pagination]);
 	],
 })
 export class HomeComponent implements OnInit {
-	miFormulario: FormGroup = this.fb.group({
+	miFormulario: UntypedFormGroup = this.fb.group({
 		tipo: ['todos'],
 	});
 
@@ -74,7 +75,10 @@ export class HomeComponent implements OnInit {
 		},
 	};
 
-	constructor(private fb: FormBuilder, private adminService: AdminService) {}
+	constructor(
+		private fb: UntypedFormBuilder,
+		private adminService: AdminService
+	) {}
 
 	ngOnInit(): void {
 		this.adminService.obtenerCategorias().subscribe(categorias => {
@@ -98,6 +102,7 @@ export class HomeComponent implements OnInit {
 	}
 
 	scrollToSection(anchor: any) {
-		scroll(anchor);
+		// TODO: Implementar el scroll
+		// scroll(anchor);
 	}
 }

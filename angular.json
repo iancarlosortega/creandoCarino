@@ -80,18 +80,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "creadoCarino:build"
+            "buildTarget": "creadoCarino:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "creadoCarino:build:production"
+              "buildTarget": "creadoCarino:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "creadoCarino:build"
+            "buildTarget": "creadoCarino:build"
           }
         },
         "test": {
@@ -146,8 +146,9 @@
       }
     }
   },
-  "defaultProject": "creadoCarino",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

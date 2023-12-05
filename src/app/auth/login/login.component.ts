@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 	styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-	loginForm: FormGroup = this.fb.group({
+	loginForm: UntypedFormGroup = this.fb.group({
 		email: ['', [Validators.required, Validators.email]],
 		password: ['', [Validators.required, Validators.minLength(6)]],
 	});
@@ -19,7 +19,7 @@ export class LoginComponent {
 	error: boolean = false;
 
 	constructor(
-		private fb: FormBuilder,
+		private fb: UntypedFormBuilder,
 		private authService: AuthService,
 		private router: Router,
 		private toastr: ToastrService
