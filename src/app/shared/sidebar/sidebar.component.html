@@ -1,0 +1,43 @@
+<p-sidebar [(visible)]="uiService.isSidebarOpen">
+	<mat-accordion>
+		<ul class="menu-items">
+			@for (menuItem of menuItems; track $index) {
+			<li>
+				<a
+					class="menu-item"
+					[routerLink]="menuItem.path"
+					routerLinkActive="menu-item-active"
+					[routerLinkActiveOptions]="{ exact: true }">
+					<mat-icon>{{ menuItem.icon }}</mat-icon>
+					<p>{{ menuItem.pathName }}</p>
+				</a>
+			</li>
+			}
+		</ul>
+		<mat-expansion-panel [expanded]="true">
+			<mat-expansion-panel-header>
+				<mat-panel-title class="categories">
+					<mat-icon>clear_all</mat-icon>
+					<p>Categorías</p>
+				</mat-panel-title>
+			</mat-expansion-panel-header>
+			<ul class="menu-items">
+				@for (category of categories; track $index) {
+				<li>
+					<a
+						class="menu-item"
+						(click)="uiService.closeSidebar()"
+						[routerLink]="['/', category.name, category.id]"
+						routerLinkActive="menu-item-active"
+						[routerLinkActiveOptions]="{
+							exact: true
+						}">
+						<mat-icon>keyboard_double_arrow_right</mat-icon>
+						<p>{{ category.name }}</p>
+					</a>
+				</li>
+				}
+			</ul>
+		</mat-expansion-panel>
+	</mat-accordion>
+</p-sidebar>

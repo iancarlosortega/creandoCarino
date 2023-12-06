@@ -1,62 +1,39 @@
-import { AfterViewInit, Component, OnInit, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import {
+	AfterViewInit,
+	ChangeDetectionStrategy,
+	Component,
+	OnInit,
+	inject,
+	signal,
+} from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 import { AdminService } from '../../services/admin.service';
 import { Categoria } from '../../interfaces/categorias.interface';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { ViewportScroller } from '@angular/common';
+import { CommonModule, ViewportScroller } from '@angular/common';
+import { SidebarComponent } from '../sidebar/sidebar.component';
+import { MaterialModule } from 'src/app/material/material.module';
+import { UIService } from 'src/app/services/ui.service';
 
 @Component({
 	selector: 'app-navbar',
+	standalone: true,
+	imports: [SidebarComponent, MaterialModule, CommonModule, RouterModule],
 	templateUrl: './navbar.component.html',
 	styleUrls: ['./navbar.component.css'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent implements OnInit, AfterViewInit {
-	toolBar: boolean = false;
-	visibleSidebar: boolean = false;
+	isDesktopDevice = signal(false);
 	home: boolean = false;
 	isOpened: boolean = false;
 	categorias: Categoria[] = [];
 
-	public viewportScroller = inject(ViewportScroller);
-
-	menuItems = [
-		{
-			titulo: 'Home',
-			route: '/play/home',
-			icono: 'home',
-		},
-		{
-			titulo: 'Carreras',
-			route: '/play/carreras',
-			icono: 'data_usage',
-		},
-		{
-			titulo: 'Asignaturas',
-			route: '/play/materias',
-			icono: 'library_books',
-		},
-		{
-			titulo: 'Historial',
-			route: '/play/historial',
-			icono: 'history',
-		},
-		{
-			titulo: 'Editar Perfil',
-			route: '/play/perfil',
-			icono: 'account_box',
-		},
-		{
-			titulo: 'Sobre Nosotros',
-			route: '/play/nosotros',
-			icono: 'supervised_user_circle',
-		},
-	];
-
-	constructor(
-		private router: Router,
-		private adminService: AdminService,
-		private observer: BreakpointObserver
-	) {}
+	public uiService = inject(UIService);
+	private viewportScroller = inject(ViewportScroller);
+	private router = inject(Router);
+	private adminService = inject(AdminService);
+	private observer = inject(BreakpointObserver);
 
 	ngOnInit(): void {
 		const url = this.router.url;
@@ -74,9 +51,9 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 		setTimeout(() => {
 			this.observer.observe(['(min-width: 992px)']).subscribe(res => {
 				if (res.matches) {
-					this.toolBar = false;
+					this.isDesktopDevice.set(true);
 				} else {
-					this.toolBar = true;
+					this.isDesktopDevice.set(false);
 				}
 			});
 		}, 0);

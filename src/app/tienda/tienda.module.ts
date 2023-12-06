@@ -18,6 +18,7 @@ import { VerMasComponent } from './ver-mas/ver-mas.component';
 // Swiper Config
 import { register } from 'swiper/element/bundle';
 import { SwiperDirective } from './directives/swiper.directive';
+import { NavbarComponent } from '../shared/navbar/navbar.component';
 register();
 
 @NgModule({
@@ -37,6 +38,7 @@ register();
 		TiendaRoutingModule,
 		SharedModule,
 		ReactiveFormsModule,
+		NavbarComponent,
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

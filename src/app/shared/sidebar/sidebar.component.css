@@ -1,0 +1,45 @@
+:host {
+  display: block;
+}
+
+.menu-items {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.menu-item {
+  text-decoration: none;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.menu-item mat-icon {
+  color: var(--gold);
+}
+
+.menu-item p {
+  margin: 0;
+  color: black;
+}
+
+.menu-item-active p {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.categories {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.categories p {
+  margin: 0;
+}
+
+.categories mat-icon {
+  color: var(--gold);
+}

@@ -5,12 +5,11 @@ import { MaterialModule } from './../material/material.module';
 import { PrimengModule } from '../primeng/primeng.module';
 
 import { FooterComponent } from './footer/footer.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
-	declarations: [FooterComponent, NavbarComponent, LoadingComponent],
+	declarations: [FooterComponent, LoadingComponent],
 	imports: [CommonModule, RouterModule, MaterialModule, PrimengModule],
-	exports: [FooterComponent, NavbarComponent, LoadingComponent],
+	exports: [FooterComponent, LoadingComponent],
 })
 export class SharedModule {}
