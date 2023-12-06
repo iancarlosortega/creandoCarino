@@ -2,11 +2,12 @@ import {
 	AfterViewInit,
 	ChangeDetectionStrategy,
 	Component,
+	Input,
 	OnInit,
 	inject,
 	signal,
 } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { AdminService } from '../../services/admin.service';
 import { Categoria } from '../../interfaces/categorias.interface';
 import { BreakpointObserver } from '@angular/cdk/layout';
@@ -23,29 +24,16 @@ import { UIService } from 'src/app/services/ui.service';
 	styleUrls: ['./navbar.component.css'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavbarComponent implements OnInit, AfterViewInit {
+export class NavbarComponent implements AfterViewInit {
+	@Input({ required: true }) categories: Categoria[] = [];
+
 	isDesktopDevice = signal(false);
-	home: boolean = false;
-	isOpened: boolean = false;
-	categorias: Categoria[] = [];
+	isDropdownOpen = signal(false);
 
 	public uiService = inject(UIService);
 	private viewportScroller = inject(ViewportScroller);
-	private router = inject(Router);
 	private adminService = inject(AdminService);
 	private observer = inject(BreakpointObserver);
-
-	ngOnInit(): void {
-		const url = this.router.url;
-
-		if (url === '/' || url === '') {
-			this.home = true;
-		}
-
-		this.adminService.obtenerCategorias().subscribe(categorias => {
-			this.categorias = categorias;
-		});
-	}
 
 	ngAfterViewInit() {
 		setTimeout(() => {

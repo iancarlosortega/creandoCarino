@@ -1,107 +1,64 @@
-.logo {
-    padding: 0.75rem 0;
+.header {
+    position: fixed;
+    width: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
-}
-
-@media (min-width:768px){
-    .logo {
-        padding: 0;
-        padding-top: 25px;
-    }
-}
-
-.logo2 {
-    padding: 0.75rem 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-@media (min-width:768px){
-    .logo2 {
-        padding: 2rem 0;
-    }
-}
-
-.fondo-blanco {
-    background-color: #FFFFFF;
-}
-
-.fondo {
-    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#faece9+0,ede0d3+34,ede0d3+63,faece9+100 */
-    background: rgb(250,236,233); /* Old browsers */
-    background: -moz-linear-gradient(45deg,  rgba(250,236,233,1) 0%, rgba(237,224,211,1) 34%, rgba(237,224,211,1) 63%, rgba(250,236,233,1) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(45deg,  rgba(250,236,233,1) 0%,rgba(237,224,211,1) 34%,rgba(237,224,211,1) 63%,rgba(250,236,233,1) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(45deg,  rgba(250,236,233,1) 0%,rgba(237,224,211,1) 34%,rgba(237,224,211,1) 63%,rgba(250,236,233,1) 100%); /* W3C, IE10+, FF16+, Chrome26+,  Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#faece9', endColorstr='#faece9',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-
-}
-
-mat-toolbar {
-    padding: 0;
-    display: grid;
-    grid-template-columns: 10% 90%;
-    background-color: var(--primario);
-    height: 8rem;
+    justify-content: space-between;
+    backdrop-filter: blur(10px);
+    height: 6rem;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 0 2rem;
+    z-index: 10;
 }
 
-.navbar-button {
+.header-mobile {
+    padding: 0;
+    justify-content: flex-start;
+    background-color: transparent;
+}
+
+@media (min-width: 992px) {
+    .header-mobile {
+        display: none;
+    }
+}
+
+.header-button {
     height: 100%;
+    width: 3.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 0px;
     color: rgb(155, 155, 155);
     border-right: 0.5px solid rgb(155, 155, 155);
 }
 
-.logo-imagen {
-    margin-right: 10px;
-    height: 100px;
+.logo img {
+    width: 80px;
 }
 
-@media (min-width : 768px) {
-    .logo-imagen {
-        height: 75px;
-    }
-}
-
-.logo-nombre {
+.logo p {
     font-size: 2.5rem;
     font-family: var(--fuente-secundaria);
     margin: 0;
 }
 
-@media (min-width : 768px) {
-    .logo-nombre {
-        font-size: 3.5rem;
-    }
-}
-
-.navbar{
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-@media (min-width : 768px) {
-    .navbar{
-        flex-direction: row;
-        justify-content: space-around;
-    }
+.logo-mobile {
+    flex: 1;
 }
 
 .navbar-item {
     text-decoration: none;
     color: #000000;
-    font-size: 17px;
     font-weight: 600;
     padding: 10px 20px;
     cursor: pointer;
+}
+
+.navbar-item-active {
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+    background-color: #FAECE9;
 }
 
 .dropdown{
@@ -111,10 +68,12 @@ mat-toolbar {
     grid-template-columns: repeat( auto-fill, minmax(10rem, 1fr) ); 
     border-radius: 9px;
     position: absolute;
+    top: 30px;
+    left: 0;
     background-color: var(--primario);
     list-style: none;
     padding: 1rem 2rem;
-    max-width: 50%;
+    margin: 1rem 0;
     width: 30rem;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     z-index: 1;
@@ -129,41 +88,5 @@ mat-toolbar {
 }
 
 .dropdown li a:hover {
-    font-weight: bold;
-}
-
-.active {
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
-    background-color: #FAECE9;
-}
-
-.listado {
-    list-style-type: none;
-    padding: 0;
-}
-
-.listado-item {
-    display: flex;
-    align-items: center;
-    margin: 2rem 0;
-    cursor: pointer;
-}
-
-.item-nombre p {
-    margin: 0;
-    margin-left: 0.5rem;
-}
-
-.nav-item {
-    text-decoration: none;
-    color: #000;
-}
-
-.listado-item mat-icon {
-    color: var(--gold);
-}
-
-.activo {
-    color: var(--gold);
     font-weight: bold;
 }

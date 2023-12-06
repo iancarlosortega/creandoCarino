@@ -1,70 +1,65 @@
 @if (isDesktopDevice()) {
-<header class="header" [ngClass]="{ fondo: !home }">
-	<div class="logo" [ngClass]="{ 'fondo-blanco': !home }">
-		<img class="logo-imagen" src="/assets/logo.png" alt="Logo Creando Carino" />
-		<p class="logo-nombre">Creando Cariño</p>
+<header class="header">
+	<div class="logo flex-center">
+		<img src="/assets/logo.png" alt="Logo Creando Carino" />
+		<p>Creando Cariño</p>
 	</div>
-	<nav class="container">
-		<ul class="navbar">
-			<li>
-				<a
-					class="navbar-item hvr-glow"
-					[routerLinkActiveOptions]="{ exact: true }"
-					routerLink="/"
-					routerLinkActive="active"
-					>Home</a
-				>
-			</li>
-			<li (mouseover)="isOpened = true" (mouseleave)="isOpened = false">
-				<a class="navbar-item hvr-glow menu"> Categorías </a>
-				<ul *ngIf="isOpened" class="dropdown" aria-label="submenu">
-					<li *ngFor="let categoria of categorias">
-						<a [routerLink]="['/', categoria.name, categoria.id]">{{
-							categoria.name
-						}}</a>
-					</li>
-				</ul>
-			</li>
-			<li>
-				<a
-					class="navbar-item hvr-glow"
-					routerLink="/pago"
-					routerLinkActive="active"
-					>Método de Pago</a
-				>
-			</li>
-			<li>
-				<a
-					class="navbar-item hvr-glow"
-					routerLink="/guia"
-					routerLinkActive="active"
-					>¿Cómo comprar?</a
-				>
-			</li>
-			<li>
-				<a
-					class="navbar-item hvr-glow"
-					(click)="scrollToSection('contactanos')">
-					Contactos
-				</a>
-			</li>
-		</ul>
+	<nav class="flex-center">
+		<a
+			class="navbar-item hvr-glow"
+			routerLink="/"
+			[routerLinkActiveOptions]="{ exact: true }"
+			routerLinkActive="navbar-item-active">
+			Home
+		</a>
+		<a
+			(mouseover)="isDropdownOpen.set(true)"
+			(mouseleave)="isDropdownOpen.set(false)"
+			class="navbar-item hvr-glow menu">
+			Categorías @if (isDropdownOpen()) {
+			<ul class="dropdown" aria-label="submenu">
+				@for (category of categories; track $index) {
+				<li>
+					<a [routerLink]="['/', category.name, category.id]">
+						{{ category.name }}
+					</a>
+				</li>
+				}
+			</ul>
+			}
+		</a>
+		<a
+			class="navbar-item hvr-glow"
+			routerLink="/pago"
+			[routerLinkActiveOptions]="{ exact: true }"
+			routerLinkActive="navbar-item-active">
+			Método de Pago
+		</a>
+		<a
+			class="navbar-item hvr-glow"
+			routerLink="/guia"
+			[routerLinkActiveOptions]="{ exact: true }"
+			routerLinkActive="navbar-item-active">
+			¿Cómo comprar?
+		</a>
+		<a class="navbar-item hvr-glow" (click)="scrollToSection('contactanos')">
+			Contáctanos
+		</a>
 	</nav>
-	<hr *ngIf="home" class="container" />
 </header>
 } @if ( !isDesktopDevice()) {
-<mat-toolbar>
-	<div class="navbar-button">
-		<button mat-icon-button (click)="uiService.openSidebar()">
-			<mat-icon> menu </mat-icon>
-		</button>
-	</div>
-	<div class="logo2">
-		<img class="logo-imagen" src="/assets/logo.png" alt="Logo Creando Carino" />
-		<p class="logo-nombre">Creando Cariño</p>
+<mat-toolbar class="header header-mobile">
+	<button
+		class="header-button"
+		mat-icon-button
+		(click)="uiService.openSidebar()">
+		<mat-icon> menu </mat-icon>
+	</button>
+	<div class="logo logo-mobile flex-center">
+		<img src="/assets/logo.png" alt="Logo Creando Carino" />
+		<p>Creando Cariño</p>
 	</div>
 </mat-toolbar>
-
-<app-sidebar [categories]="categorias" />
+<app-sidebar [categories]="categories" />
 
 }
