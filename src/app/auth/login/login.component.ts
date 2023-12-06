@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
-import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import {
+	UntypedFormGroup,
+	UntypedFormBuilder,
+	Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from './../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../services/auth.service';
 
 @Component({
 	selector: 'app-login',
@@ -44,10 +48,7 @@ export class LoginComponent {
 				this.router.navigateByUrl('/admin');
 			})
 			.catch(error => {
-				this.toastr.error(
-					'Creendeciales incorrectas!',
-					'Usuario inválido'
-				);
+				this.toastr.error('Creendeciales incorrectas!', 'Usuario inválido');
 			});
 	}
 }

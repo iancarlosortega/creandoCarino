@@ -7,29 +7,29 @@ import { MaterialModule } from './../material/material.module';
 
 import { SharedModule } from './../shared/shared.module';
 
-import { CardComponent } from './card/card.component';
-import { CategoriasComponent } from './categorias/categorias.component';
-import { ContactanosComponent } from './contactanos/contactanos.component';
-import { GuiaComponent } from './guia/guia.component';
-import { HomeComponent } from './home/home.component';
-import { PagoComponent } from './pago/pago.component';
-import { VerMasComponent } from './ver-mas/ver-mas.component';
+import { NavbarComponent } from '../shared/navbar/navbar.component';
+import { GuideComponent } from './pages/guide/guide.component';
+import { HomeComponent } from './pages/home/home.component';
+import { PaymentComponent } from './pages/payment/payment.component';
+import { ProductComponent } from './pages/product/product.component';
+import { CategoriesComponent } from './pages/categories/categories.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
 
 // Swiper Config
 import { register } from 'swiper/element/bundle';
 import { SwiperDirective } from './directives/swiper.directive';
-import { NavbarComponent } from '../shared/navbar/navbar.component';
 register();
 
 @NgModule({
 	declarations: [
-		CardComponent,
-		CategoriasComponent,
-		ContactanosComponent,
-		GuiaComponent,
+		CategoriesComponent,
+		ContactComponent,
+		GuideComponent,
 		HomeComponent,
-		PagoComponent,
-		VerMasComponent,
+		PaymentComponent,
+		ProductCardComponent,
+		ProductComponent,
 		SwiperDirective,
 	],
 	imports: [

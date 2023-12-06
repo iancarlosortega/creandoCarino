@@ -3,18 +3,16 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	Input,
-	OnInit,
 	inject,
 	signal,
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { AdminService } from '../../services/admin.service';
-import { Categoria } from '../../interfaces/categorias.interface';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { CommonModule, ViewportScroller } from '@angular/common';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { MaterialModule } from 'src/app/material/material.module';
-import { UIService } from 'src/app/services/ui.service';
+import { Category } from 'src/app/tienda/interfaces';
+import { UIService } from 'src/app/tienda/services';
 
 @Component({
 	selector: 'app-navbar',
@@ -25,14 +23,13 @@ import { UIService } from 'src/app/services/ui.service';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent implements AfterViewInit {
-	@Input({ required: true }) categories: Categoria[] = [];
+	@Input({ required: true }) categories: Category[] = [];
 
 	isDesktopDevice = signal(false);
 	isDropdownOpen = signal(false);
 
 	public uiService = inject(UIService);
 	private viewportScroller = inject(ViewportScroller);
-	private adminService = inject(AdminService);
 	private observer = inject(BreakpointObserver);
 
 	ngAfterViewInit() {

@@ -68,7 +68,7 @@
     grid-template-columns: repeat( auto-fill, minmax(10rem, 1fr) ); 
     border-radius: 9px;
     position: absolute;
-    top: 30px;
+    top: 25px;
     left: 0;
     background-color: var(--primario);
     list-style: none;

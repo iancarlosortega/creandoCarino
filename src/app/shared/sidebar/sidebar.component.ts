@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from 'src/app/material/material.module';
 import { PrimengModule } from 'src/app/primeng/primeng.module';
-import { UIService } from 'src/app/services/ui.service';
-import { Categoria } from 'src/app/interfaces/categorias.interface';
+import { Category } from 'src/app/tienda/interfaces';
+import { UIService } from 'src/app/tienda/services';
 
 @Component({
 	selector: 'app-sidebar',
@@ -14,7 +14,7 @@ import { Categoria } from 'src/app/interfaces/categorias.interface';
 	styleUrl: './sidebar.component.css',
 })
 export class SidebarComponent {
-	@Input({ required: true }) public categories: Categoria[] = [];
+	@Input({ required: true }) public categories: Category[] = [];
 	menuItems = [
 		{
 			pathName: 'Home',

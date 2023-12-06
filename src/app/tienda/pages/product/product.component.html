@@ -1,28 +1,28 @@
 <div class="contenido">
 	<div class="container">
 		<main class="main">
-			<h1 class="titulo">{{ producto.name }}</h1>
+			<h1 class="titulo">{{ product.name }}</h1>
 			<hr />
 			<div class="row">
 				<div class="col-md-6 col-izquierda">
 					<img
 						class="producto-imagen"
-						[src]="producto.photo_url"
-						[alt]="producto.name" />
+						[src]="product.photo_url"
+						[alt]="product.name" />
 				</div>
 				<div class="col-md-6 col-derecha">
-					<p class="description">{{ producto.description }}</p>
+					<p class="description">{{ product.description }}</p>
 					<p class="producto">
 						Categoría:
-						<span class="producto-categoria">{{ categoria.name }}</span>
+						<span class="producto-categoria">{{ category.name }}</span>
 					</p>
 					<p class="producto">
 						Precio:
-						<span class="producto-precio">${{ producto.price }}</span>
+						<span class="producto-precio">${{ product.price }}</span>
 					</p>
 					<a
-						*ngIf="producto"
-						[href]="urlPersonalizado"
+						*ngIf="product"
+						[href]="customUrl"
 						target="_blank"
 						class="boton-whatsapp">
 						<p>Pedir por WhatsApp</p>

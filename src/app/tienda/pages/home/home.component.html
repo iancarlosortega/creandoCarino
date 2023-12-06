@@ -1,6 +1,6 @@
 <div>
 	<div class="body">
-		<app-navbar [categories]="categorias"></app-navbar>
+		<app-navbar [categories]="categories"></app-navbar>
 		<div class="container">
 			<div class="contenido">
 				<p class="bienvenido">Bienvenido a</p>
@@ -34,8 +34,8 @@
 						(change)="cambiarTipo($event)"
 						class="select">
 						<option value="todos">Todos</option>
-						<option *ngFor="let categoria of categorias" [value]="categoria.id">
-							{{ categoria.name }}
+						<option *ngFor="let category of categories" [value]="category.id">
+							{{ category.name }}
 						</option>
 					</select>
 				</form>

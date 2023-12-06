@@ -26,7 +26,7 @@
 			<!-- Tabla -->
 			<p-table
 				#dtCategorias
-				[value]="categorias"
+				[value]="categories"
 				dataKey="name"
 				selectionMode="single"
 				[rows]="15"
@@ -126,7 +126,7 @@
 			<!-- Tabla -->
 			<p-table
 				#dtProductos
-				[value]="productos"
+				[value]="products"
 				dataKey="name"
 				selectionMode="single"
 				[rows]="15"
@@ -138,12 +138,7 @@
 				[scrollable]="scrollableProducts"
 				scrollDirection="both"
 				currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} productos"
-				[globalFilterFields]="[
-					'name',
-					'price',
-					'description',
-					'category'
-				]">
+				[globalFilterFields]="['name', 'price', 'description', 'category']">
 				<!-- Tabla header -->
 				<ng-template pTemplate="caption">
 					<div class="tabla-header">
@@ -217,9 +212,7 @@
 							{{ producto.description }}
 						</td>
 						<td class="tabla-imagen" style="width: 200px">
-							<img
-								[src]="producto.photo_url"
-								[alt]="producto.name" />
+							<img [src]="producto.photo_url" [alt]="producto.name" />
 						</td>
 						<td style="width: 200px">
 							{{ producto.subtitle }}
@@ -233,12 +226,7 @@
 									icon="pi pi-pencil"
 									iconPos="right"
 									type="button"
-									(click)="
-										obtenerProducto(
-											producto.id,
-											producto.category
-										)
-									"
+									(click)="obtenerProducto(producto.id, producto.category)"
 									class="p-button-raised p-button-rounded"></button>
 
 								<!-- Botón de eliminar -->
@@ -383,10 +371,7 @@
 		</button>
 	</div>
 	<div class="modal-body">
-		<form
-			[formGroup]="formularioProducto"
-			#form="ngForm"
-			autocomplete="off">
+		<form [formGroup]="formularioProducto" #form="ngForm" autocomplete="off">
 			<div>
 				<!-- Previsualizacion de la foto del producto -->
 				<div class="previsualizacion">
@@ -431,8 +416,7 @@
 							[ngClass]="{
 								'bg-success': percentage > 70,
 								'bg-info': percentage > 40 && percentage < 70,
-								'bg-warning':
-									percentage > 20 && percentage < 40,
+								'bg-warning': percentage > 20 && percentage < 40,
 								'bg-danger': percentage > 0 && percentage < 20
 							}">
 							{{ percentage }}%
@@ -487,7 +471,7 @@
 				<mat-label>Categoría</mat-label>
 				<mat-select formControlName="category">
 					<mat-option
-						*ngFor="let categoria of categorias"
+						*ngFor="let categoria of categories"
 						[value]="categoria.id">
 						{{ categoria.name }}
 					</mat-option>
@@ -499,9 +483,7 @@
 
 			<!-- Input Descripción -->
 			<div class="descripcion">
-				<label class="label" for="descripcion"
-					>Descripción del producto</label
-				>
+				<label class="label" for="descripcion">Descripción del producto</label>
 				<textarea
 					class="form-control textarea"
 					formControlName="description"
@@ -599,8 +581,7 @@
 							[ngClass]="{
 								'bg-success': percentage > 70,
 								'bg-info': percentage > 40 && percentage < 70,
-								'bg-warning':
-									percentage > 20 && percentage < 40,
+								'bg-warning': percentage > 20 && percentage < 40,
 								'bg-danger': percentage > 0 && percentage < 20
 							}">
 							{{ percentage }}%
@@ -655,7 +636,7 @@
 				<mat-label>Categoría</mat-label>
 				<mat-select formControlName="category">
 					<mat-option
-						*ngFor="let categoria of categorias"
+						*ngFor="let categoria of categories"
 						[value]="categoria.id">
 						{{ categoria.name }}
 					</mat-option>
@@ -667,9 +648,7 @@
 
 			<!-- Input Descripción -->
 			<div class="descripcion">
-				<label class="label" for="descripcion"
-					>Descripción del producto</label
-				>
+				<label class="label" for="descripcion">Descripción del producto</label>
 				<textarea
 					class="form-control textarea"
 					formControlName="description"

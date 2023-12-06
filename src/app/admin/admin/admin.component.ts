@@ -4,27 +4,23 @@ import {
 	ViewChild,
 	OnInit,
 	AfterViewInit,
+	inject,
 } from '@angular/core';
-import {
-	UntypedFormBuilder,
-	UntypedFormGroup,
-	Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Subscription } from 'rxjs';
-import { AdminService } from 'src/app/services/admin.service';
-import { AuthService } from './../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { FileUpload } from './../models/file-upload-model';
-import { Producto } from './../../interfaces/productos.interface';
-import { Categoria } from './../../interfaces/categorias.interface';
+import { FileUpload } from '../../tienda/models/file-upload-model';
 import { Table } from 'primeng/table';
 import { MatDialog } from '@angular/material/dialog';
 import { EliminarComponent } from '../eliminar/eliminar.component';
+import { Category } from 'src/app/tienda/interfaces/category.interface';
+import { Product } from 'src/app/tienda/interfaces/product.interface';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { CategoriesService, ProductsService } from 'src/app/tienda/services';
 
 @Component({
-	selector: 'app-admin',
 	templateUrl: './admin.component.html',
 	styleUrls: ['./admin.component.css'],
 })
@@ -36,11 +32,20 @@ export class AdminComponent implements OnInit, AfterViewInit {
 	@ViewChild('modalCrearProducto') modalCrearProducto!: TemplateRef<any>;
 	@ViewChild('modalEditarProducto') modalEditarProducto!: TemplateRef<any>;
 
-	categoria!: Categoria;
-	producto!: Producto;
-	productoEditar!: Producto;
-	categorias: Categoria[] = [];
-	productos: Producto[] = [];
+	private fb = inject(FormBuilder);
+	private modalService = inject(BsModalService);
+	private authService = inject(AuthService);
+	private categoriesService = inject(CategoriesService);
+	private productsService = inject(ProductsService);
+	private toastr = inject(ToastrService);
+	private observer = inject(BreakpointObserver);
+	public dialog = inject(MatDialog);
+
+	category!: Category;
+	product!: Product;
+	productoEditar!: Product;
+	categories: Category[] = [];
+	products: Product[] = [];
 	obs!: Subscription;
 
 	loading: boolean = true;
@@ -61,11 +66,11 @@ export class AdminComponent implements OnInit, AfterViewInit {
 	percentage: number = 0;
 
 	//Formularios
-	formularioCategoria: UntypedFormGroup = this.fb.group({
+	formularioCategoria: FormGroup = this.fb.group({
 		name: ['', [Validators.required, Validators.minLength(3)]],
 	});
 
-	formularioProducto: UntypedFormGroup = this.fb.group({
+	formularioProducto: FormGroup = this.fb.group({
 		name: ['', [Validators.required, Validators.minLength(3)]],
 		price: ['', [Validators.required, Validators.min(1)]],
 		description: ['', [Validators.required, Validators.minLength(10)]],
@@ -74,16 +79,6 @@ export class AdminComponent implements OnInit, AfterViewInit {
 		subtitle: [''],
 	});
 
-	constructor(
-		private fb: UntypedFormBuilder,
-		private modalService: BsModalService,
-		private adminService: AdminService,
-		private authService: AuthService,
-		private toastr: ToastrService,
-		private observer: BreakpointObserver,
-		public dialog: MatDialog
-	) {}
-
 	ngOnInit(): void {
 		this.modalService.onHidden.subscribe(_ => {
 			this.formularioCategoria.reset();
@@ -91,12 +86,12 @@ export class AdminComponent implements OnInit, AfterViewInit {
 			this.url = null;
 		});
 
-		this.adminService.obtenerCategorias().subscribe(categorias => {
-			this.categorias = categorias;
+		this.categoriesService.getAllCategories().subscribe(categories => {
+			this.categories = categories;
 		});
 
-		this.adminService.obtenerProductos().subscribe(productos => {
-			this.productos = productos;
+		this.productsService.getAllProducts().subscribe(products => {
+			this.products = products;
 			this.loading = false;
 		});
 	}
@@ -184,17 +179,17 @@ export class AdminComponent implements OnInit, AfterViewInit {
 		}
 
 		const { id, ...categoria } = this.formularioCategoria.value;
-		this.categoria = categoria;
+		this.category = categoria;
 		this.disabled = true;
 
-		this.adminService
-			.agregarCategoria(this.categoria)
+		this.categoriesService
+			.addCategory(this.category)
 			.then(res => {
 				this.modalRef?.hide();
 				this.disabled = false;
 				this.formularioCategoria.reset();
 				this.toastr.success(
-					`La categoría ${this.categoria.name} fue registrada con éxito!`,
+					`La categoría ${this.category.name} fue registrada con éxito!`,
 					'Categoría Registrada'
 				);
 			})
@@ -206,9 +201,9 @@ export class AdminComponent implements OnInit, AfterViewInit {
 
 	obtenerCategoria(id: string) {
 		this.openModalEditarCategoria();
-		this.adminService.obtenerCategoriaPorId(id).subscribe((data: any) => {
+		this.categoriesService.getCategoryById(id).subscribe((data: any) => {
 			if (data.type != 'removed') {
-				this.categoria = data;
+				this.category = data;
 				this.formularioCategoria.setValue({
 					name: data.name,
 				});
@@ -222,20 +217,20 @@ export class AdminComponent implements OnInit, AfterViewInit {
 			return;
 		}
 
-		this.categoria = {
-			...this.categoria,
+		this.category = {
+			...this.category,
 			...this.formularioCategoria.value,
 		};
 		this.disabled = true;
 
-		this.adminService
-			.actualizarCategoria(this.categoria)
+		this.categoriesService
+			.updateCategory(this.category)
 			.then(res => {
 				this.modalRef?.hide();
 				this.disabled = false;
 				this.formularioCategoria.reset();
 				this.toastr.info(
-					`La categoría ${this.categoria.name} fue actualizada con éxito`,
+					`La categoría ${this.category.name} fue actualizada con éxito`,
 					'Categoría actualizada!'
 				);
 			})
@@ -253,8 +248,8 @@ export class AdminComponent implements OnInit, AfterViewInit {
 
 		dialog.afterClosed().subscribe((result: boolean) => {
 			if (result) {
-				this.adminService
-					.eliminarCategoria(id)
+				this.categoriesService
+					.removeCategory(id)
 					.then(res => {
 						console.log(res);
 						this.toastr.success(
@@ -319,14 +314,14 @@ export class AdminComponent implements OnInit, AfterViewInit {
 			return;
 		}
 
-		this.producto = this.formularioProducto.value;
+		this.product = this.formularioProducto.value;
 
 		if (this.selectedFiles) {
 			let filename: string =
 				this.formularioProducto.controls['photo_url'].value;
 			filename = filename.split('\\').slice(-1)[0];
-			this.producto.photo_filename = filename;
-			delete this.producto.file;
+			this.product.photo_filename = filename;
+			delete this.product.file;
 
 			const file: File | null = this.selectedFiles.item(0);
 			this.selectedFiles = undefined;
@@ -336,14 +331,14 @@ export class AdminComponent implements OnInit, AfterViewInit {
 				this.disabled = true;
 				this.disableForm();
 				this.currentFileUpload = new FileUpload(file);
-				this.adminService
-					.agregarProducto(this.currentFileUpload, this.producto)
+				this.productsService
+					.addProduct(this.currentFileUpload, this.product)
 					.subscribe(percentage => {
 						this.percentage = Math.round(percentage ? percentage : 0);
 						if (this.percentage == 100) {
 							setTimeout(() => {
 								this.toastr.success(
-									`El producto ${this.producto.name} fue registrado con éxito!`,
+									`El producto ${this.product.name} fue registrado con éxito!`,
 									'Producto Registrado'
 								);
 								this.enableForm();
@@ -370,16 +365,16 @@ export class AdminComponent implements OnInit, AfterViewInit {
 		}
 
 		delete this.formularioProducto.value.photo_url;
-		this.producto = { ...this.producto, ...this.formularioProducto.value };
+		this.product = { ...this.product, ...this.formularioProducto.value };
 
 		if (this.selectedFiles) {
-			this.adminService.eliminarProductoStorage(this.producto.photo_filename!);
+			this.productsService.removeProductImage(this.product.photo_filename!);
 
 			let filename: string =
 				this.formularioProducto.controls['photo_url'].value;
 			filename = filename.split('\\').slice(-1)[0];
-			this.producto.photo_filename = filename;
-			delete this.producto.file;
+			this.product.photo_filename = filename;
+			delete this.product.file;
 
 			const file: File | null = this.selectedFiles.item(0);
 			this.selectedFiles = undefined;
@@ -394,14 +389,14 @@ export class AdminComponent implements OnInit, AfterViewInit {
 					this.productoEditar.category ===
 					this.formularioProducto.get('category')?.value
 				) {
-					this.adminService
-						.actualizarProductoCompleto(this.currentFileUpload, this.producto)
+					this.productsService
+						.updateProduct(this.currentFileUpload, this.product)
 						.subscribe(percentage => {
 							this.percentage = Math.round(percentage ? percentage : 0);
 							if (this.percentage == 100) {
 								setTimeout(() => {
 									this.toastr.info(
-										`El producto ${this.producto.name} fue actualizado con éxito!`,
+										`El producto ${this.product.name} fue actualizado con éxito!`,
 										'Producto Actualizado'
 									);
 									this.enableForm();
@@ -415,15 +410,15 @@ export class AdminComponent implements OnInit, AfterViewInit {
 						});
 				} else {
 					this.obs.unsubscribe();
-					this.adminService.eliminarProductoFirestore(this.productoEditar);
-					this.adminService
-						.agregarProducto(this.currentFileUpload, this.producto)
+					this.productsService.removeProductFromDatabase(this.productoEditar);
+					this.productsService
+						.addProduct(this.currentFileUpload, this.product)
 						.subscribe(percentage => {
 							this.percentage = Math.round(percentage ? percentage : 0);
 							if (this.percentage == 100) {
 								setTimeout(() => {
 									this.toastr.info(
-										`El producto ${this.producto.name} fue actualizado con éxito!`,
+										`El producto ${this.product.name} fue actualizado con éxito!`,
 										'Producto Actualizado'
 									);
 									this.enableForm();
@@ -444,12 +439,12 @@ export class AdminComponent implements OnInit, AfterViewInit {
 				this.productoEditar.category ===
 				this.formularioProducto.get('category')?.value
 			) {
-				this.adminService
-					.actualizarProducto(this.producto)
+				this.productsService
+					._updateProductToDatabase(this.product)
 					.then(_ => {
 						this.closeModalProducto();
 						this.toastr.info(
-							`El producto ${this.producto.name} fue actualizado con éxito!`,
+							`El producto ${this.product.name} fue actualizado con éxito!`,
 							'Producto Actualizado'
 						);
 					})
@@ -459,13 +454,13 @@ export class AdminComponent implements OnInit, AfterViewInit {
 					});
 			} else {
 				this.obs.unsubscribe();
-				this.adminService.eliminarProductoFirestore(this.productoEditar);
-				this.adminService
-					._agregarProducto(this.producto)
+				this.productsService.removeProductFromDatabase(this.productoEditar);
+				this.productsService
+					._addProductToDatabase(this.product)
 					.then(_ => {
 						this.closeModalProducto();
 						this.toastr.info(
-							`El producto ${this.producto.name} fue actualizado con éxito!`,
+							`El producto ${this.product.name} fue actualizado con éxito!`,
 							'Producto Actualizado'
 						);
 					})
@@ -479,10 +474,10 @@ export class AdminComponent implements OnInit, AfterViewInit {
 
 	obtenerProducto(id: string, categoria: string) {
 		this.openModalEditarProducto();
-		this.obs = this.adminService
-			.obtenerProductoPorId(id, categoria)
-			.subscribe((data: Producto) => {
-				this.producto = data;
+		this.obs = this.productsService
+			.getProductById(id, categoria)
+			.subscribe((data: Product) => {
+				this.product = data;
 				this.productoEditar = data;
 				this.url = data.photo_url;
 				this.format = 'image';
@@ -497,7 +492,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
 			});
 	}
 
-	eliminarProducto(producto: Producto) {
+	eliminarProducto(product: Product) {
 		//Ventana modal para confirmar la eliminacion
 		const dialog = this.dialog.open(EliminarComponent, {
 			width: '400px',
@@ -505,8 +500,8 @@ export class AdminComponent implements OnInit, AfterViewInit {
 
 		dialog.afterClosed().subscribe(result => {
 			if (result) {
-				this.adminService
-					.eliminarProducto(producto)
+				this.productsService
+					.removeProduct(product)
 					.then(res => {
 						this.toastr.success(
 							`El producto fue eliminado con éxito!`,

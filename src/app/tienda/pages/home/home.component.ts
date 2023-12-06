@@ -1,11 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ViewportScroller } from '@angular/common';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { AdminService } from '../../services/admin.service';
-import { Categoria } from '../../interfaces/categorias.interface';
-import { Producto } from '../../interfaces/productos.interface';
 
 import { SwiperOptions } from 'swiper/types';
+import { CategoriesService, ProductsService } from '../../services';
+import { Category, Product } from '../../interfaces';
 
 @Component({
 	selector: 'app-home',
@@ -15,7 +14,8 @@ import { SwiperOptions } from 'swiper/types';
 export class HomeComponent implements OnInit {
 	public viewportScroller = inject(ViewportScroller);
 	public fb = inject(FormBuilder);
-	public adminService = inject(AdminService);
+	public categoriesService = inject(CategoriesService);
+	public productsService = inject(ProductsService);
 
 	miFormulario: FormGroup = this.fb.group({
 		tipo: ['todos'],
@@ -42,18 +42,18 @@ export class HomeComponent implements OnInit {
 	home: boolean = false;
 	isOpened: boolean = false;
 	loading: boolean = true;
-	categorias: Categoria[] = [];
-	productos: Producto[] = [];
-	productosTotales: Producto[] = [];
+	categories: Category[] = [];
+	productos: Product[] = [];
+	productosTotales: Product[] = [];
 
 	ngOnInit(): void {
-		this.adminService.obtenerCategorias().subscribe(categorias => {
-			this.categorias = categorias;
+		this.categoriesService.getAllCategories().subscribe(categories => {
+			this.categories = categories;
 		});
 
-		this.adminService.obtenerProductos().subscribe(productos => {
-			this.productos = productos;
-			this.productosTotales = productos;
+		this.productsService.getAllProducts().subscribe(products => {
+			this.productos = products;
+			this.productosTotales = products;
 			this.loading = false;
 		});
 	}
