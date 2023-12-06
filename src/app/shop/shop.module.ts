@@ -1,11 +1,11 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { TiendaRoutingModule } from './tienda-routing.module';
+import { ShopRoutingModule } from './shop-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from './../material/material.module';
+import { MaterialModule } from '../material/material.module';
 
-import { SharedModule } from './../shared/shared.module';
+import { SharedModule } from '../shared/shared.module';
 
 import { NavbarComponent } from '../shared/navbar/navbar.component';
 import { GuideComponent } from './pages/guide/guide.component';
@@ -35,11 +35,11 @@ register();
 	imports: [
 		CommonModule,
 		MaterialModule,
-		TiendaRoutingModule,
+		ShopRoutingModule,
 		SharedModule,
 		ReactiveFormsModule,
 		NavbarComponent,
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class TiendaModule {}
+export class ShopModule {}

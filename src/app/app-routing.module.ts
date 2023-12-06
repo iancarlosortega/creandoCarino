@@ -11,8 +11,7 @@ const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/']);
 const routes: Routes = [
 	{
 		path: '',
-		loadChildren: () =>
-			import('./tienda/tienda.module').then(m => m.TiendaModule),
+		loadChildren: () => import('./shop/shop.module').then(m => m.ShopModule),
 	},
 	{
 		path: 'auth',

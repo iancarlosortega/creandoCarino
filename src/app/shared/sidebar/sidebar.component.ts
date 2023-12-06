@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from 'src/app/material/material.module';
 import { PrimengModule } from 'src/app/primeng/primeng.module';
-import { Category } from 'src/app/tienda/interfaces';
-import { UIService } from 'src/app/tienda/services';
+import { Category } from 'src/app/shop/interfaces';
+import { UIService } from 'src/app/shop/services';
 
 @Component({
 	selector: 'app-sidebar',

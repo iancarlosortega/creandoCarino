@@ -11,14 +11,14 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { FileUpload } from '../../tienda/models/file-upload-model';
+import { FileUpload } from '../../shop/models/file-upload-model';
 import { Table } from 'primeng/table';
 import { MatDialog } from '@angular/material/dialog';
 import { EliminarComponent } from '../eliminar/eliminar.component';
-import { Category } from 'src/app/tienda/interfaces/category.interface';
-import { Product } from 'src/app/tienda/interfaces/product.interface';
+import { Category } from 'src/app/shop/interfaces/category.interface';
+import { Product } from 'src/app/shop/interfaces/product.interface';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { CategoriesService, ProductsService } from 'src/app/tienda/services';
+import { CategoriesService, ProductsService } from 'src/app/shop/services';
 
 @Component({
 	templateUrl: './admin.component.html',

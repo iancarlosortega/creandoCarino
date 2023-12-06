@@ -11,8 +11,8 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { CommonModule, ViewportScroller } from '@angular/common';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { MaterialModule } from 'src/app/material/material.module';
-import { Category } from 'src/app/tienda/interfaces';
-import { UIService } from 'src/app/tienda/services';
+import { Category } from 'src/app/shop/interfaces';
+import { UIService } from 'src/app/shop/services';
 
 @Component({
 	selector: 'app-navbar',
