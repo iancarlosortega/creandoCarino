@@ -5,8 +5,6 @@ import { ShopRoutingModule } from './shop-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 
-import { SharedModule } from '../shared/shared.module';
-
 import { HeaderComponent } from '../shared/header/header.component';
 import { GuideComponent } from './pages/guide/guide.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -34,7 +32,6 @@ register();
 		CommonModule,
 		MaterialModule,
 		ShopRoutingModule,
-		SharedModule,
 		ReactiveFormsModule,
 		HeaderComponent,
 	],

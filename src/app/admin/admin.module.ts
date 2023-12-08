@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { MaterialModule } from './../material/material.module';
-import { SharedModule } from './../shared/shared.module';
 
 import { AdminComponent } from './admin/admin.component';
 import { PrimengModule } from '../primeng/primeng.module';
@@ -18,7 +17,6 @@ import { EliminarComponent } from './eliminar/eliminar.component';
 		ReactiveFormsModule,
 		MaterialModule,
 		PrimengModule,
-		SharedModule,
 	],
 })
 export class AdminModule {}
