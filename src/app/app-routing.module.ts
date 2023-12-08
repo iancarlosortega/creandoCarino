@@ -10,10 +10,6 @@ const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/']);
 
 const routes: Routes = [
 	{
-		path: '',
-		loadChildren: () => import('./shop/shop.module').then(m => m.ShopModule),
-	},
-	{
 		path: 'auth',
 		loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
 	},
@@ -22,6 +18,10 @@ const routes: Routes = [
 		loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
 		canActivate: [AngularFireAuthGuard],
 		data: { authGuardPipe: redirectUnauthorizedToLogin },
+	},
+	{
+		path: '',
+		loadChildren: () => import('./shop/shop.module').then(m => m.ShopModule),
 	},
 	{ path: '**', redirectTo: '' },
 ];

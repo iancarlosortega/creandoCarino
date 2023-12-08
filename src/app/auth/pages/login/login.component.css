@@ -1,4 +1,4 @@
-.login {
+.main-content {
     background-color: var(--primario);
     display: grid;
     place-items: center;
@@ -6,7 +6,7 @@
     width: 100vw;
 }
 
-.formulario {
+.login-card {
     background-color: var(--blanco);
     display: flex;
     flex-direction: column;
@@ -18,48 +18,38 @@
 }
 
 .logo {
-    margin-bottom: 2rem;
-    padding-top: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 2rem;
 }
 
-@media (min-width:768px){
-    .logo {
-        flex-direction: row;
-    }
+.logo img {
+    width: 75px;
+    height: 75px;
 }
 
-.logo-imagen {
-    margin-right: 10px;
-    height: 100px;
-}
-
-@media (min-width : 768px) {
-    .logo-imagen {
-        height: 75px;
-    }
-}
-
-.logo-nombre {
-    text-align: center;
-    font-size: 2.5rem;
+.logo p {
+    font-size: 3rem;
     font-family: var(--fuente-secundaria);
     margin: 0;
 }
 
-.formulario form {
+.login-card form {
     display: flex;
     flex-direction: column;
 }
 
-.campo label {
+.field {
+    margin-bottom: 1rem;
+}
+
+.field label {
     font-weight: bold;
 }
 
-.campo input{
+.field input{
     width: 100%;
     border: 1px solid #CDCDCD;
     border-radius: 10px;
@@ -67,19 +57,29 @@
     padding: 0.3rem 0.5rem;
 }
 
-.campo input:focus {
+.field input:focus {
     outline: none;
-    border:2px solid var(--secundario);
+    border:1px solid var(--secundario);
 }
 
-.campo span {
+.field span {
     display: block;
     padding: 0.25rem 0.5rem;
     font-size: 0.8rem;
 }
 
-.boton {
-    margin-top: 2rem;
-    background-color: var(--secundario);
-    color: var(--negro);
+form button {
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    color: white;
+    background-color: rgb(183, 118, 129);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 20px;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+form button:hover {
+    background-color: rgb(183, 118, 129, 0.8);
 }

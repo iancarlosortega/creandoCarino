@@ -5,7 +5,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './../material/material.module';
 
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
 	declarations: [LoginComponent],
