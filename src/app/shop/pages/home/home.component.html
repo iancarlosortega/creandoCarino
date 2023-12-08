@@ -1,82 +1,45 @@
-<div>
-	<div class="body">
-		<app-navbar [categories]="categories"></app-navbar>
-		<div class="container">
-			<div class="contenido">
-				<p class="bienvenido">Bienvenido a</p>
-				<h1 class="titulo">Creando Cariño</h1>
-				<p class="descripcion">
-					En Creando Cariño, no se trata solo de hacer regalos, sino de hacer
-					negocios con nuestros corazones. No importa quien sea el destinatario
-					de tu regalo, estamos seguros de que tenemos algo para todos,
-					ajustándonos a tu presupuesto.
-				</p>
-				<button (click)="scrollToSection('catalogo')" class="boton">
-					CATÁLOGO
-				</button>
-			</div>
+<main class="main-content">
+	<span class="welcome-text">Bienvenido a</span>
+	<h1>Creando Cariño</h1>
+	<p class="description">
+		En Creando Cariño, no se trata solo de hacer regalos, sino de hacer negocios
+		con nuestros corazones. No importa quien sea el destinatario de tu regalo,
+		estamos seguros de que tenemos algo para todos, ajustándonos a tu
+		presupuesto.
+	</p>
+	<button (click)="scrollToSection('catalogo')">Catálogo</button>
+</main>
+<section id="catalogo" class="catalogue">
+	<header>
+		<p>Catálogo</p>
+		<div class="line"></div>
+	</header>
+
+	<div class="products">
+		<!-- Select -->
+		<form [formGroup]="form">
+			<label class="select-label">Selecciona la categoría del regalo:</label>
+			<select
+				formControlName="tipo"
+				(change)="cambiarTipo($event)"
+				class="select">
+				<option value="todos">Todos</option>
+				<option *ngFor="let category of categories" [value]="category.id">
+					{{ category.name }}
+				</option>
+			</select>
+		</form>
+		<!-- Slider -->
+		<div class="slider">
+			@if (!isLoading()) {
+			<swiper-container class="fade-in" appSwiper [config]="config" lazy="true">
+				@for (product of products(); track $index) {
+				<swiper-slide>
+					<app-product-card [product]="product" />
+				</swiper-slide>
+				}
+			</swiper-container>
+			}
 		</div>
 	</div>
-	<div id="catalogo" class="catalogo">
-		<header class="header">
-			<p>Catálogo</p>
-			<div class="linea"></div>
-		</header>
-
-		<main class="productos">
-			<div class="container">
-				<!-- Select -->
-
-				<form class="formulario" [formGroup]="miFormulario">
-					<label class="select-label">Selecciona el tipo de regalo:</label>
-					<select
-						formControlName="tipo"
-						(change)="cambiarTipo($event)"
-						class="select">
-						<option value="todos">Todos</option>
-						<option *ngFor="let category of categories" [value]="category.id">
-							{{ category.name }}
-						</option>
-					</select>
-				</form>
-				<!-- Slider -->
-				<div class="slider">
-					<swiper-container appSwiper [config]="config" lazy="true">
-						@for (producto of productos; track $index) {
-						<swiper-slide>
-							<div class="card">
-								<img
-									[src]="producto.photo_url"
-									class="card-img-top"
-									loading="lazy"
-									[alt]="producto.name" />
-								<div class="card-body">
-									<h5 class="card-title">
-										{{ producto.name }}
-									</h5>
-									<div class="footer">
-										<p class="precio">
-											{{ producto.price | currency }}
-										</p>
-										<p
-											[routerLink]="[
-												'/producto',
-												producto.category,
-												producto.id
-											]"
-											class="precio ver-mas">
-											Ver Más
-										</p>
-									</div>
-								</div>
-							</div>
-						</swiper-slide>
-						}
-					</swiper-container>
-				</div>
-			</div>
-		</main>
-	</div>
-	<app-contactanos></app-contactanos>
-	<app-footer></app-footer>
-</div>
+</section>

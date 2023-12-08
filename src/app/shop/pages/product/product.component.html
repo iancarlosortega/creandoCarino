@@ -1,38 +1,33 @@
-<div class="contenido">
-	<div class="container">
-		<main class="main">
-			<h1 class="titulo">{{ product.name }}</h1>
-			<hr />
-			<div class="row">
-				<div class="col-md-6 col-izquierda">
-					<img
-						class="producto-imagen"
-						[src]="product.photo_url"
-						[alt]="product.name" />
-				</div>
-				<div class="col-md-6 col-derecha">
-					<p class="description">{{ product.description }}</p>
-					<p class="producto">
-						Categoría:
-						<span class="producto-categoria">{{ category.name }}</span>
-					</p>
-					<p class="producto">
-						Precio:
-						<span class="producto-precio">${{ product.price }}</span>
-					</p>
-					<a
-						*ngIf="product"
-						[href]="customUrl"
-						target="_blank"
-						class="boton-whatsapp">
-						<p>Pedir por WhatsApp</p>
-						<mat-icon>whatsapp</mat-icon>
-					</a>
-				</div>
-			</div>
-		</main>
-		<hr />
-	</div>
+@if (isLoading()) {
+<div class="loading">
+	<div class="loader"></div>
 </div>
-<app-contactanos id="contactanos"></app-contactanos>
-<app-footer></app-footer>
+} @else {
+<main class="main-content fade-in">
+	<h1>{{ product!.name }}</h1>
+	<section>
+		<div>
+			<img
+				class="product-image"
+				[src]="product!.photo_url"
+				[alt]="product!.name" />
+		</div>
+		<div>
+			<p class="product-description">{{ product!.description }}</p>
+			<p class="font-bold">
+				Precio:
+				<span>{{ product!.price | currency }}</span>
+			</p>
+			<a
+				*ngIf="product"
+				[href]="customUrl"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="whatsapp-button">
+				Pedir por WhatsApp
+				<mat-icon>whatsapp</mat-icon>
+			</a>
+		</div>
+	</section>
+</main>
+}

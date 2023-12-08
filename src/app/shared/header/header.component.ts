@@ -15,14 +15,14 @@ import { Category } from 'src/app/shop/interfaces';
 import { UIService } from 'src/app/shop/services';
 
 @Component({
-	selector: 'app-navbar',
+	selector: 'app-header',
 	standalone: true,
 	imports: [SidebarComponent, MaterialModule, CommonModule, RouterModule],
-	templateUrl: './navbar.component.html',
-	styleUrls: ['./navbar.component.css'],
+	templateUrl: './header.component.html',
+	styleUrls: ['./header.component.css'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavbarComponent implements AfterViewInit {
+export class HeaderComponent implements AfterViewInit {
 	@Input({ required: true }) categories: Category[] = [];
 
 	isDesktopDevice = signal(false);

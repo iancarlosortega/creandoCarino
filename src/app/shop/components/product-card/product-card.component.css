@@ -1,34 +1,40 @@
-mat-card {
+.card {
     height: 100%;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.card-img {
+.card:hover {
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-image {
+    margin-top: 1rem;
+    overflow: hidden;
+}
+
+.card-image img {
+    height: 400px;
     width: 100%;
+    object-fit: cover;
 }
 
 .description {
-    margin: 1rem 0 !important;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    height: 50px;
+    text-align: left;
 }
 
-.footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.precio {
+.price {
     margin: 0;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-    background-color: #906F22;
+    background-color: rgb(183, 118, 129);
     font-size: 15px;
     font-weight: 600;
     padding: 10px 20px;
     border-radius: 3px;
     cursor: pointer;
     color: #fff;
-}
-
-.ver-mas {
-    margin-left: 10px;
-    background-color: #a78943;
+    text-align: center;
 }

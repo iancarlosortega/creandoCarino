@@ -7,13 +7,12 @@ import { MaterialModule } from '../material/material.module';
 
 import { SharedModule } from '../shared/shared.module';
 
-import { NavbarComponent } from '../shared/navbar/navbar.component';
+import { HeaderComponent } from '../shared/header/header.component';
 import { GuideComponent } from './pages/guide/guide.component';
 import { HomeComponent } from './pages/home/home.component';
 import { PaymentComponent } from './pages/payment/payment.component';
 import { ProductComponent } from './pages/product/product.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
-import { ContactComponent } from './components/contact/contact.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 
 // Swiper Config
@@ -24,7 +23,6 @@ register();
 @NgModule({
 	declarations: [
 		CategoriesComponent,
-		ContactComponent,
 		GuideComponent,
 		HomeComponent,
 		PaymentComponent,
@@ -38,7 +36,7 @@ register();
 		ShopRoutingModule,
 		SharedModule,
 		ReactiveFormsModule,
-		NavbarComponent,
+		HeaderComponent,
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

@@ -1,12 +1,14 @@
-<div class="contenido">
-	<div class="container">
-		<h1 class="titulo">{{ name }}</h1>
-		<div class="productos">
-			<app-product-card
-				*ngFor="let product of products"
-				[product]="product"></app-product-card>
-		</div>
-	</div>
+@if (isLoading()) {
+<div class="loading">
+	<div class="loader"></div>
 </div>
-<app-contactanos id="contactanos"></app-contactanos>
-<app-footer></app-footer>
+} @else {
+<main class="main-content fade-in">
+	<h1>{{ name }}</h1>
+	<section class="list-products">
+		@for (product of products(); track $index) {
+		<app-product-card [product]="product"></app-product-card>
+		}
+	</section>
+</main>
+}

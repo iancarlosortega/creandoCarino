@@ -1,4 +1,10 @@
-import { Component, OnInit, inject } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	OnInit,
+	inject,
+	signal,
+} from '@angular/core';
 import { ViewportScroller } from '@angular/common';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -7,17 +13,17 @@ import { CategoriesService, ProductsService } from '../../services';
 import { Category, Product } from '../../interfaces';
 
 @Component({
-	selector: 'app-home',
 	templateUrl: './home.component.html',
 	styleUrls: ['./home.component.css'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit {
-	public viewportScroller = inject(ViewportScroller);
 	public fb = inject(FormBuilder);
+	public viewportScroller = inject(ViewportScroller);
 	public categoriesService = inject(CategoriesService);
 	public productsService = inject(ProductsService);
 
-	miFormulario: FormGroup = this.fb.group({
+	form: FormGroup = this.fb.group({
 		tipo: ['todos'],
 	});
 
@@ -34,17 +40,15 @@ export class HomeComponent implements OnInit {
 				slidesPerView: 2.8,
 			},
 			'992': {
-				slidesPerView: 4.2,
+				slidesPerView: 3.5,
 			},
 		},
 	};
 
-	home: boolean = false;
-	isOpened: boolean = false;
-	loading: boolean = true;
 	categories: Category[] = [];
-	productos: Product[] = [];
-	productosTotales: Product[] = [];
+	totalProducts: Product[] = [];
+	products = signal<Product[]>([]);
+	isLoading = signal(true);
 
 	ngOnInit(): void {
 		this.categoriesService.getAllCategories().subscribe(categories => {
@@ -52,19 +56,20 @@ export class HomeComponent implements OnInit {
 		});
 
 		this.productsService.getAllProducts().subscribe(products => {
-			this.productos = products;
-			this.productosTotales = products;
-			this.loading = false;
+			this.totalProducts = products;
+			this.products.set(products);
+			this.isLoading.set(false);
 		});
 	}
 
 	cambiarTipo(event: any) {
-		this.productos = this.productosTotales;
-		if (event.target.value !== 'todos') {
-			this.productos = this.productos.filter(
+		if (event.target.value === 'todos')
+			return this.products.set(this.totalProducts);
+		this.products.set(
+			this.totalProducts.filter(
 				producto => producto.category === event.target.value
-			);
-		}
+			)
+		);
 	}
 
 	scrollToSection(elementId: string): void {

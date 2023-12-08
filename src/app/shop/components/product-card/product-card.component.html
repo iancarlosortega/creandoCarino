@@ -1,21 +1,27 @@
-<mat-card class="example-card">
+<mat-card
+	class="card"
+	[routerLink]="['/producto', product.category, product.id]">
 	<mat-card-header>
-		<mat-card-title>{{ product.name }}</mat-card-title>
+		<mat-card-title>{{
+			product.name.length > 25
+				? (product.name | slice : 0 : 25) + '...'
+				: product.name
+		}}</mat-card-title>
 		<mat-card-subtitle>{{ product.subtitle }}</mat-card-subtitle>
 	</mat-card-header>
-	<img [src]="product.photo_url" alt="Producto" class="card-img" />
 	<mat-card-content>
-		<p class="description">{{ product.description }}</p>
-		<hr />
-		<div class="footer">
-			<p class="precio">
-				{{ product.price | currency }}
-			</p>
-			<p
-				[routerLink]="['/producto', product.category, product.id]"
-				class="precio ver-mas">
-				Ver Más
-			</p>
+		<div class="card-image">
+			<img [src]="product.photo_url" alt="Producto" />
 		</div>
+		<p class="description">
+			{{
+				product.description.length > 50
+					? (product.description | slice : 0 : 50) + '...'
+					: product.description
+			}}
+		</p>
+		<p class="price">
+			{{ product.price | currency }}
+		</p>
 	</mat-card-content>
 </mat-card>

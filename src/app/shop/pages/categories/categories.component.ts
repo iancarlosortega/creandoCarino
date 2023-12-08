@@ -1,17 +1,24 @@
-import { Component, OnInit, inject } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	OnInit,
+	inject,
+	signal,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, tap } from 'rxjs/operators';
 import { ProductsService } from '../../services/products.service';
 import { Product } from '../../interfaces/product.interface';
 
 @Component({
-	selector: 'app-categorias',
 	templateUrl: './categories.component.html',
 	styleUrls: ['./categories.component.css'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoriesComponent implements OnInit {
 	name: string = '';
-	products: Product[] = [];
+	products = signal<Product[]>([]);
+	isLoading = signal(true);
 
 	private activatedRoute = inject(ActivatedRoute);
 	private productsService = inject(ProductsService);
@@ -23,7 +30,8 @@ export class CategoriesComponent implements OnInit {
 				switchMap(({ id }) => this.productsService.getProductsByCategory(id))
 			)
 			.subscribe((products: Product[]) => {
-				this.products = products;
+				this.products.set(products);
+				this.isLoading.set(false);
 			});
 	}
 }

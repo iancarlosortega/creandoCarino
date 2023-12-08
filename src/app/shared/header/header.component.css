@@ -54,6 +54,7 @@
     font-weight: 600;
     padding: 10px 20px;
     cursor: pointer;
+    user-select: none;
 }
 
 .navbar-item-active {
