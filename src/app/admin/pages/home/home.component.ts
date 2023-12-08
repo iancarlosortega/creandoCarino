@@ -11,20 +11,20 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { FileUpload } from '../../shop/models/file-upload-model';
+import { FileUpload } from 'src/app/shop/models/file-upload-model';
 import { Table } from 'primeng/table';
 import { MatDialog } from '@angular/material/dialog';
-import { EliminarComponent } from '../eliminar/eliminar.component';
+import { ConfirmDeleteComponent } from 'src/app/shared/confirm-delete/confirm-delete.component';
 import { Category } from 'src/app/shop/interfaces/category.interface';
 import { Product } from 'src/app/shop/interfaces/product.interface';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { CategoriesService, ProductsService } from 'src/app/shop/services';
 
 @Component({
-	templateUrl: './admin.component.html',
-	styleUrls: ['./admin.component.css'],
+	templateUrl: './home.component.html',
+	styleUrls: ['./home.component.css'],
 })
-export class AdminComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit, AfterViewInit {
 	@ViewChild('dtCategorias') dtCategorias: Table | undefined;
 	@ViewChild('dtProductos') dtProductos: Table | undefined;
 	@ViewChild('modalCrearCategoria') modalCrearCategoria!: TemplateRef<any>;
@@ -242,7 +242,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
 
 	eliminarCategoria(id: string) {
 		//Ventana modal para confirmar la eliminacion
-		const dialog = this.dialog.open(EliminarComponent, {
+		const dialog = this.dialog.open(ConfirmDeleteComponent, {
 			width: '400px',
 		});
 
@@ -494,7 +494,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
 
 	eliminarProducto(product: Product) {
 		//Ventana modal para confirmar la eliminacion
-		const dialog = this.dialog.open(EliminarComponent, {
+		const dialog = this.dialog.open(ConfirmDeleteComponent, {
 			width: '400px',
 		});
 

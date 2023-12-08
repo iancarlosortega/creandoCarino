@@ -4,19 +4,20 @@ import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { MaterialModule } from './../material/material.module';
-
-import { AdminComponent } from './admin/admin.component';
 import { PrimengModule } from '../primeng/primeng.module';
-import { EliminarComponent } from './eliminar/eliminar.component';
+import { ConfirmDeleteComponent } from '../shared/confirm-delete/confirm-delete.component';
+
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
-	declarations: [AdminComponent, EliminarComponent],
+	declarations: [HomeComponent],
 	imports: [
 		CommonModule,
 		AdminRoutingModule,
 		ReactiveFormsModule,
 		MaterialModule,
 		PrimengModule,
+		ConfirmDeleteComponent,
 	],
 })
 export class AdminModule {}
