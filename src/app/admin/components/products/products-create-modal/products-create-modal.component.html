@@ -1,0 +1,141 @@
+<div class="custom-modal">
+	<header>
+		<h4>Agregar Producto</h4>
+		<button
+			type="button"
+			class="btn-close close pull-right"
+			aria-label="Close"
+			(click)="closeModal()">
+			&times;
+		</button>
+	</header>
+
+	<div class="preview">
+		@if (imagePreviewUrl()) {
+		<img [src]="imagePreviewUrl()" alt="Foto de producto" class="fade-in" />
+		} @else {
+		<button class="no-image" (click)="inputFile.click()">
+			<p>Selecciona una imagen</p>
+			<mat-icon>image</mat-icon>
+		</button>
+		} @if (isUploadingImage() ) {
+		<div class="percentage fade-in">
+			<div class="alert">
+				<p>Cargando imagen...</p>
+				<p-progressSpinner
+					[style]="{ width: '20px', height: '20px' }"
+					strokeWidth="8"
+					animationDuration="3s">
+				</p-progressSpinner>
+			</div>
+
+			<div class="progress mt-2">
+				<div
+					class="progress-bar progress-bar-striped"
+					role="progressbar"
+					attr.aria-valuenow="{{ percentage() }}"
+					aria-valuemin="0"
+					aria-valuemax="100"
+					[ngStyle]="{ width: percentage() + '%' }"
+					[ngClass]="{
+						'bg-success': percentage() > 70,
+						'bg-info': percentage() > 40 && percentage() < 70,
+						'bg-warning': percentage() > 20 && percentage() < 40,
+						'bg-danger': percentage() > 0 && percentage() < 20
+					}">
+					{{ percentage() }}%
+				</div>
+			</div>
+		</div>
+		}
+	</div>
+	<input
+		#inputFile
+		type="file"
+		class="form-control"
+		accept="image/*"
+		[disabled]="isUploadingImage()"
+		(change)="selectFile($event)" />
+	<form [formGroup]="form" autocomplete="off">
+		<mat-form-field>
+			<mat-label>Nombre del producto</mat-label>
+			<input
+				type="text"
+				matInput
+				formControlName="name"
+				placeholder="Ex. Regalo Sorpresa" />
+			@if (invalidField('name')) {
+			<mat-error>
+				El campo de nombre es <strong>obligatorio</strong>
+			</mat-error>
+			}
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-label>Subtítulo del producto</mat-label>
+			<input
+				type="text"
+				matInput
+				formControlName="subtitle"
+				placeholder="Ex. Regalo Sorpresa" />
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-label>Precio del producto</mat-label>
+			<input
+				type="number"
+				matInput
+				formControlName="price"
+				placeholder="Ex. $25.50"
+				min="1" />
+			@if (invalidField('price')) {
+			<mat-error> El precio debe ser mínimo <strong>1</strong> </mat-error>
+			}
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-label>Categoría</mat-label>
+			<mat-select formControlName="category" panelClass="select">
+				@for (category of categories(); track $index) {
+				<mat-option [value]="category.id">
+					{{ category.name }}
+				</mat-option>
+				}
+			</mat-select>
+			@if (invalidField('category')) {
+			<mat-error>
+				El campo de categoría es <strong>obligatorio</strong>
+			</mat-error>
+			}
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-label>Descripción del producto</mat-label>
+			<textarea matInput formControlName="description" rows="5"></textarea>
+			@if (invalidField('description')) {
+			<mat-error>
+				El campo de descripción es <strong>obligatorio</strong>
+			</mat-error>
+			}
+		</mat-form-field>
+	</form>
+
+	<footer>
+		<button
+			pButton
+			(click)="closeModal()"
+			label="Cancelar"
+			icon="pi pi-times"
+			iconPos="left"
+			class="p-button-raised cancel"></button>
+
+		<button
+			pButton
+			(click)="addProduct()"
+			[disabled]="isUploadingImage()"
+			label="Guardar"
+			icon="pi pi-check"
+			iconPos="right"
+			class="p-button-raised"></button>
+	</footer>
+</div>

@@ -1,22 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { MaterialModule } from 'src/app/material/material.module';
+import { PrimengModule } from 'src/app/primeng/primeng.module';
 
 @Component({
 	standalone: true,
 	templateUrl: './confirm-delete.component.html',
 	styleUrls: ['./confirm-delete.component.css'],
-	imports: [MaterialModule],
+	imports: [PrimengModule],
 })
 export class ConfirmDeleteComponent {
-	constructor(private dialogRef: MatDialogRef<ConfirmDeleteComponent>) {}
+	private dialogRef = inject(MatDialogRef<ConfirmDeleteComponent>);
 
-	borrar() {
-		//Confirmar la eliminacion enviando el valor de true
+	confirm() {
 		this.dialogRef.close(true);
 	}
 
-	cerrar() {
+	cancel() {
 		this.dialogRef.close();
 	}
 }

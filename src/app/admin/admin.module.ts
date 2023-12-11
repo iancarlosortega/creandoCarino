@@ -7,10 +7,9 @@ import { MaterialModule } from './../material/material.module';
 import { PrimengModule } from '../primeng/primeng.module';
 import { ConfirmDeleteComponent } from '../shared/confirm-delete/confirm-delete.component';
 
-import { HomeComponent } from './pages/home/home.component';
+import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
 
 @NgModule({
-	declarations: [HomeComponent],
 	imports: [
 		CommonModule,
 		AdminRoutingModule,
@@ -18,6 +17,7 @@ import { HomeComponent } from './pages/home/home.component';
 		MaterialModule,
 		PrimengModule,
 		ConfirmDeleteComponent,
+		DashboardLayoutComponent,
 	],
 })
 export class AdminModule {}

@@ -1,18 +1,20 @@
-<h5>¿Desea confirmar la elimación?</h5>
-<hr />
+<div class="custom-modal">
+	<h4>¿Desea confirmar la elimación?</h4>
+	<hr />
 
-<div class="botones">
-	<button
-		mat-raised-button
-		color="danger"
-		(click)="cerrar()"
-		class="cancelar">
-		Cancelar
-		<mat-icon>highlight_off</mat-icon>
-	</button>
+	<div class="actions">
+		<button
+			pButton
+			(click)="cancel()"
+			label="Cancelar"
+			class="p-button-raised cancel"></button>
 
-	<button mat-raised-button color="warn" (click)="borrar()">
-		Si, eliminar
-		<mat-icon>delete_forever</mat-icon>
-	</button>
+		<button
+			pButton
+			(click)="confirm()"
+			label="Sí, eliminar"
+			icon="pi pi-trash"
+			iconPos="left"
+			class="p-button-raised p-button-danger"></button>
+	</div>
 </div>

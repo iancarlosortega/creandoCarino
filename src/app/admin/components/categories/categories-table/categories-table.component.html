@@ -1,0 +1,82 @@
+<p-table
+	#tableRef
+	[value]="categories()"
+	dataKey="name"
+	selectionMode="single"
+	styleClass="p-datatable-usuarios p-datatable-gridlines"
+	[rows]="5"
+	[showCurrentPageReport]="true"
+	[rowsPerPageOptions]="[5, 10, 15]"
+	[loading]="isLoading()"
+	[paginator]="true"
+	[scrollable]="isScrollable()"
+	scrollDirection="both"
+	currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} categorías"
+	[globalFilterFields]="['name']">
+	<ng-template pTemplate="caption">
+		<div class="tabla-header">
+			<button
+				pButton
+				icon="pi pi-plus-circle"
+				iconPos="right"
+				type="button"
+				class="p-button-raised"
+				label="Agregar Categoría"
+				(click)="addCategory()"></button>
+
+			<span class="p-input-icon-left p-ml-auto">
+				<i class="pi pi-search"></i>
+				<input
+					class="p-inputtext p-component"
+					pInputText
+					type="text"
+					(input)="filterCategories($event, 'contains')"
+					placeholder="Buscar categoría" />
+			</span>
+		</div>
+	</ng-template>
+
+	<ng-template pTemplate="header">
+		<tr>
+			<th pSortableColumn="nombre" style="width: 200px">
+				<div class="p-d-flex p-jc-between p-ai-center">
+					Nombre
+					<p-sortIcon field="nombre"></p-sortIcon>
+				</div>
+			</th>
+			<th style="width: 200px">Acciones</th>
+		</tr>
+	</ng-template>
+	<ng-template pTemplate="body" let-categoria>
+		<tr>
+			<td style="width: 200px">
+				{{ categoria.name }}
+			</td>
+
+			<td style="width: 200px">
+				<div class="actions">
+					<button
+						pButton
+						icon="pi pi-pencil"
+						iconPos="right"
+						type="button"
+						(click)="editCategory(categoria.id)"
+						class="p-button-raised p-button-rounded"></button>
+
+					<button
+						pButton
+						icon="pi pi-trash"
+						iconPos="right"
+						type="button"
+						(click)="removeCategory(categoria.id)"
+						class="p-button-raised p-button-rounded p-button-danger"></button>
+				</div>
+			</td>
+		</tr>
+	</ng-template>
+	<ng-template pTemplate="emptymessage">
+		<tr>
+			<td class="no-results" colspan="2">Ninguna categoría encontrada.</td>
+		</tr>
+	</ng-template>
+</p-table>

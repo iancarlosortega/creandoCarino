@@ -42,6 +42,9 @@ export class HomeComponent implements OnInit {
 			'992': {
 				slidesPerView: 3.5,
 			},
+			'1366': {
+				slidesPerView: 4.2,
+			},
 		},
 	};
 

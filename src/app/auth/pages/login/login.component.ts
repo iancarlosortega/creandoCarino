@@ -37,7 +37,7 @@ export class LoginComponent {
 		this.authService
 			.loginWithEmailPassword(email, password)
 			.then(res => {
-				this.router.navigateByUrl('/admin');
+				this.router.navigateByUrl('/admin/dashboard');
 			})
 			.catch(error => {
 				this.toastr.error('Creendeciales incorrectas!', 'Usuario inválido');

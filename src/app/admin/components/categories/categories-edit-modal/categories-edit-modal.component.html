@@ -1,0 +1,45 @@
+<div class="custom-modal">
+	<header>
+		<h4>Editar Categoría</h4>
+		<button
+			type="button"
+			class="btn-close close pull-right"
+			aria-label="Close"
+			(click)="closeModal()">
+			<span aria-hidden="true" class="visually-hidden">&times;</span>
+		</button>
+	</header>
+	<form [formGroup]="form" autocomplete="off">
+		<mat-form-field class="example-full-width" appearance="fill">
+			<mat-label>Nombre de la categoría</mat-label>
+			<input
+				type="text"
+				matInput
+				formControlName="name"
+				placeholder="Ex. Cuadros" />
+			@if (invalidField('name')) {
+			<mat-error>
+				El campo de nombre es <strong>obligatorio</strong>
+			</mat-error>
+			}
+		</mat-form-field>
+	</form>
+	<footer>
+		<button
+			pButton
+			(click)="closeModal()"
+			label="Cancelar"
+			icon="pi pi-times"
+			iconPos="left"
+			class="p-button-raised cancel"></button>
+
+		<button
+			pButton
+			(click)="updateCategory()"
+			[disabled]="isDisabled()"
+			label="Actualizar"
+			icon="pi pi-check"
+			iconPos="right"
+			class="p-button-raised"></button>
+	</footer>
+</div>

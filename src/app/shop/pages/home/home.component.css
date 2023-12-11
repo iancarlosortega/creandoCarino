@@ -133,4 +133,11 @@ form {
     max-width: 1200px;
     margin: 0 auto;
     height: 700px;
+    padding: 0 10px;
+}
+
+@media (min-width: 1080px) {
+    .slider {
+        max-width: 1400px;
+    }
 }

@@ -1,0 +1,62 @@
+.tabla-header {
+  display: block;
+}
+
+.tabla-header button,
+.tabla-header span,
+.tabla-header span input {
+  width: 100%;
+}
+
+.tabla-header button {
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 600px) {
+  .tabla-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .tabla-header button,
+  .tabla-header span,
+  .tabla-header span input {
+    width: initial;
+  }
+
+  .tabla-header button {
+    margin-bottom: 0;
+  }
+}
+
+.tabla-imagen {
+  width: 100%;
+}
+
+.tabla-imagen img {
+  object-fit: cover;
+  aspect-ratio: 1/1;
+  width: 100%;
+}
+
+th {
+  border: 1px solid #ced4da;
+}
+
+td {
+  border: 1px solid #ced4da;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.actions button {
+  border-radius: 50%
+}
+
+.no-results {
+  width: 100%;
+  text-align: center !important;
+}

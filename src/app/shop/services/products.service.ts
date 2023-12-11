@@ -2,7 +2,6 @@ import { Injectable, inject } from '@angular/core';
 import { finalize, map } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { FileUpload } from '../models/file-upload-model';
 import { Product } from '../interfaces/product.interface';
 
 @Injectable({
@@ -48,27 +47,27 @@ export class ProductsService {
 		const productsCollection = this.firestore.doc(
 			`/categories/${category}/products/${id}`
 		);
-		return productsCollection.snapshotChanges().pipe(
-			map(a => {
-				const data = a.payload.data() as Product;
-				data.id = a.payload.id;
+		return productsCollection.get().pipe(
+			map(product => {
+				const data = product.data() as Product;
+				data.id = product.id;
 				return data;
 			})
 		);
 	}
 
-	addProduct(fileUpload: FileUpload, product: Product) {
-		const filePath = `${this.basePath}/${fileUpload.file.name}`;
+	addProduct(product: Product, file: File) {
+		const filePath = `${this.basePath}/${file.name}`;
 		const storageRef = this.storage.ref(filePath);
-		const uploadTask = this.storage.upload(filePath, fileUpload.file);
+		const uploadTask = this.storage.upload(filePath, file);
 
-		//Esperar a obtener el link de descarga del archivo subido
 		uploadTask
 			.snapshotChanges()
 			.pipe(
 				finalize(() => {
 					storageRef.getDownloadURL().subscribe(downloadURL => {
 						product.photo_url = downloadURL;
+						product.photo_filename = file.name;
 						this._addProductToDatabase(product);
 					});
 				})
@@ -84,18 +83,18 @@ export class ProductsService {
 			.add(product);
 	}
 
-	updateProduct(fileUpload: FileUpload, product: Product) {
-		const filePath = `${this.basePath}/${fileUpload.file.name}`;
+	updateProduct(product: Product, file: File) {
+		const filePath = `${this.basePath}/${file.name}`;
 		const storageRef = this.storage.ref(filePath);
-		const uploadTask = this.storage.upload(filePath, fileUpload.file);
+		const uploadTask = this.storage.upload(filePath, file);
 
-		//Esperar a obtener el link de descarga del archivo subido
 		uploadTask
 			.snapshotChanges()
 			.pipe(
 				finalize(() => {
 					storageRef.getDownloadURL().subscribe(downloadURL => {
 						product.photo_url = downloadURL;
+						product.photo_filename = file.name;
 						this._updateProductToDatabase(product);
 					});
 				})

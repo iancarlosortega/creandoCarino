@@ -1,10 +1,30 @@
-.botones {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: space-around;
+.custom-modal {
+    padding: 1rem;
 }
 
-.cancelar {
+@media (min-width: 768px) {
+    .custom-modal {
+        width: 500px;
+    }
+}
+
+.actions {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.actions button {
+    border-radius: 0.25rem;
+}
+
+.cancel {
     background-color: #56717D;
+    border-color: #56717D;
     color: #FFFFFF;
+}
+
+.cancel:hover {
+    background-color: rgb(86, 113, 125, 0.8);
 }

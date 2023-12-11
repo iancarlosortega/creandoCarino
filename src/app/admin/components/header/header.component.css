@@ -1,0 +1,39 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  margin: 1rem 0;
+  font-weight: 700;
+  background: linear-gradient(132deg, rgb(113, 143, 175) 0.00%, rgb(69, 92, 114) 100.00%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+}
+
+.actions a {
+  cursor: pointer;
+  color: rgb(113, 143, 175);
+  transition: all .3s ease;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.actions a:hover {
+  color: rgb(69, 92, 114);
+  transform: translateY(-5px);
+}
+
+.actions a mat-icon {
+  font-size: 35px;
+  width: 35px;
+  height: 35px;
+}

@@ -11,6 +11,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+
 @NgModule({
 	exports: [
 		MatButtonModule,
@@ -23,6 +25,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 		MatSelectModule,
 		MatStepperModule,
 		MatToolbarModule,
+	],
+	providers: [
+		{
+			provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+			useValue: { appearance: 'outline' },
+		},
 	],
 })
 export class MaterialModule {}

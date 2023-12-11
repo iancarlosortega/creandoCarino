@@ -1,0 +1,47 @@
+.custom-modal {
+  padding: 1rem;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+  .custom-modal {
+    width: 500px;
+  }
+}
+
+header {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+header h4 {
+  margin: 0;
+  flex-grow: 1;
+}
+
+mat-form-field {
+  display: block;
+}
+
+footer {
+  margin: 1rem 0;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+footer button {
+  border-radius: 0.25rem;
+}
+
+.cancel {
+  background-color: #56717D;
+  border-color: #56717D;
+  color: #FFFFFF;
+}
+
+.cancel:hover {
+  background-color: rgb(86, 113, 125, 0.8);
+}
