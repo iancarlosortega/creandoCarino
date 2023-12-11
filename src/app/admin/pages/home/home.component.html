@@ -1,8 +1,8 @@
 <mat-accordion multi>
 	<mat-expansion-panel
 		[expanded]="true"
-		(opened)="panelOpenState = true"
-		(closed)="panelOpenState = false">
+		(opened)="panelOpenState.set(true)"
+		(closed)="panelOpenState.set(false)">
 		<mat-expansion-panel-header>
 			<mat-panel-title> Listado de Categorías </mat-panel-title>
 		</mat-expansion-panel-header>
@@ -11,8 +11,8 @@
 
 	<mat-expansion-panel
 		[expanded]="true"
-		(opened)="panelOpenState = true"
-		(closed)="panelOpenState = false">
+		(opened)="panelOpenState.set(true)"
+		(closed)="panelOpenState.set(false)">
 		<mat-expansion-panel-header>
 			<mat-panel-title> Listado de Productos </mat-panel-title>
 		</mat-expansion-panel-header>

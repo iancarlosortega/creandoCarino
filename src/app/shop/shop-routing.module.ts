@@ -3,22 +3,31 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ShopLayoutComponent } from './layouts/shop-layout/shop-layout.component';
 
-import { HomeComponent } from './pages/home/home.component';
-import { CategoriesComponent } from './pages/categories/categories.component';
-import { ProductComponent } from './pages/product/product.component';
-import { PaymentComponent } from './pages/payment/payment.component';
-import { GuideComponent } from './pages/guide/guide.component';
-
 const routes: Routes = [
 	{
 		path: '',
 		component: ShopLayoutComponent,
 		children: [
-			{ path: '', component: HomeComponent },
-			{ path: ':name/:id', component: CategoriesComponent },
-			{ path: 'producto/:category/:id', component: ProductComponent },
-			{ path: 'pago', component: PaymentComponent },
-			{ path: 'guia', component: GuideComponent },
+			{
+				path: '',
+				loadComponent: () => import('./pages/home/home.component'),
+			},
+			{
+				path: ':name/:id',
+				loadComponent: () => import('./pages/categories/categories.component'),
+			},
+			{
+				path: 'producto/:category/:id',
+				loadComponent: () => import('./pages/product/product.component'),
+			},
+			{
+				path: 'pago',
+				loadComponent: () => import('./pages/payment/payment.component'),
+			},
+			{
+				path: 'guia',
+				loadComponent: () => import('./pages/guide/guide.component'),
+			},
 		],
 	},
 ];

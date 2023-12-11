@@ -1,14 +1,18 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-import { Product } from '../../interfaces/product.interface';
+import { MaterialModule } from 'src/app/material/material.module';
 import { ProductsService } from '../../services/products.service';
+import { Product } from '../../interfaces/product.interface';
 
 @Component({
+	standalone: true,
+	imports: [CommonModule, MaterialModule],
 	templateUrl: './product.component.html',
 	styleUrls: ['./product.component.css'],
 })
-export class ProductComponent implements OnInit {
+export default class ProductComponent implements OnInit {
 	product?: Product;
 	customUrl: string = '';
 	isLoading = signal(true);

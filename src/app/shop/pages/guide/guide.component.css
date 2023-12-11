@@ -22,7 +22,7 @@
 .boton {
     margin-right: 1rem;
     background-color: var(--gold);
-    color: #fff;
+    color: #fff !important;
 }
 
 mat-stepper {

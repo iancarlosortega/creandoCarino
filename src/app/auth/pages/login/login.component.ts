@@ -1,32 +1,46 @@
-import { Component, inject } from '@angular/core';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	inject,
+	signal,
+} from '@angular/core';
+import {
+	Validators,
+	FormGroup,
+	FormBuilder,
+	ReactiveFormsModule,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../services/auth.service';
+import { MaterialModule } from 'src/app/material/material.module';
 
 @Component({
+	standalone: true,
+	imports: [ReactiveFormsModule, MaterialModule],
 	templateUrl: './login.component.html',
 	styleUrls: ['./login.component.css'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginComponent {
+export default class LoginComponent {
 	private fb = inject(FormBuilder);
 	private authService = inject(AuthService);
 	private router = inject(Router);
 	private toastr = inject(ToastrService);
+
+	isFormSubmitted = signal(false);
 
 	form: FormGroup = this.fb.group({
 		email: ['', [Validators.required, Validators.email]],
 		password: ['', [Validators.required, Validators.minLength(6)]],
 	});
 
-	isFormSubmitted: boolean = false;
-
 	invalidField(fieldName: string) {
-		return this.form.get(fieldName)?.invalid && this.isFormSubmitted;
+		return this.form.get(fieldName)?.invalid && this.isFormSubmitted();
 	}
 
 	login() {
-		this.isFormSubmitted = true;
+		this.isFormSubmitted.set(true);
 
 		if (this.form.invalid) {
 			return;

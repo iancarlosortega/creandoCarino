@@ -1,4 +1,5 @@
 import {
+	CUSTOM_ELEMENTS_SCHEMA,
 	ChangeDetectionStrategy,
 	Component,
 	OnInit,
@@ -6,18 +7,26 @@ import {
 	signal,
 } from '@angular/core';
 import { ViewportScroller } from '@angular/common';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { SwiperOptions } from 'swiper/types';
 import { CategoriesService, ProductsService } from '../../services';
+import { ProductCardComponent } from '../../components/product-card/product-card.component';
 import { Category, Product } from '../../interfaces';
 
+import { SwiperOptions } from 'swiper/types';
+import { register } from 'swiper/element/bundle';
+import { SwiperDirective } from '../../directives/swiper.directive';
+register();
+
 @Component({
+	standalone: true,
+	imports: [ReactiveFormsModule, SwiperDirective, ProductCardComponent],
 	templateUrl: './home.component.html',
 	styleUrls: ['./home.component.css'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class HomeComponent implements OnInit {
+export default class HomeComponent implements OnInit {
 	public fb = inject(FormBuilder);
 	public viewportScroller = inject(ViewportScroller);
 	public categoriesService = inject(CategoriesService);
