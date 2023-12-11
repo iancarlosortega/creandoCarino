@@ -1,109 +1,40 @@
-<div class="fondo">
-	<div class="container">
-		<div class="footer">
-			<div class="logo">
-				<img class="imagen" src="/assets/logo.png" alt="Logo" />
-				<p></p>
-			</div>
-			<div class="tipos">
-				<p class="titulo">Información importante</p>
-				<ul class="tipos-listado">
-					<li routerLink="/pago" class="item">
-						<img
-							src="/assets/footer/metodo-pago.png"
-							alt="Método de pago" />
-						<p>Método de pago</p>
-					</li>
-					<li routerLink="/guia" class="item">
-						<img
-							src="/assets/footer/como-comprar.png"
-							alt="Guía de cómo comprar" />
-						<p>¿Cómo comprar?</p>
-					</li>
-					<li class="item">
-						<img
-							src="/assets/footer/regalos-personalizados.png"
-							alt="Regalos 100% personalizados" />
-						<p>Regalos 100% personalizados</p>
-					</li>
-					<li class="item">
-						<img
-							src="/assets/footer/reloj.png"
-							alt="Tiempo de antelación" />
-						<p>72 horas de anticipación</p>
-					</li>
-					<li class="item">
-						<img
-							src="/assets/footer/entrega-domicilio.png"
-							alt="Entrego a domicilio" />
-						<p>Entrega a domicilio</p>
-					</li>
-					<li class="item">
-						<img
-							src="/assets/footer/location.png"
-							alt="Localidad" />
-						<p>Loja, Ecuador</p>
-					</li>
-				</ul>
-			</div>
-			<div class="redes-sociales">
-				<div class="redes-sociales-email">
-					<p class="titulo">Recibe las últimas novedades!</p>
-					<div class="input-group with-icon">
-						<input
-							class="form-control"
-							name="suche"
-							type="email"
-							placeholder="Tu correo electrónico"
-							autocomplete="off" />
-						<img
-							src="/assets/redes-sociales/logotipo-email.png"
-							alt="Icono de email" />
-					</div>
-				</div>
-
-				<ul class="redes-sociales-listado">
-					<li class="item">
-						<a href="https://wa.me/593986526621" target="_blank">
-							<img
-								src="/assets/redes-sociales/logotipo-whatsapp.png"
-								alt="Logo de WhatsApp" />
-						</a>
-					</li>
-					<li class="item">
-						<a
-							href="https://www.instagram.com/creando_220"
-							target="_blank">
-							<img
-								src="/assets/redes-sociales/logotipo-instagram.png"
-								alt="Logo de Instagram" />
-						</a>
-					</li>
-					<li class="item">
-						<a
-							href="https://www.facebook.com/creando.carino.9"
-							target="_blank">
-							<img
-								src="/assets/redes-sociales/logotipo-facebook.png"
-								alt="Logo de Facebook" />
-						</a>
-					</li>
-					<li class="item">
-						<a
-							href="https://www.tiktok.com/@creando_220"
-							target="_blank">
-							<img
-								src="/assets/redes-sociales/logotipo-tiktok.png"
-								alt="Logo de TikTok" />
-						</a>
-					</li>
-					<li class="item">
-						<img
-							src="/assets/redes-sociales/logotipo-google.png"
-							alt="Logo de Gmail" />
-					</li>
-				</ul>
-			</div>
+<footer>
+	<div class="main-content">
+		<div class="logo">
+			<img src="/assets/images/logo.png" alt="Logo Creando Cariño" />
 		</div>
+		<article>
+			<h4>Información importante</h4>
+			<ul class="links">
+				@for (link of links; track $index) {
+				<li class="link">
+					<a [routerLink]="link.url">
+						<img [src]="link.imageUrl" [alt]="link.imageAlt" />
+						<p>{{ link.name }}</p>
+					</a>
+				</li>
+				}
+			</ul>
+		</article>
+		<article>
+			<h4>Recibe las últimas novedades!</h4>
+			<div class="input-group with-icon">
+				<input
+					class="form-control"
+					type="email"
+					placeholder="Tu correo electrónico" />
+				<img src="/assets/images/icons/email.png" alt="Icono de email" />
+			</div>
+
+			<ul class="social-media-links">
+				@for (socialMedia of socialMediaLinks; track $index) {
+				<li class="item">
+					<a [href]="socialMedia.url" target="_blank">
+						<img [src]="socialMedia.imageUrl" [alt]="socialMedia.name" />
+					</a>
+				</li>
+				}
+			</ul>
+		</article>
 	</div>
-</div>
+</footer>

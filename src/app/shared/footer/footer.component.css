@@ -1,64 +1,71 @@
-.fondo {
+footer {
     background: linear-gradient(to bottom, #faece9 0%,#f0d8c0 100%);
     padding: 3rem 0;
 }
 
-.footer {
+.main-content {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    max-width: 1320px;
+    margin: 0 auto;
 }
 
 @media (min-width:992px){
-    .footer {
+    .main-content {
         display: grid;
         grid-template-columns: 20% 50% 30%;
     }
 }
 
-.logo {
-    display: flex;
-    justify-content: center;
+article {
+    padding: 1rem;
 }
 
-.imagen {
-    width: 70%;
-}
-
-.tipos {
-    width: 100%;
-}
-
-.tipos-listado {
-    width: 80%;
-    padding: 0;
+.links {
     list-style: none;
     display: grid;
     place-content: center;
+    padding: 1rem;
 }
 
 @media (min-width:768px){
-    .tipos-listado {
+    .links {
         grid-template-columns: 1fr 1fr;
         gap: 1rem;
     }
 }
 
-.tipos-listado li {
+article h4 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    text-align: center;
+}
+
+@media (min-width:768px) {
+    article h4 {
+        margin: 1rem 0;
+    }
+}
+
+.link a {
     font-weight: 500;
     padding: 0.75rem 0;
-    cursor: pointer;
-}
-
-.tipos-listado li:hover {
-    color: rgba(0, 0, 0, 0.76);
-}
-
-.redes-sociales, .tipos{
+    color: black;
+    text-decoration: none;
     display: flex;
-    flex-direction: column;
     align-items: center;
+    gap: 12px;
+}
+
+.link a:hover {
+    color: rgba(0, 0, 0, 0.76);;
+}
+
+.link p {
+    margin: 0;
 }
 
 .input-group.with-icon {
@@ -75,7 +82,7 @@
     transform: translateY(-50%);
     pointer-events: none;
     position: absolute;
-    z-index: 3;
+    z-index: 99;
     top: 50%;
 }
 
@@ -96,28 +103,12 @@
     margin: 1rem 0;
 }
 
-.icono {
-    position: relative;
-}
-
-.redes-sociales-listado{
-    list-style: none;
+.social-media-links {
     display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 1rem;
     padding: 0;
-}
-
-.titulo {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin: 0;
-    text-align: center;
-}
-
-@media (min-width:768px){
-    .titulo {
-        margin: 1rem 0;
-    }
 }
 
 .item {

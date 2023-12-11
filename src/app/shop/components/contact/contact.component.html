@@ -1,44 +1,19 @@
-<div class="background" id="contactanos">
-	<div class="container">
-		<div class="contenedor">
-			<h2 class="titulo">¿No te llama la atención ninguno de los regalos?</h2>
-			<div class="contenido">
-				<div class="contenido-texto">
-					Si es así, no dudes en escribirnos para juntos personalizar el regalo
-					ideal para esa persona especial en tu vida, nos adaptamos a sus
-					gustos, comida y temática favorita. Recuerda que si tienes una idea en
-					especial no dudes en consultarnos.
-				</div>
-				<div class="redes-sociales">
-					<a
-						class="redes-sociales-links"
-						href="https://wa.me/593986526621"
-						target="_blank">
-						<img
-							src="/assets/redes-sociales/logotipo-whatsapp.png"
-							alt="WhatsApp" />
-						<p>0986526621</p>
-					</a>
-					<a
-						class="redes-sociales-links"
-						href="https://www.instagram.com/creando_220"
-						target="_blank">
-						<img
-							src="/assets/redes-sociales/logotipo-instagram.png"
-							alt="Instagram" />
-						<p>&#64;creando_220</p>
-					</a>
-					<a
-						class="redes-sociales-links"
-						href="https://www.facebook.com/creando.carino.9"
-						target="_blank">
-						<img
-							src="/assets/redes-sociales/logotipo-facebook.png"
-							alt="Facebook" />
-						<p>Creando Cariño</p>
-					</a>
-				</div>
-			</div>
+<section id="contactanos">
+	<div class="content">
+		<h3>¿No te llama la atención ninguno de los regalos?</h3>
+		<p>
+			Si es así, no dudes en escribirnos para juntos personalizar el regalo
+			ideal para esa persona especial en tu vida, nos adaptamos a sus gustos,
+			comida y temática favorita. Recuerda que si tienes una idea en especial no
+			dudes en consultarnos.
+		</p>
+		<div class="social-media-links">
+			@for (socialMedia of socialMediaLinks; track $index) {
+			<a [href]="socialMedia.link" target="_blank">
+				<img [src]="socialMedia.image" [alt]="socialMedia.name" />
+				<p>{{ socialMedia.content }}</p>
+			</a>
+			}
 		</div>
 	</div>
-</div>
+</section>
