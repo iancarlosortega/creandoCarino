@@ -1,3 +1,4 @@
+import { CommonModule, ViewportScroller } from '@angular/common';
 import {
 	AfterViewInit,
 	ChangeDetectionStrategy,
@@ -8,16 +9,22 @@ import {
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { CommonModule, ViewportScroller } from '@angular/common';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 import { SidebarComponent } from '../sidebar/sidebar.component';
-import { MaterialModule } from 'src/app/material/material.module';
-import { Category } from 'src/app/shop/interfaces';
-import { UIService } from 'src/app/shop/services';
+import { Category } from '../../shop/interfaces';
+import { UIService } from '../../shop/services';
 
 @Component({
 	selector: 'app-header',
 	standalone: true,
-	imports: [SidebarComponent, MaterialModule, CommonModule, RouterModule],
+	imports: [
+		SidebarComponent,
+		CommonModule,
+		RouterModule,
+		MatToolbarModule,
+		MatIconModule,
+	],
 	templateUrl: './header.component.html',
 	styleUrls: ['./header.component.css'],
 	changeDetection: ChangeDetectionStrategy.OnPush,

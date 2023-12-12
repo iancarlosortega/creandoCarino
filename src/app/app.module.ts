@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
@@ -13,10 +11,8 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from '../environments/environment';
 
 @NgModule({
-	declarations: [AppComponent],
 	imports: [
 		BrowserModule,
-		AppRoutingModule,
 		HttpClientModule,
 		BrowserAnimationsModule,
 		AngularFireModule.initializeApp(environment.firebase),
@@ -28,7 +24,5 @@ import { environment } from '../environments/environment';
 			preventDuplicates: true,
 		}),
 	],
-	providers: [],
-	bootstrap: [AppComponent],
 })
 export class AppModule {}

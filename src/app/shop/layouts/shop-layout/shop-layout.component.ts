@@ -6,11 +6,11 @@ import {
 	inject,
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { HeaderComponent } from 'src/app/shared/header/header.component';
 import { CategoriesService } from '../../services';
 import { Category } from '../../interfaces';
 import { ContactComponent } from '../../components/contact/contact.component';
-import { FooterComponent } from 'src/app/shared/footer/footer.component';
+import { HeaderComponent } from '../../../shared/header/header.component';
+import { FooterComponent } from '../../../shared/footer/footer.component';
 
 @Component({
 	standalone: true,

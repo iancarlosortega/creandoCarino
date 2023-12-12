@@ -9,19 +9,20 @@ import {
 } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ToastrService } from 'ngx-toastr';
-import { Table } from 'primeng/table';
+import { Table, TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 import { MatDialog } from '@angular/material/dialog';
-import { PrimengModule } from 'src/app/primeng/primeng.module';
-import { CategoriesService } from 'src/app/shop/services';
-import { ConfirmDeleteComponent } from 'src/app/shared/confirm-delete/confirm-delete.component';
+import { CategoriesService } from '../../../../shop/services';
 import { CategoriesCreateModalComponent } from '../categories-create-modal/categories-create-modal.component';
 import { CategoriesEditModalComponent } from '../categories-edit-modal/categories-edit-modal.component';
-import { Category } from 'src/app/shop/interfaces';
+import { ConfirmDeleteComponent } from '../../../../shared/confirm-delete/confirm-delete.component';
+import { Category } from '../../../../shop/interfaces';
 
 @Component({
 	selector: 'app-categories-table',
 	standalone: true,
-	imports: [PrimengModule],
+	imports: [TableModule, ButtonModule, InputTextModule],
 	templateUrl: './categories-table.component.html',
 	styleUrl: './categories-table.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,

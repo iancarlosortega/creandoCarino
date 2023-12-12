@@ -12,12 +12,12 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../../services/auth.service';
-import { MaterialModule } from 'src/app/material/material.module';
 
 @Component({
 	standalone: true,
-	imports: [ReactiveFormsModule, MaterialModule],
+	imports: [ReactiveFormsModule, MatButtonModule],
 	templateUrl: './login.component.html',
 	styleUrls: ['./login.component.css'],
 	changeDetection: ChangeDetectionStrategy.OnPush,

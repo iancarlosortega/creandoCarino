@@ -1,9 +1,7 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-
+import { Routes } from '@angular/router';
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
 
-const routes: Routes = [
+export const adminRoutes: Routes = [
 	{
 		path: '',
 		component: DashboardLayoutComponent,
@@ -19,9 +17,3 @@ const routes: Routes = [
 		],
 	},
 ];
-
-@NgModule({
-	imports: [RouterModule.forChild(routes)],
-	exports: [RouterModule],
-})
-export class AdminRoutingModule {}

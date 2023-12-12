@@ -14,14 +14,25 @@ import {
 } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { MaterialModule } from 'src/app/material/material.module';
-import { PrimengModule } from 'src/app/primeng/primeng.module';
-import { Category, Product } from 'src/app/shop/interfaces';
-import { CategoriesService, ProductsService } from 'src/app/shop/services';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { ButtonModule } from 'primeng/button';
+import { MatSelectModule } from '@angular/material/select';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { CategoriesService, ProductsService } from '../../../../shop/services';
+import { Category, Product } from '../../../../shop/interfaces';
 
 @Component({
 	standalone: true,
-	imports: [CommonModule, MaterialModule, PrimengModule, ReactiveFormsModule],
+	imports: [
+		CommonModule,
+		ReactiveFormsModule,
+		MatFormFieldModule,
+		MatSelectModule,
+		MatIconModule,
+		ProgressSpinnerModule,
+		ButtonModule,
+	],
 	templateUrl: './products-edit-modal.component.html',
 	styleUrl: './products-edit-modal.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,

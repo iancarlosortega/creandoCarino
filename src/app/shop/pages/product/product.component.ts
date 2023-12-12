@@ -2,13 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-import { MaterialModule } from 'src/app/material/material.module';
+import { MatIconModule } from '@angular/material/icon';
 import { ProductsService } from '../../services/products.service';
 import { Product } from '../../interfaces/product.interface';
 
 @Component({
 	standalone: true,
-	imports: [CommonModule, MaterialModule],
+	imports: [CommonModule, MatIconModule],
 	templateUrl: './product.component.html',
 	styleUrls: ['./product.component.css'],
 })

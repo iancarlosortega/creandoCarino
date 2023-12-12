@@ -1,15 +1,22 @@
-import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, Input, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { MaterialModule } from 'src/app/material/material.module';
-import { PrimengModule } from 'src/app/primeng/primeng.module';
-import { Category } from 'src/app/shop/interfaces';
-import { UIService } from 'src/app/shop/services';
+import { SidebarModule } from 'primeng/sidebar';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
+import { UIService } from '../../shop/services';
+import { Category } from '../../shop/interfaces';
 
 @Component({
 	selector: 'app-sidebar',
 	standalone: true,
-	imports: [CommonModule, MaterialModule, RouterModule, PrimengModule],
+	imports: [
+		CommonModule,
+		RouterModule,
+		SidebarModule,
+		MatExpansionModule,
+		MatIconModule,
+	],
 	templateUrl: './sidebar.component.html',
 	styleUrl: './sidebar.component.css',
 })

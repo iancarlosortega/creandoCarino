@@ -9,18 +9,19 @@ import {
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { Table } from 'primeng/table';
-import { PrimengModule } from 'src/app/primeng/primeng.module';
-import { ProductsService } from 'src/app/shop/services';
+import { Table, TableModule } from 'primeng/table';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
 import { ProductsEditModalComponent } from '../products-edit-modal/products-edit-modal.component';
 import { ProductsCreateModalComponent } from '../products-create-modal/products-create-modal.component';
-import { ConfirmDeleteComponent } from 'src/app/shared/confirm-delete/confirm-delete.component';
-import { Product } from 'src/app/shop/interfaces';
+import { ConfirmDeleteComponent } from '../../../../shared/confirm-delete/confirm-delete.component';
+import { ProductsService } from '../../../../shop/services';
+import { Product } from '../../../../shop/interfaces';
 
 @Component({
 	selector: 'app-products-table',
 	standalone: true,
-	imports: [CommonModule, PrimengModule],
+	imports: [CommonModule, TableModule, ButtonModule, InputTextModule],
 	templateUrl: './products-table.component.html',
 	styleUrl: './products-table.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,

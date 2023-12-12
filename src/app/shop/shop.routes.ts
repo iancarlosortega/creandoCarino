@@ -1,9 +1,7 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-
+import { Routes } from '@angular/router';
 import { ShopLayoutComponent } from './layouts/shop-layout/shop-layout.component';
 
-const routes: Routes = [
+export const shopRoutes: Routes = [
 	{
 		path: '',
 		component: ShopLayoutComponent,
@@ -31,9 +29,3 @@ const routes: Routes = [
 		],
 	},
 ];
-
-@NgModule({
-	imports: [RouterModule.forChild(routes)],
-	exports: [RouterModule],
-})
-export class ShopRoutingModule {}

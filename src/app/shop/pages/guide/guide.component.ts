@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { MaterialModule } from 'src/app/material/material.module';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @Component({
 	standalone: true,
-	imports: [MaterialModule],
+	imports: [MatStepperModule],
 	templateUrl: './guide.component.html',
 	styleUrls: ['./guide.component.css'],
 })

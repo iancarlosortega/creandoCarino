@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { PrimengModule } from 'src/app/primeng/primeng.module';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
 	standalone: true,
+	imports: [ButtonModule],
 	templateUrl: './confirm-delete.component.html',
 	styleUrls: ['./confirm-delete.component.css'],
-	imports: [PrimengModule],
 })
 export class ConfirmDeleteComponent {
 	private dialogRef = inject(MatDialogRef<ConfirmDeleteComponent>);
