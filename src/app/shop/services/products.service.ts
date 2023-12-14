@@ -1,7 +1,23 @@
 import { Injectable, inject } from '@angular/core';
-import { finalize, map } from 'rxjs';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Observable, from, map, of } from 'rxjs';
+import {
+	Storage,
+	deleteObject,
+	getDownloadURL,
+	ref,
+	uploadBytesResumable,
+} from '@angular/fire/storage';
+import {
+	Firestore,
+	addDoc,
+	collection,
+	collectionData,
+	collectionGroup,
+	deleteDoc,
+	doc,
+	getDoc,
+	updateDoc,
+} from '@angular/fire/firestore';
 import { Product } from '../interfaces/product.interface';
 
 @Injectable({
@@ -10,105 +26,116 @@ import { Product } from '../interfaces/product.interface';
 export class ProductsService {
 	// Folder path in Firebase Storage
 	private basePath = '/products';
+	private collectionName = 'products';
 
-	private firestore = inject(AngularFirestore);
-	private storage = inject(AngularFireStorage);
+	private firestore = inject(Firestore);
+	private storage = inject(Storage);
 
 	getAllProducts() {
-		const productsCollection = this.firestore.collectionGroup('products');
-		return productsCollection.snapshotChanges().pipe(
-			map(actions => {
-				return actions.map(a => {
-					const data = a.payload.doc.data() as Product;
-					data.id = a.payload.doc.id;
-					return data;
-				});
-			})
+		const productsCollection = collectionGroup(
+			this.firestore,
+			this.collectionName
 		);
+		return collectionData(productsCollection, {
+			idField: 'id',
+		}) as Observable<Product[]>;
 	}
 
 	getProductsByCategory(categoryId: string) {
-		const productsCollection = this.firestore.collection(
-			`/categories/${categoryId}/products`
+		const productsCollection = collection(
+			this.firestore,
+			`/categories/${categoryId}/${this.collectionName}`
 		);
-
-		return productsCollection.snapshotChanges().pipe(
-			map(actions => {
-				return actions.map(a => {
-					const data = a.payload.doc.data() as Product;
-					data.id = a.payload.doc.id;
-					return data;
-				});
-			})
-		);
+		return collectionData(productsCollection, {
+			idField: 'id',
+		}) as Observable<Product[]>;
 	}
 
 	getProductById(id: string, category: string) {
-		const productsCollection = this.firestore.doc(
-			`/categories/${category}/products/${id}`
-		);
-		return productsCollection.get().pipe(
-			map(product => {
-				const data = product.data() as Product;
-				data.id = product.id;
-				return data;
-			})
-		);
+		return from(
+			getDoc(
+				doc(
+					this.firestore,
+					`/categories/${category}/${this.collectionName}`,
+					id
+				)
+			)
+		).pipe(map(snapshot => snapshot.data() as Product));
 	}
 
 	addProduct(product: Product, file: File) {
 		const filePath = `${this.basePath}/${file.name}`;
-		const storageRef = this.storage.ref(filePath);
-		const uploadTask = this.storage.upload(filePath, file);
+		const storageRef = ref(this.storage, filePath);
+		const uploadTask = uploadBytesResumable(storageRef, file);
 
-		uploadTask
-			.snapshotChanges()
-			.pipe(
-				finalize(() => {
-					storageRef.getDownloadURL().subscribe(downloadURL => {
+		return new Observable<number>(observer => {
+			uploadTask.on(
+				'state_changed',
+				snapshot => {
+					const progress =
+						(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+					observer.next(progress);
+				},
+				error => {
+					observer.error(error);
+					console.error(error);
+				},
+				() => {
+					getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
 						product.photo_url = downloadURL;
 						product.photo_filename = file.name;
 						this._addProductToDatabase(product);
+						observer.complete();
 					});
-				})
-			)
-			.subscribe();
-
-		return uploadTask.percentageChanges();
+				}
+			);
+		});
 	}
 
 	_addProductToDatabase(product: Product) {
-		return this.firestore
-			.collection(`categories/${product.category}/products`)
-			.add(product);
+		const productsCollection = collection(
+			this.firestore,
+			`/categories/${product.category}/${this.collectionName}`
+		);
+		return addDoc(productsCollection, product);
 	}
 
 	updateProduct(product: Product, file: File) {
 		const filePath = `${this.basePath}/${file.name}`;
-		const storageRef = this.storage.ref(filePath);
-		const uploadTask = this.storage.upload(filePath, file);
+		const storageRef = ref(this.storage, filePath);
+		const uploadTask = uploadBytesResumable(storageRef, file);
 
-		uploadTask
-			.snapshotChanges()
-			.pipe(
-				finalize(() => {
-					storageRef.getDownloadURL().subscribe(downloadURL => {
+		return new Observable<number>(observer => {
+			uploadTask.on(
+				'state_changed',
+				snapshot => {
+					const progress =
+						(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+					observer.next(progress);
+				},
+				error => {
+					observer.error(error);
+					console.error(error);
+				},
+				() => {
+					getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
 						product.photo_url = downloadURL;
 						product.photo_filename = file.name;
 						this._updateProductToDatabase(product);
+						observer.complete();
 					});
-				})
-			)
-			.subscribe();
-
-		return uploadTask.percentageChanges();
+				}
+			);
+		});
 	}
 
 	_updateProductToDatabase(product: Product) {
-		return this.firestore
-			.collection(`categories/${product.category}/products`)
-			.doc(product.id!)
-			.update(product);
+		const docRef = doc(
+			this.firestore,
+			`categories/${product.category}/products`,
+			product.id!
+		);
+		return updateDoc(docRef, { ...product });
 	}
 
 	async removeProduct(product: Product) {
@@ -119,14 +146,17 @@ export class ProductsService {
 			.catch(error => console.log(error));
 	}
 
-	removeProductFromDatabase(producto: Product): Promise<void> {
-		return this.firestore
-			.collection(`categories/${producto.category}/products`)
-			.doc(producto.id)
-			.delete();
+	removeProductFromDatabase(product: Product) {
+		const docRef = doc(
+			this.firestore,
+			`categories/${product.category}/products`,
+			product.id!
+		);
+		return deleteDoc(docRef);
 	}
 
-	removeProductImage(name: string) {
-		this.storage.ref(this.basePath).child(name).delete();
+	removeProductImage(fileName: string) {
+		const storageRef = ref(this.storage, `${this.basePath}/${fileName}`);
+		return deleteObject(storageRef);
 	}
 }

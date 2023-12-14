@@ -15,19 +15,14 @@ import {
 } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { ButtonModule } from 'primeng/button';
 import { CategoriesService } from '../../../../shop/services';
 import { Category } from '../../../../shop/interfaces';
 
 @Component({
 	standalone: true,
-	imports: [
-		CommonModule,
-		ReactiveFormsModule,
-		MatFormFieldModule,
-		ButtonModule,
-	],
+	imports: [CommonModule, ReactiveFormsModule, MatInputModule, ButtonModule],
 	templateUrl: './categories-edit-modal.component.html',
 	styleUrl: './categories-edit-modal.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,

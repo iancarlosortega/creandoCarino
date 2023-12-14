@@ -1,9 +1,6 @@
 import { Routes } from '@angular/router';
 
-import {
-	AngularFireAuthGuard,
-	redirectUnauthorizedTo,
-} from '@angular/fire/compat/auth-guard';
+import { redirectUnauthorizedTo, AuthGuard } from '@angular/fire/auth-guard';
 
 import { authRoutes } from './auth/auth.routes';
 import { adminRoutes } from './admin/admin.routes';
@@ -19,7 +16,7 @@ export const routes: Routes = [
 	{
 		path: 'admin',
 		children: adminRoutes,
-		canActivate: [AngularFireAuthGuard],
+		canActivate: [AuthGuard],
 		data: { authGuardPipe: redirectUnauthorizedToLogin },
 	},
 	{

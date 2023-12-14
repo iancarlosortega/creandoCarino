@@ -13,19 +13,14 @@ import {
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { ButtonModule } from 'primeng/button';
 import { CategoriesService } from '../../../../shop/services';
 import { Category } from '../../../../shop/interfaces';
 
 @Component({
 	standalone: true,
-	imports: [
-		CommonModule,
-		ReactiveFormsModule,
-		MatFormFieldModule,
-		ButtonModule,
-	],
+	imports: [CommonModule, ReactiveFormsModule, MatInputModule, ButtonModule],
 	templateUrl: './categories-create-modal.component.html',
 	styleUrl: './categories-create-modal.component.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,

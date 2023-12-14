@@ -1,50 +1,47 @@
 import { Injectable, inject } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { map } from 'rxjs';
+import { Observable, from, map, of } from 'rxjs';
+import {
+	Firestore,
+	addDoc,
+	collection,
+	collectionData,
+	deleteDoc,
+	doc,
+	getDoc,
+	updateDoc,
+} from '@angular/fire/firestore';
 import { Category } from '../interfaces/category.interface';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class CategoriesService {
-	private firestore = inject(AngularFirestore);
+	private firestore = inject(Firestore);
+	private categoryCollection = collection(this.firestore, 'categories');
 
 	getAllCategories() {
-		const categoriesCollection = this.firestore.collection('categories');
-		return categoriesCollection.snapshotChanges().pipe(
-			map(actions => {
-				return actions.map(a => {
-					const data = a.payload.doc.data() as Category;
-					data.id = a.payload.doc.id;
-					return data;
-				});
-			})
-		);
+		return collectionData(this.categoryCollection, {
+			idField: 'id',
+		}) as Observable<Category[]>;
 	}
 
 	getCategoryById(id: string) {
-		const category = this.firestore.collection('categories').doc(id);
-		return category.snapshotChanges().pipe(
-			map(a => {
-				const data = a.payload.data() as Category;
-				data.id = a.payload.id;
-				return data;
-			})
+		return from(getDoc(doc(this.firestore, 'categories', id))).pipe(
+			map(snapshot => snapshot.data() as Category)
 		);
 	}
 
 	addCategory(category: Category) {
-		return this.firestore.collection('categories').add(category);
+		return addDoc(this.categoryCollection, category);
 	}
 
 	updateCategory(category: Category) {
-		return this.firestore
-			.collection('categories')
-			.doc(category.id!)
-			.update(category);
+		const docRef = doc(this.firestore, 'categories', category.id!);
+		return updateDoc(docRef, { ...category });
 	}
 
 	removeCategory(id: string) {
-		return this.firestore.collection('categories').doc(id).delete();
+		const docRef = doc(this.firestore, 'categories', id);
+		return deleteDoc(docRef);
 	}
 }

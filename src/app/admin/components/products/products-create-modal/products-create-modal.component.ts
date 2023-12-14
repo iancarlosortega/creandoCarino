@@ -5,6 +5,8 @@ import {
 	OnInit,
 	inject,
 	signal,
+	computed,
+	effect,
 } from '@angular/core';
 import {
 	FormBuilder,
@@ -14,7 +16,7 @@ import {
 } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { ButtonModule } from 'primeng/button';
 import { MatSelectModule } from '@angular/material/select';
@@ -27,7 +29,7 @@ import { Category, Product } from '../../../../shop/interfaces';
 	imports: [
 		CommonModule,
 		ReactiveFormsModule,
-		MatFormFieldModule,
+		MatInputModule,
 		MatSelectModule,
 		MatIconModule,
 		ProgressSpinnerModule,
@@ -50,10 +52,15 @@ export class ProductsCreateModalComponent implements OnInit {
 	imagePreviewUrl = signal<string | ArrayBuffer | null>(null);
 	selectedFile = signal<File | null>(null);
 
+	//! DON'T DELETE THIS LINE, MAKES SIGNAL UPDATE, FIX LATER
+	percentageEffect = effect(() => {
+		console.log('percentage', this.percentage());
+	});
+
 	form: FormGroup = this.fb.group({
-		name: ['', [Validators.required, Validators.minLength(3)]],
-		price: ['', [Validators.required, Validators.min(1)]],
-		description: ['', [Validators.required, Validators.minLength(5)]],
+		name: ['Test', [Validators.required, Validators.minLength(3)]],
+		price: ['12', [Validators.required, Validators.min(1)]],
+		description: ['hellouda', [Validators.required, Validators.minLength(5)]],
 		category: ['', [Validators.required]],
 		subtitle: [''],
 	});

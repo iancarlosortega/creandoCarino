@@ -6,7 +6,7 @@ import {
 	inject,
 	signal,
 } from '@angular/core';
-import { ViewportScroller } from '@angular/common';
+import { ViewportScroller, CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { CategoriesService, ProductsService } from '../../services';
@@ -20,7 +20,12 @@ register();
 
 @Component({
 	standalone: true,
-	imports: [ReactiveFormsModule, SwiperDirective, ProductCardComponent],
+	imports: [
+		CommonModule,
+		ReactiveFormsModule,
+		SwiperDirective,
+		ProductCardComponent,
+	],
 	templateUrl: './home.component.html',
 	styleUrls: ['./home.component.css'],
 	changeDetection: ChangeDetectionStrategy.OnPush,

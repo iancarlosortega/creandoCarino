@@ -3,6 +3,7 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	Inject,
+	effect,
 	inject,
 	signal,
 } from '@angular/core';
@@ -14,7 +15,7 @@ import {
 } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { ButtonModule } from 'primeng/button';
 import { MatSelectModule } from '@angular/material/select';
@@ -27,7 +28,7 @@ import { Category, Product } from '../../../../shop/interfaces';
 	imports: [
 		CommonModule,
 		ReactiveFormsModule,
-		MatFormFieldModule,
+		MatInputModule,
 		MatSelectModule,
 		MatIconModule,
 		ProgressSpinnerModule,
@@ -51,6 +52,11 @@ export class ProductsEditModalComponent {
 	imagePreviewUrl = signal<string | ArrayBuffer | null>(null);
 	selectedFile = signal<File | null>(null);
 
+	//! DON'T DELETE THIS LINE, MAKES SIGNAL UPDATE, FIX LATER
+	percentageEffect = effect(() => {
+		console.log('percentage', this.percentage());
+	});
+
 	form: FormGroup = this.fb.group({
 		name: ['', [Validators.required, Validators.minLength(3)]],
 		price: ['', [Validators.required, Validators.min(1)]],
@@ -67,7 +73,10 @@ export class ProductsEditModalComponent {
 		this.productsService
 			.getProductById(this.data.id, this.data.categoryId)
 			.subscribe(product => {
-				this.currentProduct = product;
+				this.currentProduct = {
+					...product,
+					id: this.data.id,
+				};
 				this.imagePreviewUrl.set(product.photo_url);
 				this.form.reset(product);
 			});
