@@ -23,7 +23,12 @@ This project was originally created with Angular 13, so I decided to migrate it 
 - Update the Angular Fire version
 - Migrate from traditional NgModules to StandaloneComponents
 
-This are resutls of page speed and bundle size:
+Also, I left both versions of the project in different branches:
+
+- **Angular 13:** master branch
+- **Angular 17:** v17 branch
+
+### Before and after the migration:
 
 - **Before the migration:**
 
