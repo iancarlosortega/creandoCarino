@@ -30,6 +30,7 @@
 			</select>
 		</form>
 		<!-- Slider -->
+		@defer (on viewport;) {
 		<div class="slider">
 			@if (!isLoading()) {
 			<swiper-container class="fade-in" appSwiper [config]="config" lazy="true">
@@ -41,5 +42,8 @@
 			</swiper-container>
 			}
 		</div>
+		} @placeholder {
+		<div class="slider"></div>
+		}
 	</div>
 </section>
