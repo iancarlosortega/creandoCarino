@@ -7,8 +7,14 @@
     backdrop-filter: blur(10px);
     height: 6rem;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    padding: 0 2rem;
+    padding: 0 1rem;
     z-index: 10;
+}
+
+@media (min-width: 1366px) {
+    .header {
+        padding: 0 2rem;
+    }
 }
 
 .header-mobile {
@@ -31,7 +37,9 @@
     justify-content: center;
     border-radius: 0px;
     color: rgb(155, 155, 155);
+    border: none;
     border-right: 0.5px solid rgb(155, 155, 155);
+    background-color: transparent;
 }
 
 .logo img {
@@ -39,9 +47,15 @@
 }
 
 .logo p {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-family: var(--fuente-secundaria);
     margin: 0;
+}
+
+@media (min-width:  1366px) {
+    .logo p {
+        font-size: 2.5rem;
+    }
 }
 
 .logo-mobile {
@@ -52,10 +66,17 @@
     text-decoration: none;
     color: #000000;
     font-weight: 600;
-    padding: 10px 20px;
+    padding: 10px;
     cursor: pointer;
     user-select: none;
 }
+
+@media (min-width: 1366px) {
+    .navbar-item {
+        padding: 10px 20px;
+    }
+}
+
 
 .navbar-item-active {
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);

@@ -6,10 +6,15 @@
 }
 
 .main-content{
-    padding-top: 8rem;
-    padding-bottom: 6rem;
+    padding: 8rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
+}
+
+@media (min-width: 1200px) {
+    .main-content {
+        padding: 8rem 0rem;
+    }
 }
 
 .main-content h1 {

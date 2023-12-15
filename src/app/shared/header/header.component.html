@@ -49,10 +49,7 @@
 </header>
 } @if ( !isDesktopDevice()) {
 <mat-toolbar class="header header-mobile">
-	<button
-		class="header-button"
-		mat-icon-button
-		(click)="uiService.openSidebar()">
+	<button class="header-button" (click)="uiService.openSidebar()">
 		<mat-icon> menu </mat-icon>
 	</button>
 	<div class="logo logo-mobile flex-center">

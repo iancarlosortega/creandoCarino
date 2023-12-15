@@ -47,14 +47,11 @@ export default class HomeComponent implements OnInit {
 		slidesPerView: 1.2,
 		navigation: true,
 		breakpoints: {
-			'499': {
+			'768': {
 				slidesPerView: 2.2,
 			},
-			'768': {
-				slidesPerView: 2.8,
-			},
 			'992': {
-				slidesPerView: 3.5,
+				slidesPerView: 3.2,
 			},
 			'1366': {
 				slidesPerView: 4.2,
