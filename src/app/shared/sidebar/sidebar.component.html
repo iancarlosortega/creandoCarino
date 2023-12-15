@@ -5,6 +5,7 @@
 			<li>
 				<a
 					class="menu-item"
+					(click)="uiService.closeSidebar()"
 					[routerLink]="menuItem.path"
 					routerLinkActive="menu-item-active"
 					[routerLinkActiveOptions]="{ exact: true }">
