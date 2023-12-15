@@ -58,9 +58,9 @@ export class ProductsCreateModalComponent implements OnInit {
 	});
 
 	form: FormGroup = this.fb.group({
-		name: ['Test', [Validators.required, Validators.minLength(3)]],
-		price: ['12', [Validators.required, Validators.min(1)]],
-		description: ['hellouda', [Validators.required, Validators.minLength(5)]],
+		name: ['', [Validators.required, Validators.minLength(3)]],
+		price: ['', [Validators.required, Validators.min(1)]],
+		description: ['', [Validators.required, Validators.minLength(5)]],
 		category: ['', [Validators.required]],
 		subtitle: [''],
 	});
